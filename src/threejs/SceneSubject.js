@@ -10,10 +10,8 @@ export default scene => {
 	scene.add(mesh);
 
     function update(time) {
-
         const scale = Math.sin(time)+2;
         mesh.scale.set(scale, scale, scale)
-
     }
 
     return {
