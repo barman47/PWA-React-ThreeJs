@@ -6,8 +6,8 @@ export default container => {
     const canvas = createCanvas(document, container);
     const sceneManager = new SceneManager(canvas);
 
-    let canvasHalfWidth;
-    let canvasHalfHeight;
+    // let canvasHalfWidth;
+    // let canvasHalfHeight;
 
     bindEventListeners();
     render();
@@ -20,7 +20,7 @@ export default container => {
 
     function bindEventListeners() {
         window.onresize = resizeCanvas;
-        window.onmousemove = mouseMove;
+        //window.onmousemove = mouseMove;
         resizeCanvas();
     }
 
@@ -28,18 +28,19 @@ export default container => {
         canvas.style.width = '100%';
         canvas.style.height= '100%';
 
-        canvas.width  = canvas.offsetWidth;
-        canvas.height = canvas.offsetHeight;
+        console.log( "windows : "+ window.innerWidth)
+        canvas.width  = window.innerWidth;
+        canvas.height = window.innerHeight;
 
-        canvasHalfWidth = Math.round(canvas.offsetWidth/2);
-        canvasHalfHeight = Math.round(canvas.offsetHeight/2);
+        // canvasHalfWidth = Math.round(canvas.offsetWidth/2);
+        // canvasHalfHeight = Math.round(canvas.offsetHeight/2);
 
         sceneManager.onWindowResize()
     }
 
-    function mouseMove({screenX, screenY}) {
-        sceneManager.onMouseMove(screenX-canvasHalfWidth, screenY-canvasHalfHeight);
-    }
+    // function mouseMove({screenX, screenY}) {
+    //     sceneManager.onMouseMove(screenX-canvasHalfWidth, screenY-canvasHalfHeight);
+    // }
 
     function render(time) {
         requestAnimationFrame(render);
