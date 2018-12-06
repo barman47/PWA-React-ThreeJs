@@ -2,11 +2,12 @@
 import THREE from '../three';
 //import * as THREE from 'three';
 
+
 //import SceneSubject from './sceneSubjects/SceneSubject';
 import Horizon from './sceneSubjects/Horizon';
 import SkyStars from './sceneSubjects/SkyStars';
 import Light from './sceneSubjects/Light';
-//import Planets from './sceneSubjects/Planets';
+import Planets from './sceneSubjects/Planets';
 
 
 //import Planets from './sceneSubjects/Planets';
@@ -92,7 +93,7 @@ export default canvas => {
     function createSceneSubjects(scene) {
         const sceneSubjects = [
             new Light(scene),
-            //new Planets(scene, objectsPlanets),
+            new Planets(scene, objectsPlanets),
             new SkyStars(scene),
             new Horizon(scene),
             //new SceneSubjecttt(scene)
@@ -104,8 +105,6 @@ export default canvas => {
     function update() {
         const elapsedTime = clock.getElapsedTime();
 
-        for(let i=0; i<sceneSubjects.length; i++)
-            sceneSubjects[i].update(elapsedTime);
 
        // TWEEN.update();
         controls.update();

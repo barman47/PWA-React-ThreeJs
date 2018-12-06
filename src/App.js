@@ -1,21 +1,27 @@
 import React, {Component} from 'react';
-//import logo from './logo.svg';
+import logo from './textures/stars_bg.png';
 import './App.css';
 import ThreeContainer from './component/ThreeContainer'
-
+import NavBarBottom from './component/NavBarBottom'
+import Modal from "./component/Modal";
 
 class App extends Component {
     constructor(props) {
         super(props);
-        this.state = { updatePresent: "non" };
+        this.state = {updatePresent: "non"};
     }
 
-    render () {
+    render() {
         return (
-            <ThreeContainer  />
+            <div>
+
+                <ThreeContainer/>
+                <NavBarBottom/>
+                <Modal/>
+
+            </div>
         );
     }
-
 
 
     // render() {
@@ -37,6 +43,8 @@ class App extends Component {
     //                 >
     //                     Learn React
     //                 </a>
+    //                 <img src={logo}/>
+    //
     //             </header>
     //         </div>
     //     );

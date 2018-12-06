@@ -6,17 +6,22 @@ export default container => {
     const canvas = createCanvas(document, container);
     const sceneManager = new SceneManager(canvas);
 
+
     // let canvasHalfWidth;
     // let canvasHalfHeight;
 
     bindEventListeners();
     render();
+    init();
 
     function createCanvas(document, container) {
         const canvas = document.createElement('canvas');
         container.appendChild(canvas);
         return canvas;
     }
+
+
+
 
     function bindEventListeners() {
         window.onresize = resizeCanvas;
@@ -28,7 +33,6 @@ export default container => {
         canvas.style.width = '100%';
         canvas.style.height= '100%';
 
-        console.log( "windows : "+ window.innerWidth)
         canvas.width  = window.innerWidth;
         canvas.height = window.innerHeight;
 
@@ -46,4 +50,29 @@ export default container => {
         requestAnimationFrame(render);
         sceneManager.update();
     }
+
+
+    let modal = document.getElementById('myModal');
+
+    function init( ) {
+
+        //
+        // document.getElementById("btnAgenda").addEventListener('click', AddInputAgenda, false);
+        // document.getElementById("btn-navigation").addEventListener('mousedown', mouseDown, false);
+        // document.getElementById("btn-navigation").addEventListener('mouseup', mouseUp, false);
+        // document.getElementById("btnRecherche").addEventListener('mouseup', BtnRecherche, false);
+        //
+        //
+        //
+        // // Get the <span> element that closes the modal
+        // const closeModal = document.getElementsByClassName("close")[0];
+        // closeModal.addEventListener('mousedown',CloseModal, false);
+        //
+        // //click
+        // document.addEventListener('mousedown', onDocumentMouseDown , false);
+        // document.addEventListener('touchstart', onDocumentTouchStart, false);
+
+
+    }
+
 }
