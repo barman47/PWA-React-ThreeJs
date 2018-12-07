@@ -13,14 +13,15 @@ export function onDocumentTouchStart(event , objectsPlanets, renderer, camera, m
 
 export function onDocumentMouseDown(event,objectsPlanets, renderer, camera, modal, scene, controls) {
 
+
     console.log("je clique")
     console.log(event.touches[0].clientX )
     let raycaster = new THREE.Raycaster();
     let mouse = new THREE.Vector2();
-
     //event.preventDefault();
     mouse.x = (event.clientX / renderer.domElement.clientWidth) * 2 - 1;
     mouse.y = -(event.clientY / renderer.domElement.clientHeight) * 2 + 1;
+
     raycaster.setFromCamera(mouse, camera);
     let intersects = raycaster.intersectObjects(objectsPlanets, true);
 

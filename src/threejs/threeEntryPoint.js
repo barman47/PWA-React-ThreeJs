@@ -22,6 +22,7 @@ export default container => {
     function bindEventListeners() {
         window.onresize = resizeCanvas;
         window.onmousemove = mouseMove;
+        window.onmousedown = mouseDown;
         resizeCanvas();
     }
 
@@ -40,6 +41,9 @@ export default container => {
 
     function mouseMove({screenX, screenY}) {
         sceneManager.onMouseMove(screenX-canvasHalfWidth, screenY-canvasHalfHeight);
+    }
+    function mouseDown({screenX, screenY}) {
+        sceneManager.onMouseDown(screenX-canvasHalfWidth, screenY-canvasHalfHeight);
     }
 
     function render(time) {

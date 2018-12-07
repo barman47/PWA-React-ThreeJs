@@ -128,7 +128,13 @@ export default canvas => {
     function onMouseMove(x, y) {
         mousePosition.x = x;
         mousePosition.y = y;
-        console.log("mousePosition.x : " + mousePosition.x)
+       // console.log("mousePosition.x : " + mousePosition.x)
+    }
+
+    function onMouseDown(x, y) {
+        mousePosition.x = x;
+        mousePosition.y = y;
+        console.log("mousePosition Down .x : " + mousePosition.x)
     }
 
     let modal = document.getElementById('myModal');
@@ -148,6 +154,7 @@ export default canvas => {
         update,
         onWindowResize,
         init,
-        onMouseMove
+        onMouseMove,
+        onMouseDown
     }
 }
