@@ -1,19 +1,13 @@
 
 import THREE from '../three';
-//import * as THREE from 'three';
-
 
 //import SceneSubject from './sceneSubjects/SceneSubject';
 import Horizon from './sceneSubjects/Horizon';
 import SkyStars from './sceneSubjects/SkyStars';
 import Light from './sceneSubjects/Light';
 import Planets from './sceneSubjects/Planets';
-
-
-//import Planets from './sceneSubjects/Planets';
-
-
-//import TWEEN from './libs/tween.min.js'; // changement d'orbite  smooth
+import {onDocumentMouseDown} from "./sceneActions/Raycaster";
+var TWEEN = require('@tweenjs/tween.js');
 
 
 
@@ -27,10 +21,10 @@ export default canvas => {
         height: canvas.height
     }
 
-    // const mousePosition = {
-    //     x: 0,
-    //     y: 0
-    // }
+    const mousePosition = {
+        x: 0,
+        y: 0
+    }
 
 
     const objectsPlanets = [];
@@ -106,7 +100,7 @@ export default canvas => {
         const elapsedTime = clock.getElapsedTime();
 
 
-       // TWEEN.update();
+        TWEEN.update();
         controls.update();
         renderer.render(scene, camera);
 
@@ -131,14 +125,29 @@ export default canvas => {
     }
 
 
-    // function onMouseMove(x, y) {
-    //     mousePosition.x = x;
-    //     mousePosition.y = y;
-    // }
+    function onMouseMove(x, y) {
+        mousePosition.x = x;
+        mousePosition.y = y;
+        console.log("mousePosition.x : " + mousePosition.x)
+    }
+
+    let modal = document.getElementById('myModal');
+
+
+    function init(objectsPlanets, renderer, camera, modal, scene, controls) {
+
+
+        document.addEventListener('mousedown', onDocumentMouseDown(objectsPlanets, renderer, camera, modal, scene, controls), false);
+        //document.addEventListener('touchstart', onDocumentTouchStart, false);
+
+    }
+
+
 
     return {
         update,
         onWindowResize,
-        //onMouseMove
+        init,
+        onMouseMove
     }
 }
