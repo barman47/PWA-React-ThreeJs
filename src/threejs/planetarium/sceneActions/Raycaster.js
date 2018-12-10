@@ -1,8 +1,8 @@
 import THREE from './../../three';
-import * as Navigation  from '../sceneActions/Navigation'
+import * as Navigation from '../sceneActions/Navigation'
 
 
-export function onDocumentTouchStart(event , objectsPlanets, renderer, camera, modal, scene, controls) {
+export function onDocumentTouchStart(event, objectsPlanets, renderer, camera, modal, scene, controls) {
 
     //event.preventDefault();
 
@@ -11,19 +11,25 @@ export function onDocumentTouchStart(event , objectsPlanets, renderer, camera, m
     onDocumentMouseDown(event);
 }
 
-export function onDocumentMouseDown(event,objectsPlanets, renderer, camera, modal, scene, controls) {
+export function onDocumentMouseDown(objectsPlanets, renderer, camera, modal, scene, controls, mouseX, mouseY, canvas) {
 
 
-    console.log("je clique")
-    console.log(event.touches[0].clientX )
+    //console.log("evenet touche : " + event.touches[0].clientX )
     let raycaster = new THREE.Raycaster();
     let mouse = new THREE.Vector2();
+
     //event.preventDefault();
-    mouse.x = (event.clientX / renderer.domElement.clientWidth) * 2 - 1;
-    mouse.y = -(event.clientY / renderer.domElement.clientHeight) * 2 + 1;
+    mouse.x = (mouseX / renderer.domElement.clientWidth) * 2 - 1;
+    mouse.y = -(mouseY / renderer.domElement.clientHeight) * 2 + 1;
 
     raycaster.setFromCamera(mouse, camera);
     let intersects = raycaster.intersectObjects(objectsPlanets, true);
+
+    console.log("mouse X: " + mouse.x + " - mouse Y: " + mouse.y)
+    console.log("camera X: " + camera.position.x + " - camera Y: " + camera.position.y)
+    console.log('intersects : ' + intersects.length )
+
+
 
 
     if (intersects.length > 0) {
@@ -40,7 +46,7 @@ let accueil = true;
 ;
 let earthExist = false;
 
-function switchValue(choix, event,objectsPlanets, renderer, camera, modal, scene, controls) {
+function switchValue(choix, event, objectsPlanets, renderer, camera, modal, scene, controls) {
 
     // fermer le modal quand on appui sur la navette
     if (modal.style.display = "block") {
@@ -118,10 +124,10 @@ function switchValue(choix, event,objectsPlanets, renderer, camera, modal, scene
         // si on clique sur une autre planetes
         if (controlX !== planetX || controlZ !== planetZ) {
             console.log("Direction la planete " + choix + " ! ")
-            Navigation.focusTarget(planet,controls);
+            Navigation.focusTarget(planet, controls);
 
             setTimeout(function () {
-                Navigation.focusZoom(planet,camera)
+                Navigation.focusZoom(planet, camera)
                 if (!earthExist) {
                     //EarthPlanet();
                     console.log("Avant earthExist :" + earthExist)

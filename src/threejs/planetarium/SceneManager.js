@@ -131,29 +131,26 @@ export default canvas => {
        // console.log("mousePosition.x : " + mousePosition.x)
     }
 
-    function onMouseDown(x, y) {
-        mousePosition.x = x;
-        mousePosition.y = y;
-        console.log("mousePosition Down .x : " + mousePosition.x)
+    function onMouseDown(mouseX,mouseY) {
+        onDocumentMouseDown(objectsPlanets, renderer, camera, modal, scene, controls , mouseX,mouseY,canvas)
     }
 
     let modal = document.getElementById('myModal');
 
-
-    function init(objectsPlanets, renderer, camera, modal, scene, controls) {
-
-
-        document.addEventListener('mousedown', onDocumentMouseDown(objectsPlanets, renderer, camera, modal, scene, controls), false);
-        //document.addEventListener('touchstart', onDocumentTouchStart, false);
-
-    }
-
+    //
+    // function init(objectsPlanets, renderer, camera, modal, scene, controls) {
+    //
+    //
+    //     document.addEventListener('mousedown', onDocumentMouseDown(objectsPlanets, renderer, camera, modal, scene, controls), false);
+    //     //document.addEventListener('touchstart', onDocumentTouchStart, false);
+    //
+    // }
+    //
 
 
     return {
         update,
         onWindowResize,
-        init,
         onMouseMove,
         onMouseDown
     }
