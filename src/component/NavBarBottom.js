@@ -1,16 +1,31 @@
-import React, {Component} from 'react';
+import React, {Component } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faCogs, faSearch,faEye , faCompass, faCalendarCheck} from '@fortawesome/free-solid-svg-icons'
 
 import Modal from './Modal'
 
+import { ThemeContext } from "./../store/UserProvider";
+const ThemeConsumer = ThemeContext.Consumer
 
+
+
+
+
+const styles = {
+    dark: {
+        backgroundColor: 'black',
+        color: 'white',
+    },
+    light: {
+        backgroundColor: 'white',
+        color: 'black',
+    },
+}
 
 export default class NavBarBottom extends Component {
     constructor(props) {
         super(props);
-
         this.state = { isOpen: false };
     }
 
@@ -20,24 +35,17 @@ export default class NavBarBottom extends Component {
         });
     }
 
-
-    showModal = () => {
-        this.setState({ show: true });
-    };
-
-    hideModal = () => {
-        this.setState({ show: false });
-    };
-
-
-
     componentDidMount() {
-        // threeEntryPoint(this.threeRootElement);
     }
 
     render() {
         return (
             <div id="btn">
+                <ThemeConsumer>
+
+                    {theme => <div style={styles[theme]}>{theme}</div>}
+                </ThemeConsumer>
+
                 <div id="btn-navigation">
 
                     <button id="btnRecherche" onClick={this.toggleModal}>

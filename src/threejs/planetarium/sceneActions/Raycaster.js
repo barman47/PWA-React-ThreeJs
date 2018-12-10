@@ -1,15 +1,18 @@
 import THREE from './../../three';
 import * as Navigation from '../sceneActions/Navigation'
 
+import {addBtnPlanet} from "./NavBarAction";
 
-export function onDocumentTouchStart(event, objectsPlanets, renderer, camera, modal, scene, controls) {
 
-    //event.preventDefault();
-
-    event.clientX = event.touches[0].clientX;
-    event.clientY = event.touches[0].clientY;
-    onDocumentMouseDown(event);
-}
+//
+// export function onDocumentTouchStart(event, objectsPlanets, renderer, camera, modal, scene, controls) {
+//
+//     //event.preventDefault();
+//
+//     event.clientX = event.touches[0].clientX;
+//     event.clientY = event.touches[0].clientY;
+//     onDocumentMouseDown(event);
+// }
 
 export function onDocumentMouseDown(objectsPlanets, renderer, camera, modal, scene, controls, mouseX, mouseY, canvas) {
 
@@ -35,7 +38,7 @@ export function onDocumentMouseDown(objectsPlanets, renderer, camera, modal, sce
     if (intersects.length > 0) {
 
         let namePlanet = intersects[0].object.parent.name
-        switchValue(namePlanet);
+        switchValue(namePlanet,objectsPlanets, renderer, camera, modal, scene, controls);
 
     }
 
@@ -43,15 +46,14 @@ export function onDocumentMouseDown(objectsPlanets, renderer, camera, modal, sce
 
 let currentObj = null
 let accueil = true;
-;
 let earthExist = false;
 
-function switchValue(choix, event, objectsPlanets, renderer, camera, modal, scene, controls) {
+function switchValue(choix, objectsPlanets, renderer, camera, modal, scene, controls) {
 
     // fermer le modal quand on appui sur la navette
-    if (modal.style.display = "block") {
-        modal.style.display = "none"
-    }
+    // if (modal.style.display = "block") {
+    //     modal.style.display = "none"
+    // }
 
     if (choix == "Back") {
 
@@ -139,7 +141,7 @@ function switchValue(choix, event, objectsPlanets, renderer, camera, modal, scen
 
             controls.autoRotate = true;
             if (accueil) {
-                //addBtnPlanet()
+                addBtnPlanet()
                 //addBtnPhoto()
                 accueil = false;
             }

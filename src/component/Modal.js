@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
-import Search from '../threejs/planetarium/sceneActions/search'
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faGlobe, faInfo, faSpaceShuttle, faSearch, faTimes} from '@fortawesome/free-solid-svg-icons'
 
-export default class FilteredList extends React.Component {
+export default class Modal extends React.Component {
 
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             initialItems: ["Moon", "Saturn", "Uranus", "Jupiter", "Mars", "Mercury", "Venus", "Neptune"],
             items: []
@@ -32,7 +31,7 @@ export default class FilteredList extends React.Component {
 
 
     render() {
-        if(!this.props.show) {
+        if (!this.props.show) {
             return null;
         }
         return (
@@ -62,36 +61,18 @@ export default class FilteredList extends React.Component {
                 </div>
             </div>
 
-
-            // <div className="filter-list">
-            //     <form>
-            //         <fieldset className="form-group">
-            //             <input type="text" className="form-control form-control-lg" placeholder="Search"
-            //                    onChange={this.filterList}/>
-            //         </fieldset>
-            //     </form>
-            //     <List items={this.state.items}/>
-            // </div>
         );
     }
 }
 
 
-function ListItem(props) {
-    // Correct! There is no need to specify the key here:
-    return (
-        <li className="">
-            <FontAwesomeIcon icon={faGlobe} size="lg"/>
-            <a>{props.value}</a>
-            <FontAwesomeIcon icon={faInfo} size="lg" onClick={() => console.log("coucou boum  ")}/>
-            <FontAwesomeIcon icon={faSpaceShuttle} transform={{rotate: 300}} size="lg"
-                             onClick={() => console.log("coucou boum  ")}/>
-        </li>
-    )
-
-}
-
 class List extends React.Component {
+
+    constructor(props) {
+        super(props)
+
+    }
+
     render() {
         return (
             <ul>
@@ -101,9 +82,9 @@ class List extends React.Component {
                             <li>
                                 <FontAwesomeIcon icon={faGlobe} size="lg"/>
                                 <a>{item}</a>
-                                <FontAwesomeIcon icon={faInfo} size="lg" onClick={() => console.log("coucou boum  ")}/>
+                                <FontAwesomeIcon icon={faInfo} size="lg" onClick={() => console.log( "info planet : " + item )}/>
                                 <FontAwesomeIcon icon={faSpaceShuttle} transform={{rotate: 300}} size="lg"
-                                                 onClick={() => console.log("coucou boum  ")}/>
+                                                 onClick={() => console.log( "direction : " + item )}/>
                             </li>
                         )
                     })

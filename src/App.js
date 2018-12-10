@@ -3,7 +3,10 @@ import logo from './textures/stars_bg.png';
 import './App.css';
 import ThreeContainer from './component/ThreeContainer'
 import NavBarBottom from './component/NavBarBottom'
-import Modal from "./component/Modal";
+
+// On importe la classe `UserProvider`
+import ThemeProvider from "./store/UserProvider";
+
 
 class App extends Component {
     constructor(props) {
@@ -14,11 +17,10 @@ class App extends Component {
     render() {
         return (
             <div>
-
-                <ThreeContainer/>
-                <NavBarBottom/>
-                <Modal/>
-
+                <ThemeProvider>
+                    <ThreeContainer/>
+                    <NavBarBottom/>
+                </ThemeProvider>
             </div>
         );
     }
