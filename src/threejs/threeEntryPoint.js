@@ -53,7 +53,7 @@ export default (container,onLocalisationClick) => {
         let mouseY = e.clientY ;
 
 
-        sceneManager.onMouseDown(mouseX, mouseY, onLocalisationClick);
+        sceneManager.onMouseDown(mouseX, mouseY);
     }
 
     function render(time) {

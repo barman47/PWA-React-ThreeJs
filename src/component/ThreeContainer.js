@@ -5,7 +5,7 @@ import NavBarBottom from "./NavBarBottom";
 export default class ThreeContainer extends Component {
 
     componentDidMount() {
-        threeEntryPoint(this.threeRootElement, this.props.onLocalisationClick);
+        threeEntryPoint(this.threeRootElement);
     }
 
     render () {

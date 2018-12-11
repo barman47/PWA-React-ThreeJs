@@ -14,7 +14,7 @@ import * as Navigation from '../sceneActions/Navigation'
 //     onDocumentMouseDown(event);
 // }
 
-export function onDocumentMouseDown(objectsPlanets, renderer, camera, modal, scene, controls, mouseX, mouseY, canvas, onLocalisationClick) {
+export function onDocumentMouseDown(objectsPlanets, renderer, camera, modal, scene, controls, mouseX, mouseY, canvas) {
 
 
     //console.log("evenet touche : " + event.touches[0].clientX )
@@ -38,7 +38,7 @@ export function onDocumentMouseDown(objectsPlanets, renderer, camera, modal, sce
     if (intersects.length > 0) {
 
         let namePlanet = intersects[0].object.parent.name
-        switchValue(namePlanet,objectsPlanets, renderer, camera, modal, scene, controls, onLocalisationClick);
+        switchValue(namePlanet,objectsPlanets, renderer, camera, modal, scene, controls);
 
     }
 
@@ -48,7 +48,7 @@ let currentObj = null
 let accueil = true;
 let earthExist = false;
 
-function switchValue(choix, objectsPlanets, renderer, camera, modal, scene, controls, onLocalisationClick) {
+function switchValue(choix, objectsPlanets, renderer, camera, modal, scene, controls) {
 
 
     // fermer le modal quand on appui sur la navette
@@ -143,8 +143,6 @@ function switchValue(choix, objectsPlanets, renderer, camera, modal, scene, cont
             controls.autoRotate = true;
             if (accueil) {
                 window.dispatchEvent(new Event('localisationClick'));
-                // let value = this.Context;
-                // value.toggleAccueil();
 
                 //addBtnPhoto()
                 accueil = false;

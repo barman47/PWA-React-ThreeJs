@@ -70,7 +70,7 @@ export default class NavBarBottom extends Component {
                         <FontAwesomeIcon icon={faCalendarCheck}  size="2x" />
                     </button>
                     <button id="btnLocalisation">
-                        <FontAwesomeIcon icon={this.state.btnLocalisation} size="lg" />
+                        <FontAwesomeIcon icon={this.state.btnLocalisation} size="2x" />
                     </button>
 
                 </div>

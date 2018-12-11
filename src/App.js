@@ -15,11 +15,11 @@ class App extends Component {
 
         this.state = {
             updatePresent: "non",
-            btnLocalisation: faCompass,
             accueil: false,
             toggleAccueil: this.toggleAccueil
         };
 
+        // test de l'api context de react : store global disponible dans les composants
         this.toggleAccueil = () => {
             this.setState(state => ({
                 accueil:
@@ -28,19 +28,14 @@ class App extends Component {
         };
     }
 
-    onLocalisationClick = () => {
-        this.setState({
-            btnLocalisation: faParachuteBox
-        })
-    }
 
 
     render() {
         return (
             <div>
                 <Context.Provider value={this.state}>
-                    <ThreeContainer onLocalisationClick={this.onLocalisationClick}/>
-                    <NavBarBottom btnLocalisation={this.state.btnLocalisation}/>
+                    <ThreeContainer />
+                    <NavBarBottom />
                 </Context.Provider>
             </div>
         );

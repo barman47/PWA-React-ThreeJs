@@ -132,7 +132,7 @@ export default canvas => {
     }
 
     function onMouseDown(mouseX,mouseY, onLocalisationClick) {
-        onDocumentMouseDown(objectsPlanets, renderer, camera, modal, scene, controls , mouseX,mouseY,canvas, onLocalisationClick)
+        onDocumentMouseDown(objectsPlanets, renderer, camera, modal, scene, controls , mouseX,mouseY,canvas)
     }
 
     let modal = document.getElementById('myModal');
