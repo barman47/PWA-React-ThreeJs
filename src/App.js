@@ -5,22 +5,39 @@ import ThreeContainer from './component/ThreeContainer'
 import NavBarBottom from './component/NavBarBottom'
 
 // On importe la classe `UserProvider`
-import ThemeProvider from "./store/UserProvider";
+import {Context} from "./store/Context";
 
 
 class App extends Component {
     constructor(props) {
         super(props);
+
         this.state = {updatePresent: "non"};
+
+        this.toggleAccueil = () => {
+            this.setState(state => ({
+                accueil:
+                    state.accueil !== true,
+            }));
+        };
+
+        this.state = {
+            accueil: false,
+            toggleAccueil: this.toggleAccueil,
+        };
+
     }
+
+
+
 
     render() {
         return (
             <div>
-                <ThemeProvider>
+                <Context.Provider value={this.state}>
                     <ThreeContainer/>
                     <NavBarBottom/>
-                </ThemeProvider>
+                </Context.Provider>
             </div>
         );
     }

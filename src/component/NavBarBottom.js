@@ -5,23 +5,9 @@ import {faCogs, faSearch,faEye , faCompass, faCalendarCheck} from '@fortawesome/
 
 import Modal from './Modal'
 
-import { ThemeContext } from "./../store/UserProvider";
-const ThemeConsumer = ThemeContext.Consumer
+import { Context } from "../store/Context";
 
 
-
-
-
-const styles = {
-    dark: {
-        backgroundColor: 'black',
-        color: 'white',
-    },
-    light: {
-        backgroundColor: 'white',
-        color: 'black',
-    },
-}
 
 export default class NavBarBottom extends Component {
     constructor(props) {
@@ -41,10 +27,15 @@ export default class NavBarBottom extends Component {
     render() {
         return (
             <div id="btn">
-                <ThemeConsumer>
-
-                    {theme => <div style={styles[theme]}>{theme}</div>}
-                </ThemeConsumer>
+                <Context.Consumer>
+                    {({accueil, toggleAccueil}) => (
+                        <button
+                            onClick={toggleAccueil}
+                        >
+                            {console.log({accueil})}
+                        </button>
+                    )}
+                </Context.Consumer>
 
                 <div id="btn-navigation">
 
