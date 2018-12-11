@@ -1,7 +1,7 @@
 import SceneManager from './planetarium/SceneManager';
 
 
-export default container => {
+export default (container,onLocalisationClick) => {
     const canvas = createCanvas(document, container);
     const sceneManager = new SceneManager(canvas);
 
@@ -53,7 +53,7 @@ export default container => {
         let mouseY = e.clientY ;
 
 
-        sceneManager.onMouseDown(mouseX, mouseY);
+        sceneManager.onMouseDown(mouseX, mouseY, onLocalisationClick);
     }
 
     function render(time) {

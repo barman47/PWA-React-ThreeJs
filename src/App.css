@@ -75,7 +75,7 @@ html, body {
   justify-content: space-around;
   margin-bottom: 0px;
   font-size: 20px;
-  opacity: 0;
+  /*opacity: 0;*/
 
 }
 
@@ -87,6 +87,9 @@ html, body {
   background-color: rgba(0, 0, 0, 0.7);
   padding: 5px
 }
+
+button:focus {outline:0;}
+
 
 #btn-navigation {
 

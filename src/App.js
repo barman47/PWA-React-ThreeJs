@@ -6,13 +6,19 @@ import NavBarBottom from './component/NavBarBottom'
 
 // On importe la classe `UserProvider`
 import {Context} from "./store/Context";
+import {faCompass, faParachuteBox} from "@fortawesome/free-solid-svg-icons";
 
 
 class App extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {updatePresent: "non"};
+        this.state = {
+            updatePresent: "non",
+            btnLocalisation: faCompass,
+            accueil: false,
+            toggleAccueil: this.toggleAccueil
+        };
 
         this.toggleAccueil = () => {
             this.setState(state => ({
@@ -20,23 +26,21 @@ class App extends Component {
                     state.accueil !== true,
             }));
         };
-
-        this.state = {
-            accueil: false,
-            toggleAccueil: this.toggleAccueil,
-        };
-
     }
 
-
+    onLocalisationClick = () => {
+        this.setState({
+            btnLocalisation: faParachuteBox
+        })
+    }
 
 
     render() {
         return (
             <div>
                 <Context.Provider value={this.state}>
-                    <ThreeContainer/>
-                    <NavBarBottom/>
+                    <ThreeContainer onLocalisationClick={this.onLocalisationClick}/>
+                    <NavBarBottom btnLocalisation={this.state.btnLocalisation}/>
                 </Context.Provider>
             </div>
         );

@@ -1,7 +1,7 @@
 import THREE from './../../three';
 import * as Navigation from '../sceneActions/Navigation'
 
-import {addBtnPlanet} from "./NavBarAction";
+
 
 
 //
@@ -14,7 +14,7 @@ import {addBtnPlanet} from "./NavBarAction";
 //     onDocumentMouseDown(event);
 // }
 
-export function onDocumentMouseDown(objectsPlanets, renderer, camera, modal, scene, controls, mouseX, mouseY, canvas) {
+export function onDocumentMouseDown(objectsPlanets, renderer, camera, modal, scene, controls, mouseX, mouseY, canvas, onLocalisationClick) {
 
 
     //console.log("evenet touche : " + event.touches[0].clientX )
@@ -38,7 +38,7 @@ export function onDocumentMouseDown(objectsPlanets, renderer, camera, modal, sce
     if (intersects.length > 0) {
 
         let namePlanet = intersects[0].object.parent.name
-        switchValue(namePlanet,objectsPlanets, renderer, camera, modal, scene, controls);
+        switchValue(namePlanet,objectsPlanets, renderer, camera, modal, scene, controls, onLocalisationClick);
 
     }
 
@@ -48,7 +48,8 @@ let currentObj = null
 let accueil = true;
 let earthExist = false;
 
-function switchValue(choix, objectsPlanets, renderer, camera, modal, scene, controls) {
+function switchValue(choix, objectsPlanets, renderer, camera, modal, scene, controls, onLocalisationClick) {
+
 
     // fermer le modal quand on appui sur la navette
     // if (modal.style.display = "block") {
@@ -141,7 +142,10 @@ function switchValue(choix, objectsPlanets, renderer, camera, modal, scene, cont
 
             controls.autoRotate = true;
             if (accueil) {
-                addBtnPlanet()
+                window.dispatchEvent(new Event('localisationClick'));
+                // let value = this.Context;
+                // value.toggleAccueil();
+
                 //addBtnPhoto()
                 accueil = false;
             }
