@@ -1,7 +1,7 @@
 import SceneManager from './planetarium/SceneManager';
 
 
-export default (container,onLocalisationClick) => {
+export default (container) => {
     const canvas = createCanvas(document, container);
     const sceneManager = new SceneManager(canvas);
 
@@ -21,7 +21,7 @@ export default (container,onLocalisationClick) => {
 
     function bindEventListeners() {
         window.onresize = resizeCanvas;
-        window.onmousemove = mouseMove;
+        // window.onmousemove = mouseMove;
         window.onmousedown = mouseDown;
         resizeCanvas();
     }
@@ -41,11 +41,11 @@ export default (container,onLocalisationClick) => {
 
     }
 
-    function mouseMove({screenX, screenY}) {
-
-      //  console.log( " clientX:" + canvas.clientX )
-        sceneManager.onMouseMove(screenX-canvasHalfWidth, screenY-canvasHalfHeight);
-    }
+    // function mouseMove({screenX, screenY}) {
+    //
+    //   //  console.log( " clientX:" + canvas.clientX )
+    //     sceneManager.onMouseMove(screenX-canvasHalfWidth, screenY-canvasHalfHeight);
+    // }
     function mouseDown(e) {
 
 

@@ -1,4 +1,3 @@
-
 import THREE from '../three';
 
 //import SceneSubject from './sceneSubjects/SceneSubject';
@@ -7,8 +6,8 @@ import SkyStars from './sceneSubjects/SkyStars';
 import Light from './sceneSubjects/Light';
 import Planets from './sceneSubjects/Planets';
 import {onDocumentMouseDown} from "./sceneActions/Raycaster";
-var TWEEN = require('@tweenjs/tween.js');
 
+var TWEEN = require('@tweenjs/tween.js');
 
 
 export default canvas => {
@@ -21,19 +20,28 @@ export default canvas => {
         height: canvas.height
     }
 
-    const mousePosition = {
-        x: 0,
-        y: 0
-    }
+    // const mousePosition = {
+    //     x: 0,
+    //     y: 0
+    // }
 
 
     const objectsPlanets = [];
-
     const scene = buildScene();
     const renderer = buildRender(screenDimensions);
     const camera = buildCamera(screenDimensions);
-    const sceneSubjects = createSceneSubjects(scene);
     const controls = buildControls();
+
+    const sceneSubjects = createSceneSubjects(scene);
+
+    let optsThree = {
+        canvas: canvas,
+        objectsPlanets: objectsPlanets,
+        scene: scene,
+        renderer: renderer,
+        camera: camera,
+        controls: controls
+    };
 
     function buildScene() {
         const scene = new THREE.Scene();
@@ -58,8 +66,8 @@ export default canvas => {
         return controls;
     }
 
-    function buildRender({ width, height }) {
-        const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+    function buildRender({width, height}) {
+        const renderer = new THREE.WebGLRenderer({canvas: canvas, antialias: true, alpha: true});
         const DPR = window.devicePixelRatio ? window.devicePixelRatio : 1;
         renderer.setPixelRatio(DPR);
         renderer.setSize(width, height);
@@ -70,7 +78,7 @@ export default canvas => {
         return renderer;
     }
 
-    function buildCamera({ width, height }) {
+    function buildCamera({width, height}) {
         const aspectRatio = width / height;
         const fieldOfView = 60;
         const nearPlane = 4;
@@ -81,7 +89,6 @@ export default canvas => {
 
         return camera;
     }
-
 
 
     function createSceneSubjects(scene) {
@@ -113,7 +120,7 @@ export default canvas => {
     // }
 
     function onWindowResize() {
-        const { width, height } = canvas;
+        const {width, height} = canvas;
 
         screenDimensions.width = width;
         screenDimensions.height = height;
@@ -125,14 +132,14 @@ export default canvas => {
     }
 
 
-    function onMouseMove(x, y) {
-        mousePosition.x = x;
-        mousePosition.y = y;
-       // console.log("mousePosition.x : " + mousePosition.x)
-    }
+    // function onMouseMove(x, y) {
+    //     mousePosition.x = x;
+    //     mousePosition.y = y;
+    //    // console.log("mousePosition.x : " + mousePosition.x)
+    // }
 
-    function onMouseDown(mouseX,mouseY, onLocalisationClick) {
-        onDocumentMouseDown(objectsPlanets, renderer, camera, modal, scene, controls , mouseX,mouseY,canvas)
+    function onMouseDown(mouseX, mouseY) {
+        onDocumentMouseDown( optsThree , mouseX, mouseY)
     }
 
     let modal = document.getElementById('myModal');
@@ -151,7 +158,7 @@ export default canvas => {
     return {
         update,
         onWindowResize,
-        onMouseMove,
+        // onMouseMove,
         onMouseDown
     }
 }

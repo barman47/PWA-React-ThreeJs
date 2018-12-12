@@ -1,11 +1,15 @@
 import THREE from './../../three';
-import THREEx from './../libs/threex.planets/threex.planets.js';
-// import earthbump1k from '../../../threejs/planetarium/libs/threex.planets/images/sunmap.jpg';
-// import earthbump1k from '../../../threejs/planetarium/libs/threex.planets/images/earthbump1k_2.jpg';
-// import * as allImage from '../../../threejs/planetarium/libs/threex.planets/images';
 
 
 export default (scene, objectsPlanets) => {
+
+    var THREEx = THREEx || {}
+
+
+    THREEx	= {}
+
+
+    THREEx.baseURL	= 'planetarium/libs/threex.planets/'
 
 
     // import toute les images des planets de la lib
