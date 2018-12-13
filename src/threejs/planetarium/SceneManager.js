@@ -32,6 +32,7 @@ export default canvas => {
     const camera = buildCamera(screenDimensions);
     const controls = buildControls();
 
+
     const sceneSubjects = createSceneSubjects(scene);
 
     let optsThree = {
@@ -42,6 +43,8 @@ export default canvas => {
         camera: camera,
         controls: controls
     };
+
+
 
     function buildScene() {
         const scene = new THREE.Scene();
@@ -92,6 +95,15 @@ export default canvas => {
 
 
     function createSceneSubjects(scene) {
+
+        //window.dispatchEvent(new Event('sendOptsThree', {'optsThree': optsThree}));
+
+        // create and dispatch the event
+        let event = new CustomEvent("sendOptsThree",
+            {detail: optsThree}
+        );
+        window.dispatchEvent(event);
+
         const sceneSubjects = [
             new Light(scene),
             new Planets(scene, objectsPlanets),
@@ -102,6 +114,7 @@ export default canvas => {
 
         return sceneSubjects;
     }
+
 
     function update() {
         const elapsedTime = clock.getElapsedTime();

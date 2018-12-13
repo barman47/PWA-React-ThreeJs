@@ -30,10 +30,6 @@ export function onDocumentMouseDown(optsThree, mouseX, mouseY) {
     raycaster.setFromCamera(mouse, optsThree.camera);
     let intersects = raycaster.intersectObjects(optsThree.objectsPlanets, true);
 
-    console.log("mouse X: " + mouse.x + " - mouse Y: " + mouse.y)
-    console.log("camera X: " + optsThree.camera.position.x + " - camera Y: " + optsThree.camera.position.y)
-    console.log('intersects : ' + intersects.length)
-
 
     if (intersects.length > 0) {
         let namePlanet = intersects[0].object.parent.name
@@ -63,12 +59,11 @@ export function switchValue(choix, optsThree, currentObj) {
     // }
 
 
-
     // retour sur la planete terre
     if (choix == "Back") {
 
 
-        console.log("currentObj : "+ currentObj  )
+        console.log("currentObj : " + currentObj)
         optsThree.controls.autoRotate = false;
 
         if (currentObj != null) {
@@ -102,12 +97,10 @@ export function switchValue(choix, optsThree, currentObj) {
                 setTimeout(function () {
 
                     if (earthExist) {
-                        console.log("avant earthExist :" + earthExist)
                         let earth = optsThree.scene.getObjectByName("Earth");
                         optsThree.scene.remove(earth)
                         // console.log("- Suppr : " + earth.name)
                         earthExist = false
-                        console.log("apres earthExist :" + earthExist)
                     }
                 }, 3000);
             }
@@ -154,9 +147,7 @@ export function switchValue(choix, optsThree, currentObj) {
                 Navigation.focusZoom(planet, optsThree.camera)
                 if (!earthExist) {
                     EarthPlanet(optsThree.scene);
-                    console.log("Avant earthExist :" + earthExist)
                     earthExist = true
-                    console.log("Apres earthExist :" + earthExist)
                 }
 
             }, 500);

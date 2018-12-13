@@ -19,9 +19,9 @@ export default class NavBarBottom extends Component {
             btnLocalisation: faCompass,
 
             currentObj: null,
-            accueil: true,
-            earthExist: false,
-            optsThree:{}
+            //accueil: true,
+            //earthExist: false,
+            optsThree: {}
 
         };
     }
@@ -33,6 +33,14 @@ export default class NavBarBottom extends Component {
         });
     }
 
+    clickBtnLoca = () => {
+        this.setState({
+            btnLocalisation: faCompass,
+        });
+        switchValue("Back", this.state.optsThree, this.state.currentObj)
+    }
+
+
     btnToParachute = () => {
         this.setState({
             btnLocalisation: faParachuteBox,
@@ -41,7 +49,7 @@ export default class NavBarBottom extends Component {
 
 
     changeCurrentObj = (e) => {
-         this.setState({
+        this.setState({
             currentObj: e.detail,
         })
         // console.log("e.currentPlanet : " + e.detail )
@@ -50,8 +58,8 @@ export default class NavBarBottom extends Component {
     sendOptsThree = (e) => {
         this.setState({
             optsThree: e.detail,
-    })
-        // console.log("optsThree: ",  e.detail.camera.position.x)
+        })
+        console.log("optsThree: ", this.state.optsThree.camera.position.x)
     }
 
 
@@ -67,6 +75,15 @@ export default class NavBarBottom extends Component {
     }
 
     render() {
+
+        let ButtonsPh;
+        if (this.state.btnLocalisation.iconName === "parachute-box") {
+            ButtonsPh = (<ButtonsPhoto/>)
+        } else {
+            ButtonsPh = null
+        }
+
+
         return (
             <div id="btn">
                 {/*<Context.Consumer>*/}
@@ -79,7 +96,7 @@ export default class NavBarBottom extends Component {
                 {/*)}*/}
                 {/*</Context.Consumer>*/}
 
-                {/*<ButtonsPhoto/>*/}
+                {ButtonsPh}
 
                 <div id="btn-navigation">
 
@@ -95,16 +112,22 @@ export default class NavBarBottom extends Component {
                     <button id="btnAgenda">
                         <FontAwesomeIcon icon={faCalendarCheck} size="2x"/>
                     </button>
-                    <button id="btnLocalisation" onClick={() => switchValue("Back", this.state.optsThree , this.state.currentObj)}>
+                    <button id="btnLocalisation" onClick={() => this.clickBtnLoca()}>
                         <FontAwesomeIcon icon={this.state.btnLocalisation} size="2x"/>
                     </button>
                 </div>
 
-                <Modal show={this.state.isOpen}
-                       onClose={this.toggleModal}>
-                </Modal>
+                {this.state.isOpen && <Modal show={this.state.isOpen}
+                                             onClose={this.toggleModal}
+                                             currentObj={this.state.currentObj}
+                                             optsThree={this.state.optsThree}>
+                </Modal>}>
 
-
+                {/*<Modal show={this.state.isOpen}*/}
+                       {/*onClose={this.toggleModal}*/}
+                       {/*currentObj={this.state.currentObj}*/}
+                       {/*optsThree={this.state.optsThree}>*/}
+                {/*</Modal>*/}
             </div>
 
         );

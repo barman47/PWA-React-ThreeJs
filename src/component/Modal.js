@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faGlobe, faInfo, faSpaceShuttle, faSearch, faTimes} from '@fortawesome/free-solid-svg-icons'
+import {switchValue} from './../threejs/planetarium/sceneActions/Raycaster'
 
 export default class Modal extends React.Component {
 
@@ -26,14 +27,16 @@ export default class Modal extends React.Component {
 
 
     componentWillMount() {
-        this.setState({items: this.state.initialItems})
+        this.setState({
+            items: this.state.initialItems,
+        })
     }
 
 
     render() {
-        if (!this.props.show) {
-            return null;
-        }
+        // if (!this.props.show) {
+        //     return null;
+        // }
         return (
             <div id="myModal" className="modal">
                 <div className="modal-content">
@@ -54,7 +57,12 @@ export default class Modal extends React.Component {
 
                         <h3> Planètes </h3>
 
-                        <List items={this.state.items}/>
+                        <List items={this.state.items}
+                              onClose={this.props.onClose}
+                              currentObj={this.props.currentObj}
+                              optsThree={this.props.optsThree}
+                        />
+
 
                     </div>
 
@@ -70,27 +78,38 @@ class List extends React.Component {
 
     constructor(props) {
         super(props)
+    }
 
+    btnNavette(item) {
+        switchValue(item, this.props.optsThree, this.props.currentObj);
+        this.props.onClose();
     }
 
     render() {
-        return (
-            <ul>
-                {
-                    this.props.items.map(function (item) {
-                        return (
-                            <li>
-                                <FontAwesomeIcon icon={faGlobe} size="lg"/>
-                                <a>{item}</a>
-                                <FontAwesomeIcon icon={faInfo} size="lg" onClick={() => console.log( "info planet : " + item )}/>
-                                <FontAwesomeIcon icon={faSpaceShuttle} transform={{rotate: 300}} size="lg"
-                                                 onClick={() => console.log( "direction : " + item )}/>
-                            </li>
-                        )
-                    })
-                }
-            </ul>
-        )
-    }
-};
+        const currentObj = this.props.currentObj;
+        const optsThree = this.props.optsThree;
 
+        console.log("currentObj in list :  ", currentObj)
+        console.log("optsThree in list : ", optsThree)
+
+        return <ul>
+            {
+                this.props.items.map((item, index) => {
+                    return (
+                        <li key={index}>
+                            <FontAwesomeIcon icon={faGlobe} size="lg"/>
+                            <a>{item}</a>
+                            <FontAwesomeIcon icon={faInfo} size="lg"
+                                             onClick={() => console.log("info planet : " + item)}/>
+                            <FontAwesomeIcon icon={faSpaceShuttle} transform={{rotate: 300}} size="lg"
+                                             onClick={() => this.btnNavette(item)}/>
+                        </li>
+                    )
+                })
+            }
+        </ul>
+    }
+}
+
+// this.props.onClose
+// switchValue(item, optsThree, currentObj)

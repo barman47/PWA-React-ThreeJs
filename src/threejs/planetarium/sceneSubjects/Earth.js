@@ -96,7 +96,6 @@ export default scene => {
 
     var THREExAtmo = THREExAtmo || {}
 
-    console.log(" THREExAtmo   ========  " + Object.values(THREExAtmo))
 
     /**
      * from http://stemkoski.blogspot.fr/2013/07/shaders-in-threejs-glow-and-halo.html
