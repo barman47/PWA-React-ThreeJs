@@ -10,7 +10,7 @@ import {onDocumentMouseDown} from "./sceneActions/Raycaster";
 var TWEEN = require('@tweenjs/tween.js');
 
 
-export default canvas => {
+export default (canvas,updateOptsThree) => {
 
     const clock = new THREE.Clock();
     //const origin = new THREE.Vector3(0,0,0);
@@ -32,7 +32,6 @@ export default canvas => {
     const camera = buildCamera(screenDimensions);
     const controls = buildControls();
 
-
     const sceneSubjects = createSceneSubjects(scene);
 
     let optsThree = {
@@ -44,7 +43,8 @@ export default canvas => {
         controls: controls
     };
 
-
+    console.log("optsThree :" , optsThree);
+    updateOptsThree(optsThree);
 
     function buildScene() {
         const scene = new THREE.Scene();
@@ -52,6 +52,7 @@ export default canvas => {
 
         return scene;
     }
+
 
     function buildControls() {
         const controls = new THREE.OrbitControls(camera, renderer.domElement);
@@ -96,14 +97,6 @@ export default canvas => {
 
     function createSceneSubjects(scene) {
 
-        //window.dispatchEvent(new Event('sendOptsThree', {'optsThree': optsThree}));
-
-        // create and dispatch the event
-        let event = new CustomEvent("sendOptsThree",
-            {detail: optsThree}
-        );
-        window.dispatchEvent(event);
-
         const sceneSubjects = [
             new Light(scene),
             new Planets(scene, objectsPlanets),
@@ -142,6 +135,13 @@ export default canvas => {
         camera.updateProjectionMatrix();
 
         renderer.setSize(width, height);
+
+        // console.log("optsThree :" , optsThree);
+        // while (!optsThree) {
+        //
+        //
+        // }
+
     }
 
 
@@ -152,20 +152,19 @@ export default canvas => {
     // }
 
     function onMouseDown(mouseX, mouseY) {
-        onDocumentMouseDown( optsThree , mouseX, mouseY)
+        onDocumentMouseDown(optsThree, mouseX, mouseY)
     }
 
     let modal = document.getElementById('myModal');
 
-    //
-    // function init(objectsPlanets, renderer, camera, modal, scene, controls) {
+
+    //function init(objectsPlanets, renderer, camera, modal, scene, controls) {
     //
     //
     //     document.addEventListener('mousedown', onDocumentMouseDown(objectsPlanets, renderer, camera, modal, scene, controls), false);
     //     //document.addEventListener('touchstart', onDocumentTouchStart, false);
     //
     // }
-    //
 
 
     return {
@@ -173,5 +172,6 @@ export default canvas => {
         onWindowResize,
         // onMouseMove,
         onMouseDown
+
     }
 }

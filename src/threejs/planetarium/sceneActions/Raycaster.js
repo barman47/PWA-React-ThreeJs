@@ -41,7 +41,7 @@ export function onDocumentMouseDown(optsThree, mouseX, mouseY) {
             {detail: optsThree}
         );
         window.dispatchEvent(event);
-
+        console.log("in raycaster je lance l'event : " ,  event )
     }
 
 }

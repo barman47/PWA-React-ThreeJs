@@ -14,7 +14,6 @@ export default class Modal extends React.Component {
         }
     }
 
-
     filterList = (event) => {
         var updatedList = this.state.initialItems;
 
@@ -25,13 +24,11 @@ export default class Modal extends React.Component {
         this.setState({items: updatedList});
     }
 
-
     componentWillMount() {
         this.setState({
             items: this.state.initialItems,
         })
     }
-
 
     render() {
         // if (!this.props.show) {
@@ -42,7 +39,6 @@ export default class Modal extends React.Component {
                 <div className="modal-content">
                     <div className="modal-header">
                         <FontAwesomeIcon className="close" icon={faTimes} size="lg" onClick={this.props.onClose}/>
-
 
                         <h3>
                             <FontAwesomeIcon icon={faSearch} size="lg"/>
@@ -63,7 +59,6 @@ export default class Modal extends React.Component {
                               optsThree={this.props.optsThree}
                         />
 
-
                     </div>
 
                 </div>
@@ -72,7 +67,6 @@ export default class Modal extends React.Component {
         );
     }
 }
-
 
 class List extends React.Component {
 

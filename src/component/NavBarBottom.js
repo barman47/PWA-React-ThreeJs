@@ -59,7 +59,7 @@ export default class NavBarBottom extends Component {
         this.setState({
             optsThree: e.detail,
         })
-        console.log("optsThree: ", this.state.optsThree.camera.position.x)
+        console.log("optsThree in navbar bottom: ", this.state.optsThree.camera.position.x)
     }
 
 
@@ -120,7 +120,7 @@ export default class NavBarBottom extends Component {
                 {this.state.isOpen && <Modal show={this.state.isOpen}
                                              onClose={this.toggleModal}
                                              currentObj={this.state.currentObj}
-                                             optsThree={this.state.optsThree}>
+                                             optsThree={this.props.optsThree}>
                 </Modal>}>
 
                 {/*<Modal show={this.state.isOpen}*/}

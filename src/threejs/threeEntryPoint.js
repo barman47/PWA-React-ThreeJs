@@ -1,9 +1,9 @@
 import SceneManager from './planetarium/SceneManager';
 
 
-export default (container) => {
+export default (container,updateOptsThree) => {
     const canvas = createCanvas(document, container);
-    const sceneManager = new SceneManager(canvas);
+    const sceneManager = new SceneManager(canvas,updateOptsThree);
 
 
     let canvasHalfWidth;
@@ -33,8 +33,8 @@ export default (container) => {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        canvasHalfWidth = Math.round(canvas.offsetWidth/2);
-        canvasHalfHeight = Math.round(canvas.offsetHeight/2);
+        canvasHalfWidth = Math.round(canvas.offsetWidth / 2);
+        canvasHalfHeight = Math.round(canvas.offsetHeight / 2);
 
 
         sceneManager.onWindowResize()
@@ -49,8 +49,8 @@ export default (container) => {
     function mouseDown(e) {
 
 
-        let mouseX = e.clientX ;
-        let mouseY = e.clientY ;
+        let mouseX = e.clientX;
+        let mouseY = e.clientY;
 
 
         sceneManager.onMouseDown(mouseX, mouseY);
@@ -60,8 +60,6 @@ export default (container) => {
         requestAnimationFrame(render);
         sceneManager.update();
     }
-
-
 
 
     //click

@@ -28,14 +28,21 @@ class App extends Component {
         };
     }
 
+    updateOptsThree = (opts) => {
+        this.setState({
+            optsThree: opts
+        })
+       // console.log("optsThree in app js: ", opts)
+
+    }
 
 
     render() {
         return (
             <div>
                 <Context.Provider value={this.state}>
-                    <ThreeContainer />
-                    <NavBarBottom />
+                    <ThreeContainer updateOptsThree={this.updateOptsThree}/>
+                    <NavBarBottom optsThree={this.state.optsThree}/>
                 </Context.Provider>
             </div>
         );
