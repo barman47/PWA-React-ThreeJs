@@ -37,7 +37,7 @@ export default class NavBarBottom extends Component {
         this.setState({
             btnLocalisation: faCompass,
         });
-        switchValue("Back", this.state.optsThree, this.state.currentObj)
+        switchValue("Back", this.props.optsThree, this.state.currentObj)
     }
 
 
@@ -52,21 +52,12 @@ export default class NavBarBottom extends Component {
         this.setState({
             currentObj: e.detail,
         })
-        // console.log("e.currentPlanet : " + e.detail )
-    }
-
-    sendOptsThree = (e) => {
-        this.setState({
-            optsThree: e.detail,
-        })
-        console.log("optsThree in navbar bottom: ", this.state.optsThree.camera.position.x)
     }
 
 
     componentDidMount() {
         window.addEventListener('btnToParachute', this.btnToParachute)
         window.addEventListener('changeCurrentObj', this.changeCurrentObj)
-        window.addEventListener('sendOptsThree', this.sendOptsThree)
     }
 
     componentWillUnmount() {
@@ -123,11 +114,6 @@ export default class NavBarBottom extends Component {
                                              optsThree={this.props.optsThree}>
                 </Modal>}>
 
-                {/*<Modal show={this.state.isOpen}*/}
-                       {/*onClose={this.toggleModal}*/}
-                       {/*currentObj={this.state.currentObj}*/}
-                       {/*optsThree={this.state.optsThree}>*/}
-                {/*</Modal>*/}
             </div>
 
         );

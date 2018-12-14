@@ -32,7 +32,6 @@ class App extends Component {
         this.setState({
             optsThree: opts
         })
-       // console.log("optsThree in app js: ", opts)
 
     }
 

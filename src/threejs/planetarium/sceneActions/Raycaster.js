@@ -16,12 +16,13 @@ import EarthPlanet from './../sceneSubjects/Earth'
 
 let currentObj = null
 
-export function onDocumentMouseDown(optsThree, mouseX, mouseY) {
+export function onDocumentMouseDown(optsThree, mouseX, mouseY, updateOptsThree) {
 
 
     //console.log("evenet touche : " + event.touches[0].clientX )
     let raycaster = new THREE.Raycaster();
     let mouse = new THREE.Vector2();
+
 
     //event.preventDefault();
     mouse.x = (mouseX / optsThree.renderer.domElement.clientWidth) * 2 - 1;
@@ -32,17 +33,12 @@ export function onDocumentMouseDown(optsThree, mouseX, mouseY) {
 
 
     if (intersects.length > 0) {
-        let namePlanet = intersects[0].object.parent.name
+        let namePlanet = intersects[0].object.parent.name;
         switchValue(namePlanet, optsThree, currentObj);
-        //window.dispatchEvent(new Event('sendOptsThree', {'optsThree': optsThree}));
+        updateOptsThree(optsThree);
 
-        // create and dispatch the event
-        let event = new CustomEvent("sendOptsThree",
-            {detail: optsThree}
-        );
-        window.dispatchEvent(event);
-        console.log("in raycaster je lance l'event : " ,  event )
     }
+
 
 }
 
@@ -62,8 +58,6 @@ export function switchValue(choix, optsThree, currentObj) {
     // retour sur la planete terre
     if (choix == "Back") {
 
-
-        console.log("currentObj : " + currentObj)
         optsThree.controls.autoRotate = false;
 
         if (currentObj != null) {

@@ -10,7 +10,7 @@ import {onDocumentMouseDown} from "./sceneActions/Raycaster";
 var TWEEN = require('@tweenjs/tween.js');
 
 
-export default (canvas,updateOptsThree) => {
+export default (canvas, updateOptsThree) => {
 
     const clock = new THREE.Clock();
     //const origin = new THREE.Vector3(0,0,0);
@@ -43,7 +43,7 @@ export default (canvas,updateOptsThree) => {
         controls: controls
     };
 
-    console.log("optsThree :" , optsThree);
+    //envoie de options three
     updateOptsThree(optsThree);
 
     function buildScene() {
@@ -136,11 +136,6 @@ export default (canvas,updateOptsThree) => {
 
         renderer.setSize(width, height);
 
-        // console.log("optsThree :" , optsThree);
-        // while (!optsThree) {
-        //
-        //
-        // }
 
     }
 
@@ -151,8 +146,8 @@ export default (canvas,updateOptsThree) => {
     //    // console.log("mousePosition.x : " + mousePosition.x)
     // }
 
-    function onMouseDown(mouseX, mouseY) {
-        onDocumentMouseDown(optsThree, mouseX, mouseY)
+    function onMouseDown(mouseX, mouseY, updateOptsThree) {
+        onDocumentMouseDown(optsThree, mouseX, mouseY, updateOptsThree)
     }
 
     let modal = document.getElementById('myModal');

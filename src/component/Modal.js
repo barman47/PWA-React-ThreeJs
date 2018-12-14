@@ -83,9 +83,6 @@ class List extends React.Component {
         const currentObj = this.props.currentObj;
         const optsThree = this.props.optsThree;
 
-        console.log("currentObj in list :  ", currentObj)
-        console.log("optsThree in list : ", optsThree)
-
         return <ul>
             {
                 this.props.items.map((item, index) => {
@@ -104,6 +101,3 @@ class List extends React.Component {
         </ul>
     }
 }
-
-// this.props.onClose
-// switchValue(item, optsThree, currentObj)
