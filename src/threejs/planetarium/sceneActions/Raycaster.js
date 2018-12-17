@@ -31,7 +31,7 @@ export function onDocumentMouseDown(optsThree, mouseX, mouseY, updateOptsThree) 
     raycaster.setFromCamera(mouse, optsThree.camera);
     let intersects = raycaster.intersectObjects(optsThree.objectsPlanets, true);
 
-
+    //console.log("position camera : " + optsThree.camera.position.x + " - " + optsThree.camera.position.y)
     if (intersects.length > 0) {
         let namePlanet = intersects[0].object.parent.name;
         switchValue(namePlanet, optsThree, currentObj);
@@ -42,7 +42,7 @@ export function onDocumentMouseDown(optsThree, mouseX, mouseY, updateOptsThree) 
 
 }
 
-
+var tweenFocusTarget = null;
 let accueil = true;
 let earthExist = false;
 
@@ -135,7 +135,9 @@ export function switchValue(choix, optsThree, currentObj) {
         // si on clique sur une autre planetes
         if (controlX !== planetX || controlZ !== planetZ) {
             console.log("Direction la planete " + choix + " ! ")
-            Navigation.focusTarget(planet, optsThree.controls);
+
+            tweenFocusTarget = Navigation.focusTarget(planet, optsThree.controls);
+            console.log("tweenFocusTarget : " + tweenFocusTarget)
 
             setTimeout(function () {
                 Navigation.focusZoom(planet, optsThree.camera)
@@ -161,3 +163,28 @@ export function switchValue(choix, optsThree, currentObj) {
     }
 
 }
+
+export function collisionCam(optsThree) {
+
+    //clearText();
+
+    var vector = new THREE.Vector3(); // create once and reuse it!
+    var cameraDirection = optsThree.camera.getWorldDirection(new THREE.Vector3());
+
+    var ray = new THREE.Raycaster(optsThree.camera.getWorldPosition(), cameraDirection);
+    var intersects = ray.intersectObjects(optsThree.objectsPlanets, true);
+    if (intersects.length > 0) {
+        console.log(intersects[0].distance);
+        if (intersects[0].distance < 10 && tweenFocusTarget) {
+            setTimeout(function () {
+                console.log("collision")
+                tweenFocusTarget.stop();
+            }, 1000);
+
+        }
+    }
+
+    //appendText(hits);
+
+}
+

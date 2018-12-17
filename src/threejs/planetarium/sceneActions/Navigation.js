@@ -17,10 +17,13 @@ export function focusZoom(obj , camera) {
 }
 
 export function focusTarget(obj, controls) {
-    new TWEEN.Tween(controls.target)
+    var tweenFocusTarget = new TWEEN.Tween(controls.target)
         .to({x: obj.position.x, y: obj.position.y, z: obj.position.z}, 2500)
         .easing(TWEEN.Easing.Quadratic.InOut)
         .start();
+
+    return tweenFocusTarget
+
 }
 
 

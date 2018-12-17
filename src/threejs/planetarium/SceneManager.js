@@ -5,7 +5,7 @@ import Horizon from './sceneSubjects/Horizon';
 import SkyStars from './sceneSubjects/SkyStars';
 import Light from './sceneSubjects/Light';
 import Planets from './sceneSubjects/Planets';
-import {onDocumentMouseDown} from "./sceneActions/Raycaster";
+import {onDocumentMouseDown, collisionCam} from "./sceneActions/Raycaster";
 
 var TWEEN = require('@tweenjs/tween.js');
 
@@ -113,6 +113,7 @@ export default (canvas, updateOptsThree) => {
         const elapsedTime = clock.getElapsedTime();
 
 
+        collisionCam(optsThree);
         TWEEN.update();
         controls.update();
         renderer.render(scene, camera);
@@ -165,8 +166,8 @@ export default (canvas, updateOptsThree) => {
     return {
         update,
         onWindowResize,
+        onMouseDown,
         // onMouseMove,
-        onMouseDown
 
     }
 }
