@@ -6,22 +6,22 @@ export default (scene, objectsPlanets) => {
     var THREEx = THREEx || {}
 
 
-    THREEx	= {}
+    THREEx = {}
 
 
-    THREEx.baseURL	= 'planetarium/libs/threex.planets/'
+    THREEx.baseURL = 'planetarium/libs/threex.planets/'
 
 
     // import toute les images des planets de la lib
     function importAll(r) {
         let images = {};
-        r.keys().map((item, index) => { images[item.replace('./', '')] = r(item); });
+        r.keys().map((item, index) => {
+            images[item.replace('./', '')] = r(item);
+        });
         return images;
     }
 
     const images = importAll(require.context('../../../threejs/planetarium/libs/threex.planets/images', false, /\.(png|jpe?g|svg|gif)$/));
-
-
 
 
     THREEx.baseURL = './../libs/threex.planets/threex.planets/'
@@ -54,7 +54,7 @@ export default (scene, objectsPlanets) => {
         var geometry = new THREE.SphereGeometry(radius, 32, 32)
         var material = new THREE.MeshPhongMaterial({
             map: THREE.ImageUtils.loadTexture(images['venusmap.jpg']),
-            bumpMap: THREE.ImageUtils.loadTexture(images['venusbump.jpg'] ),
+            bumpMap: THREE.ImageUtils.loadTexture(images['venusbump.jpg']),
             bumpScale: 0.005,
         })
         var mesh = new THREE.Mesh(geometry, material)
@@ -338,7 +338,7 @@ export default (scene, objectsPlanets) => {
         var geometry = new THREE.SphereGeometry(radius, 32, 32)
         var material = new THREE.MeshPhongMaterial({
             map: THREE.ImageUtils.loadTexture(images['plutomap1k.jpg']),
-            bumpMap: THREE.ImageUtils.loadTexture(images['plutobump1k.jpg'] ),
+            bumpMap: THREE.ImageUtils.loadTexture(images['plutobump1k.jpg']),
             bumpScale: 0.005,
         })
         var mesh = new THREE.Mesh(geometry, material)
@@ -449,7 +449,7 @@ export default (scene, objectsPlanets) => {
     moonMesh.geometry.radius = radMoon
 
     Moon.add(moonMesh)
-    Moon.scale.multiplyScalar(2 / 5)
+    Moon.scale.multiplyScalar(2 / 14)
     objectsPlanets.push(Moon);
 
     //Neptune
@@ -466,14 +466,14 @@ export default (scene, objectsPlanets) => {
     neptuMesh.geometry.radius = radNeptune
 
     Neptune.add(neptuMesh)
-    Neptune.scale.multiplyScalar(2 / 5)
+    Neptune.scale.multiplyScalar(5 / 14)
     objectsPlanets.push(Neptune);
 
 
     //Jupiter
     var Jupiter = new THREE.Group();
-    Jupiter.position.z = -6
-    Jupiter.position.x = -6
+    Jupiter.position.z = -8
+    Jupiter.position.x = -15
     Jupiter.name = "Jupiter";
 
     var radJupiter = 0.5;
@@ -483,7 +483,7 @@ export default (scene, objectsPlanets) => {
     jupiMesh.geometry.radius = radJupiter
 
     Jupiter.add(jupiMesh)
-    Jupiter.scale.multiplyScalar(2 / 5)
+    Jupiter.scale.multiplyScalar(14 / 14)
     objectsPlanets.push(Jupiter);
 
 
@@ -501,7 +501,7 @@ export default (scene, objectsPlanets) => {
 
     mercMesh.geometry.radius = radMercury
     Mercury.add(mercMesh)
-    Mercury.scale.multiplyScalar(2 / 5)
+    Mercury.scale.multiplyScalar(2 / 14)
     objectsPlanets.push(Mercury);
 
 
@@ -519,7 +519,7 @@ export default (scene, objectsPlanets) => {
 
     venusMesh.geometry.radius = radVenus
     Venus.add(venusMesh)
-    Venus.scale.multiplyScalar(2 / 5)
+    Venus.scale.multiplyScalar(3 / 14)
     objectsPlanets.push(Venus);
 
     //Mars
@@ -536,7 +536,7 @@ export default (scene, objectsPlanets) => {
 
     marsMesh.geometry.radius = radMars
     Mars.add(marsMesh)
-    Mars.scale.multiplyScalar(2 / 5)
+    Mars.scale.multiplyScalar(1.5 / 14)
     objectsPlanets.push(Mars);
 
 
@@ -560,8 +560,7 @@ export default (scene, objectsPlanets) => {
     ring.castShadow = true
     ring.geometry.radius = radRingSaturn;
     Saturn.add(ring)
-
-
+    Saturn.scale.multiplyScalar(12 / 14)
     objectsPlanets.push(Saturn);
 
 
@@ -586,7 +585,7 @@ export default (scene, objectsPlanets) => {
     ring.castShadow = true
     ring.geometry.radius = radRingUranus;
     Uranus.add(ring)
-
+    Uranus.scale.multiplyScalar(5.1 / 14)
     objectsPlanets.push(Uranus);
 
 
