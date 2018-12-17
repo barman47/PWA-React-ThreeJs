@@ -42,7 +42,7 @@ export function onDocumentMouseDown(optsThree, mouseX, mouseY, updateOptsThree) 
 
 }
 
-var tweenFocusTarget = null;
+let focusZoomVal = null;
 let accueil = true;
 let earthExist = false;
 
@@ -136,11 +136,10 @@ export function switchValue(choix, optsThree, currentObj) {
         if (controlX !== planetX || controlZ !== planetZ) {
             console.log("Direction la planete " + choix + " ! ")
 
-            tweenFocusTarget = Navigation.focusTarget(planet, optsThree.controls);
-            console.log("tweenFocusTarget : " + tweenFocusTarget)
+            Navigation.focusTarget(planet, optsThree.controls);
 
             setTimeout(function () {
-                Navigation.focusZoom(planet, optsThree.camera)
+                focusZoomVal = Navigation.focusZoom(planet, optsThree.camera)
                 if (!earthExist) {
                     EarthPlanet(optsThree.scene);
                     earthExist = true
@@ -164,7 +163,7 @@ export function switchValue(choix, optsThree, currentObj) {
 
 }
 
-export function collisionCam(optsThree) {
+export async function collisionCam(optsThree) {
 
     //clearText();
 
@@ -175,11 +174,11 @@ export function collisionCam(optsThree) {
     var intersects = ray.intersectObjects(optsThree.objectsPlanets, true);
     if (intersects.length > 0) {
         console.log(intersects[0].distance);
-        if (intersects[0].distance < 10 && tweenFocusTarget) {
-            setTimeout(function () {
-                console.log("collision")
-                tweenFocusTarget.stop();
-            }, 1000);
+        console.log("focusZoomVal : " + focusZoomVal)
+        if (intersects[0].distance < 7 && focusZoomVal) {
+            console.log("__________------------------------------------------------------------------------------------- collision")
+            focusZoomVal.stop();
+            focusZoomVal = null;
 
         }
     }
