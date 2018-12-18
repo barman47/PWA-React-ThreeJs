@@ -176,10 +176,9 @@ export async function collisionCam(optsThree) {
         console.log(intersects[0].distance);
         console.log("focusZoomVal : " + focusZoomVal)
         if (intersects[0].distance < 7 && focusZoomVal) {
-            console.log("__________------------------------------------------------------------------------------------- collision")
+            console.log("__________------------ collision")
             focusZoomVal.stop();
             focusZoomVal = null;
-
         }
     }
 

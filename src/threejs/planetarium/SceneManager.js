@@ -30,7 +30,7 @@ export default (canvas, updateOptsThree) => {
     const scene = buildScene();
     const renderer = buildRender(screenDimensions);
     const camera = buildCamera(screenDimensions);
-    const controls = buildControls();
+    let controls = buildControls();
 
     const sceneSubjects = createSceneSubjects(scene);
 
@@ -67,8 +67,27 @@ export default (canvas, updateOptsThree) => {
         controls.maxPolarAngle = Math.PI;
         controls.dampingFactor = 0.07;
         controls.rotateSpeed = 0.07;
+
+
         return controls;
     }
+
+    window.addEventListener('deviceorientation', setOrientationControls, true);
+
+    function setOrientationControls(e) {
+        if (!e.alpha) {
+            console.log("Je laisse le control orbite car alpha = " + e.alpha)
+            return;
+
+        }
+        console.log("setOrientationControls : utilisation de device controls")
+        alert("setOrientationControls : utilisation de device controls :" + e.alpha)
+        controls = new THREE.DeviceOrientationControls(camera, true);
+        controls.connect();
+        //controls.update();
+        window.removeEventListener('deviceorientation', setOrientationControls, true);
+    }
+
 
     function buildRender({width, height}) {
         const renderer = new THREE.WebGLRenderer({canvas: canvas, antialias: true, alpha: true});
@@ -120,11 +139,11 @@ export default (canvas, updateOptsThree) => {
 
     }
 
-    // function updateCameraPositionRelativeToMouse() {
-    //     camera.position.x += (  (mousePosition.x * 0.01) - camera.position.x ) * 0.01;
-    //     camera.position.y += ( -(mousePosition.y * 0.01) - camera.position.y ) * 0.01;
-    //     camera.lookAt(origin);
-    // }
+// function updateCameraPositionRelativeToMouse() {
+//     camera.position.x += (  (mousePosition.x * 0.01) - camera.position.x ) * 0.01;
+//     camera.position.y += ( -(mousePosition.y * 0.01) - camera.position.y ) * 0.01;
+//     camera.lookAt(origin);
+// }
 
     function onWindowResize() {
         const {width, height} = canvas;
@@ -141,11 +160,11 @@ export default (canvas, updateOptsThree) => {
     }
 
 
-    // function onMouseMove(x, y) {
-    //     mousePosition.x = x;
-    //     mousePosition.y = y;
-    //    // console.log("mousePosition.x : " + mousePosition.x)
-    // }
+// function onMouseMove(x, y) {
+//     mousePosition.x = x;
+//     mousePosition.y = y;
+//    // console.log("mousePosition.x : " + mousePosition.x)
+// }
 
     function onMouseDown(mouseX, mouseY, updateOptsThree) {
         onDocumentMouseDown(optsThree, mouseX, mouseY, updateOptsThree)
@@ -154,13 +173,13 @@ export default (canvas, updateOptsThree) => {
     let modal = document.getElementById('myModal');
 
 
-    //function init(objectsPlanets, renderer, camera, modal, scene, controls) {
-    //
-    //
-    //     document.addEventListener('mousedown', onDocumentMouseDown(objectsPlanets, renderer, camera, modal, scene, controls), false);
-    //     //document.addEventListener('touchstart', onDocumentTouchStart, false);
-    //
-    // }
+//function init(objectsPlanets, renderer, camera, modal, scene, controls) {
+//
+//
+//     document.addEventListener('mousedown', onDocumentMouseDown(objectsPlanets, renderer, camera, modal, scene, controls), false);
+//     //document.addEventListener('touchstart', onDocumentTouchStart, false);
+//
+// }
 
 
     return {
