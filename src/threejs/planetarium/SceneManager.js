@@ -75,7 +75,7 @@ export default (canvas, updateOptsThree) => {
         return controls;
     }
 
-    window.addEventListener('deviceorientation', setOrientationControls, {passive: true});
+    window.addEventListener('deviceorientation', setOrientationControls, true);
 
     function setOrientationControls(e) {
 
@@ -122,7 +122,7 @@ export default (canvas, updateOptsThree) => {
         const sceneSubjects = [
             new Light(scene),
             new Planets(scene, objectsPlanets),
-            //new SkyStars(scene),
+            new SkyStars(scene),
             new Horizon(scene),
             //new SceneSubjecttt(scene)
         ];
