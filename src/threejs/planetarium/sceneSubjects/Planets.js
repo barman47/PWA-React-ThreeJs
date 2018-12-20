@@ -6,9 +6,6 @@ export default (scene, objectsPlanets) => {
     var THREEx = THREEx || {}
 
 
-    THREEx = {}
-
-
     THREEx.baseURL = 'planetarium/libs/threex.planets/'
 
 
@@ -28,7 +25,7 @@ export default (scene, objectsPlanets) => {
 
     THREEx.createSun = async function (radius) {
         var geometry = new THREE.SphereGeometry(radius, 32, 32)
-        var texture = new THREE.TextureLoader().load(images['sunmap.jpg']);
+        var texture = new THREE.TextureLoader().load().load(images['sunmap.jpg']);
         var material = new THREE.MeshPhongMaterial({
             map: texture,
             bumpMap: texture,
@@ -42,8 +39,8 @@ export default (scene, objectsPlanets) => {
     THREEx.createMercury = function (radius) {
         var geometry = new THREE.SphereGeometry(radius, 32, 32)
         var material = new THREE.MeshPhongMaterial({
-            map: THREE.ImageUtils.loadTexture(images['mercurymap.jpg']),
-            bumpMap: THREE.ImageUtils.loadTexture(images['mercurybump.jpg']),
+            map: new THREE.TextureLoader().load(images['mercurymap.jpg']),
+            bumpMap: new THREE.TextureLoader().load(images['mercurybump.jpg']),
             bumpScale: 0.005,
         })
         var mesh = new THREE.Mesh(geometry, material)
@@ -53,8 +50,8 @@ export default (scene, objectsPlanets) => {
     THREEx.createVenus = function (radius) {
         var geometry = new THREE.SphereGeometry(radius, 32, 32)
         var material = new THREE.MeshPhongMaterial({
-            map: THREE.ImageUtils.loadTexture(images['venusmap.jpg']),
-            bumpMap: THREE.ImageUtils.loadTexture(images['venusbump.jpg']),
+            map: new THREE.TextureLoader().load(images['venusmap.jpg']),
+            bumpMap: new THREE.TextureLoader().load(images['venusbump.jpg']),
             bumpScale: 0.005,
         })
         var mesh = new THREE.Mesh(geometry, material)
@@ -64,10 +61,10 @@ export default (scene, objectsPlanets) => {
     THREEx.createEarth = function (radius) {
         var geometry = new THREE.SphereGeometry(radius, 32, 32)
         var material = new THREE.MeshPhongMaterial({
-            map: THREE.ImageUtils.loadTexture(images['earthmap1k.jpg']),
-            bumpMap: THREE.ImageUtils.loadTexture(images['earthbump1k.jpg']),
+            map: new THREE.TextureLoader().load(images['earthmap1k.jpg']),
+            bumpMap: new THREE.TextureLoader().load(images['earthbump1k.jpg']),
             bumpScale: 0.05,
-            specularMap: THREE.ImageUtils.loadTexture(images['earthspec1k.jpg']),
+            specularMap: new THREE.TextureLoader().load(images['earthspec1k.jpg']),
             specular: new THREE.Color('grey'),
         })
         var mesh = new THREE.Mesh(geometry, material)
@@ -139,9 +136,9 @@ export default (scene, objectsPlanets) => {
         var geometry = new THREE.SphereGeometry(radius, 32, 32)
         var texture = new THREE.TextureLoader().load(images['moonmap1k.jpg']);
         var material = new THREE.MeshPhongMaterial({
-            //map: THREE.ImageUtils.loadTexture(THREEx.baseURL + 'images/moonmap1k.jpg'),
+            //map: THREE.TextureLoader().load(THREEx.baseURL + 'images/moonmap1k.jpg'),
             map: texture,
-            bumpMap: THREE.ImageUtils.loadTexture(images['moonbump1k.jpg']),
+            bumpMap: texture,
             bumpScale: 0.002,
         })
         var mesh = new THREE.Mesh(geometry, material)
@@ -151,8 +148,8 @@ export default (scene, objectsPlanets) => {
     THREEx.createMars = function (radius) {
         var geometry = new THREE.SphereGeometry(radius, 32, 32)
         var material = new THREE.MeshPhongMaterial({
-            map: THREE.ImageUtils.loadTexture(images['marsmap1k.jpg']),
-            bumpMap: THREE.ImageUtils.loadTexture(images['marsbump1k.jpg']),
+            map: new THREE.TextureLoader().load(images['marsmap1k.jpg']),
+            bumpMap: new THREE.TextureLoader().load(images['marsbump1k.jpg']),
             bumpScale: 0.05,
         })
         var mesh = new THREE.Mesh(geometry, material)
@@ -161,7 +158,7 @@ export default (scene, objectsPlanets) => {
 
     THREEx.createJupiter = function (radius) {
         var geometry = new THREE.SphereGeometry(radius, 32, 32)
-        var texture = THREE.ImageUtils.loadTexture(images['jupitermap.jpg'])
+        var texture = new THREE.TextureLoader().load(images['jupitermap.jpg'])
         var material = new THREE.MeshPhongMaterial({
             map: texture,
             bumpMap: texture,
@@ -175,7 +172,7 @@ export default (scene, objectsPlanets) => {
     THREEx.createSaturn = function (radius) {
 
         var geometry = new THREE.SphereGeometry(radius, 32, 32)
-        var texture = THREE.ImageUtils.loadTexture(images['saturnmap.jpg'])
+        var texture = new THREE.TextureLoader().load(images['saturnmap.jpg'])
         var material = new THREE.MeshPhongMaterial({
             map: texture,
             bumpMap: texture,
@@ -237,7 +234,7 @@ export default (scene, objectsPlanets) => {
         var geometry = new THREEx._RingGeometry(radius, 0.75, 64); //0.55
         var material = new THREE.MeshPhongMaterial({
             map: new THREE.Texture(canvasResult),
-            // map		: THREE.ImageUtils.loadTexture(THREEx.baseURL+'images/ash_uvgrid01.jpg'),
+            // map		: THREE.TextureLoader().load(THREEx.baseURL+'images/ash_uvgrid01.jpg'),
             side: THREE.DoubleSide,
             transparent: true,
             opacity: 0.8,
@@ -250,7 +247,7 @@ export default (scene, objectsPlanets) => {
 
     THREEx.createUranus = function (radius) {
         var geometry = new THREE.SphereGeometry(radius, 32, 32)
-        var texture = THREE.ImageUtils.loadTexture(images['uranusmap.jpg'])
+        var texture = new THREE.TextureLoader().load(images['uranusmap.jpg'])
         var material = new THREE.MeshPhongMaterial({
             map: texture,
             bumpMap: texture,
@@ -310,7 +307,7 @@ export default (scene, objectsPlanets) => {
         var geometry = new THREEx._RingGeometry(radius, 0.75, 64); //0.55
         var material = new THREE.MeshPhongMaterial({
             map: new THREE.Texture(canvasResult),
-            // map		: THREE.ImageUtils.loadTexture(THREEx.baseURL+'images/ash_uvgrid01.jpg'),
+            // map		: THREE.TextureLoader().load(THREEx.baseURL+'images/ash_uvgrid01.jpg'),
             side: THREE.DoubleSide,
             transparent: true,
             opacity: 0.8,
@@ -323,10 +320,9 @@ export default (scene, objectsPlanets) => {
 
     THREEx.createNeptune = function (radius) {
         var geometry = new THREE.SphereGeometry(radius, 32, 32)
-        var texture = THREE.ImageUtils.loadTexture(images['neptunemap.jpg'])
+        var texture = new THREE.TextureLoader().load(images['neptunemap.jpg'])
         var material = new THREE.MeshPhongMaterial({
             map: texture,
-            bumpMap: texture,
             bumpScale: 0.05,
         })
         var mesh = new THREE.Mesh(geometry, material)
@@ -337,8 +333,8 @@ export default (scene, objectsPlanets) => {
     THREEx.createPluto = function (radius) {
         var geometry = new THREE.SphereGeometry(radius, 32, 32)
         var material = new THREE.MeshPhongMaterial({
-            map: THREE.ImageUtils.loadTexture(images['plutomap1k.jpg']),
-            bumpMap: THREE.ImageUtils.loadTexture(images['plutobump1k.jpg']),
+            map: new THREE.TextureLoader().load(images['plutomap1k.jpg']),
+            bumpMap: new THREE.TextureLoader().load(images['plutobump1k.jpg']),
             bumpScale: 0.005,
         })
         var mesh = new THREE.Mesh(geometry, material)
@@ -346,7 +342,7 @@ export default (scene, objectsPlanets) => {
     }
 
     THREEx.createStarfield = function () {
-        var texture = THREE.ImageUtils.loadTexture(images['galaxy_starfield.png'])
+        var texture = new THREE.TextureLoader().load(images['galaxy_starfield.png'])
         var material = new THREE.MeshBasicMaterial({
             map: texture,
             side: THREE.BackSide
@@ -603,6 +599,10 @@ export default (scene, objectsPlanets) => {
             //earthMesh.rotation.y += 1/32 * delta;
         }
 
+    }
+
+    return {
+        update
     }
 
 }

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import threeEntryPoint from './../threejs/threeEntryPoint';
-import NavBarBottom from "./NavBarBottom";
 
 export default class ThreeContainer extends Component {
 

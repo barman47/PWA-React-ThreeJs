@@ -31,17 +31,20 @@ export default (canvas, updateOptsThree) => {
     const renderer = buildRender(screenDimensions);
     const camera = buildCamera(screenDimensions);
     let controls = buildControls();
+    let controlsType;
 
-    const sceneSubjects = createSceneSubjects(scene);
+    //const sceneSubjects = createSceneSubjects(scene);
+    createSceneSubjects(scene);
 
     let optsThree = {
-        canvas: canvas,
-        objectsPlanets: objectsPlanets,
-        scene: scene,
-        renderer: renderer,
-        camera: camera,
-        controls: controls
-    };
+            canvas: canvas,
+            objectsPlanets: objectsPlanets,
+            scene: scene,
+            renderer: renderer,
+            camera: camera,
+            controls: controls,
+        }
+    ;
 
     //envoie de options three
     updateOptsThree(optsThree);
@@ -67,21 +70,21 @@ export default (canvas, updateOptsThree) => {
         controls.maxPolarAngle = Math.PI;
         controls.dampingFactor = 0.07;
         controls.rotateSpeed = 0.07;
-
-
+        controlsType = "orbit"
+        console.log("je fais build control")
         return controls;
     }
 
-    window.addEventListener('deviceorientation', setOrientationControls, true);
+    window.addEventListener('deviceorientation', setOrientationControls, {passive: true});
 
     function setOrientationControls(e) {
+
         if (!e.alpha) {
-            console.log("Je laisse le control orbite car alpha = " + e.alpha)
+            //orientation control pas possible
             return;
 
         }
-        console.log("setOrientationControls : utilisation de device controls")
-        alert("setOrientationControls : utilisation de device controls :" + e.alpha)
+        controlsType = "orientation"
         controls = new THREE.DeviceOrientationControls(camera, true);
         controls.connect();
         //controls.update();
@@ -166,11 +169,14 @@ export default (canvas, updateOptsThree) => {
 //    // console.log("mousePosition.x : " + mousePosition.x)
 // }
 
-    function onMouseDown(mouseX, mouseY, updateOptsThree) {
-        onDocumentMouseDown(optsThree, mouseX, mouseY, updateOptsThree)
-    }
+    async function onMouseDown(mouseX, mouseY, updateOptsThree) {
 
-    let modal = document.getElementById('myModal');
+        if (controlsType === "orientation") {
+            console.log(" controlsType : " + controlsType)
+            controls = await buildControls();
+        }
+        onDocumentMouseDown(optsThree, mouseX, mouseY, updateOptsThree, controlsType)
+    }
 
 
 //function init(objectsPlanets, renderer, camera, modal, scene, controls) {

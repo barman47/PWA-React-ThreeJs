@@ -1,5 +1,5 @@
 // store/Context.js
-import React, { createContext, Component } from "react"; // on importe createContext qui servira à la création d'un ou plusieurs contextes
+import React from "react"; // on importe createContext qui servira à la création d'un ou plusieurs contextes
 
 /**
  * `createContext` contient 2 propriétés :
@@ -14,7 +14,8 @@ import React, { createContext, Component } from "react"; // on importe createCon
 
 export const Context = React.createContext({
     accueil: true,
-    toggleAccueil: () => {},
+    toggleAccueil: () => {
+    },
 });
 
 

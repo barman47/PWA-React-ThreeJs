@@ -6,8 +6,15 @@ export default (container, updateOptsThree) => {
     const sceneManager = new SceneManager(canvas, updateOptsThree);
 
 
-    let canvasHalfWidth;
-    let canvasHalfHeight;
+    let alphaVal;
+
+    window.addEventListener('deviceorientation', setOrientationControls, true);
+
+    function setOrientationControls(e) {
+
+        alphaVal = e.alpha;
+        window.removeEventListener('deviceorientation', setOrientationControls, true);
+    }
 
     bindEventListeners();
     render();
@@ -23,6 +30,9 @@ export default (container, updateOptsThree) => {
         window.onresize = resizeCanvas;
         // window.onmousemove = mouseMove;
         window.onmousedown = mouseDown;
+        window.ontouchstart = mouseDown;
+
+
         resizeCanvas();
     }
 
@@ -32,10 +42,7 @@ export default (container, updateOptsThree) => {
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-
-        canvasHalfWidth = Math.round(canvas.offsetWidth / 2);
-        canvasHalfHeight = Math.round(canvas.offsetHeight / 2);
-
+        
 
         sceneManager.onWindowResize()
 
@@ -46,12 +53,19 @@ export default (container, updateOptsThree) => {
     //   //  console.log( " clientX:" + canvas.clientX )
     //     sceneManager.onMouseMove(screenX-canvasHalfWidth, screenY-canvasHalfHeight);
     // }
+
+
     function mouseDown(e) {
 
-
-        let mouseX = e.clientX;
-        let mouseY = e.clientY;
-
+        let mouseX;
+        let mouseY;
+        if (!alphaVal) {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        } else {
+            mouseX = (e.targetTouches[0] ? e.targetTouches[0].pageX : e.changedTouches[e.changedTouches.length - 1].pageX)
+            mouseY = (e.targetTouches[0] ? e.targetTouches[0].pageY : e.changedTouches[e.changedTouches.length - 1].pageY);
+        }
 
         sceneManager.onMouseDown(mouseX, mouseY, updateOptsThree);
     }

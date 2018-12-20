@@ -7,7 +7,7 @@ import Modal from './Modal'
 
 import {switchValue} from './../threejs/planetarium/sceneActions/Raycaster'
 
-import {Context} from "../store/Context";
+//import {Context} from "../store/Context";
 
 
 export default class NavBarBottom extends Component {

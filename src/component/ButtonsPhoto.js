@@ -5,9 +5,7 @@ import {faCamera, faImages} from '@fortawesome/free-solid-svg-icons'
 
 
 export default class ButtonsPhoto extends Component {
-    constructor(props) {
-        super(props);
-    }
+
 
 
     componentDidMount() {

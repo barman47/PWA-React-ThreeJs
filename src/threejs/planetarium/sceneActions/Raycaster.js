@@ -16,7 +16,7 @@ import EarthPlanet from './../sceneSubjects/Earth'
 
 let currentObj = null
 
-export function onDocumentMouseDown(optsThree, mouseX, mouseY, updateOptsThree) {
+export function onDocumentMouseDown(optsThree, mouseX, mouseY, updateOptsThree, controlsType) {
 
 
     //console.log("evenet touche : " + event.touches[0].clientX )
@@ -34,7 +34,7 @@ export function onDocumentMouseDown(optsThree, mouseX, mouseY, updateOptsThree) 
     //console.log("position camera : " + optsThree.camera.position.x + " - " + optsThree.camera.position.y)
     if (intersects.length > 0) {
         let namePlanet = intersects[0].object.parent.name;
-        switchValue(namePlanet, optsThree, currentObj);
+        switchValue(namePlanet, optsThree, currentObj, controlsType);
         updateOptsThree(optsThree);
 
     }
@@ -47,7 +47,7 @@ let accueil = true;
 let earthExist = false;
 
 // {camera, modal, scene, controls}
-export function switchValue(choix, optsThree, currentObj) {
+export function switchValue(choix, optsThree, currentObj, controlsType) {
 
     // fermer le modal quand on appui sur la navette
     // if (modal.style.display = "block") {
@@ -56,7 +56,7 @@ export function switchValue(choix, optsThree, currentObj) {
 
 
     // retour sur la planete terre
-    if (choix == "Back") {
+    if (choix === "Back") {
 
         optsThree.controls.autoRotate = false;
 
@@ -147,7 +147,9 @@ export function switchValue(choix, optsThree, currentObj) {
 
             }, 500);
 
+            console.log(" controls-target : " + optsThree.controls.target.x)
             optsThree.controls.autoRotate = true;
+            console.log(" optsThree.controls.autoRotate : " + optsThree.controls.autoRotate)
             if (accueil) {
                 window.dispatchEvent(new Event('btnToParachute'));
 
@@ -168,9 +170,11 @@ export async function collisionCam(optsThree) {
     //clearText();
 
     var vector = new THREE.Vector3(); // create once and reuse it!
-    var cameraDirection = optsThree.camera.getWorldDirection(new THREE.Vector3());
+    var cameraDirection = optsThree.camera.getWorldDirection(vector);
 
-    var ray = new THREE.Raycaster(optsThree.camera.getWorldPosition(), cameraDirection);
+
+    var ray = new THREE.Raycaster(optsThree.camera.getWorldPosition(vector), cameraDirection);
+
     var intersects = ray.intersectObjects(optsThree.objectsPlanets, true);
     if (intersects.length > 0) {
         console.log(intersects[0].distance);

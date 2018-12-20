@@ -4,7 +4,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faGlobe, faInfo, faSpaceShuttle, faSearch, faTimes} from '@fortawesome/free-solid-svg-icons'
 import {switchValue} from './../threejs/planetarium/sceneActions/Raycaster'
 
-export default class Modal extends React.Component {
+export default class Modal extends Component {
 
     constructor(props) {
         super(props)
@@ -80,8 +80,7 @@ class List extends React.Component {
     }
 
     render() {
-        const currentObj = this.props.currentObj;
-        const optsThree = this.props.optsThree;
+
 
         return <ul>
             {
