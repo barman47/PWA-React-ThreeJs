@@ -122,7 +122,7 @@ export default (canvas, updateOptsThree) => {
         const sceneSubjects = [
             new Light(scene),
             new Planets(scene, objectsPlanets),
-            new SkyStars(scene),
+            //new SkyStars(scene),
             new Horizon(scene),
             //new SceneSubjecttt(scene)
         ];

@@ -42,7 +42,7 @@ export default (container, updateOptsThree) => {
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-        
+
 
         sceneManager.onWindowResize()
 

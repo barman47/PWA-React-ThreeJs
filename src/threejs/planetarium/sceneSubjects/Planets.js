@@ -347,7 +347,7 @@ export default (scene, objectsPlanets) => {
             map: texture,
             side: THREE.BackSide
         })
-        var geometry = new THREE.SphereGeometry(100, 32, 32)
+        var geometry = new THREE.SphereGeometry(50, 32, 32)
         var mesh = new THREE.Mesh(geometry, material)
         return mesh
     }
@@ -583,6 +583,18 @@ export default (scene, objectsPlanets) => {
     Uranus.add(ring)
     Uranus.scale.multiplyScalar(5.1 / 14)
     objectsPlanets.push(Uranus);
+
+
+    //Mercury
+
+    var Sky = THREEx.createStarfield()
+    Sky.receiveShadow = true
+    Sky.castShadow = true
+
+    scene.add(Sky);
+
+
+
 
 
     //Ajout de toutes les planets a la scene
