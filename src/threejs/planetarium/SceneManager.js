@@ -1,16 +1,14 @@
 import THREE from '../three';
 
-//import SceneSubject from './sceneSubjects/SceneSubject';
 import Horizon from './sceneSubjects/Horizon';
-import SkyStars from './sceneSubjects/SkyStars';
 import Light from './sceneSubjects/Light';
 import Planets from './sceneSubjects/Planets';
-import {onDocumentMouseDown, collisionCam} from "./sceneActions/Raycaster";
+import {onDocumentMouseDown} from "./sceneActions/Raycaster";
 
 var TWEEN = require('@tweenjs/tween.js');
 
 
-export default (canvas, updateOptsThree) => {
+export default (canvas, updateOptsThree, optsThreeGlobal) => {
 
     const clock = new THREE.Clock();
     //const origin = new THREE.Vector3(0,0,0);
@@ -26,25 +24,26 @@ export default (canvas, updateOptsThree) => {
     // }
 
 
+    let controlsType = null;
     const objectsPlanets = [];
     const scene = buildScene();
     const renderer = buildRender(screenDimensions);
     const camera = buildCamera(screenDimensions);
     let controls = buildControls();
-    let controlsType;
+
 
     //const sceneSubjects = createSceneSubjects(scene);
     createSceneSubjects(scene);
 
     let optsThree = {
-            canvas: canvas,
-            objectsPlanets: objectsPlanets,
-            scene: scene,
-            renderer: renderer,
-            camera: camera,
-            controls: controls,
-        }
-    ;
+        canvas: canvas,
+        objectsPlanets: objectsPlanets,
+        scene: scene,
+        renderer: renderer,
+        camera: camera,
+        controls: controls,
+        controlsType: controlsType,
+    }
 
     //envoie de options three
     updateOptsThree(optsThree);
@@ -60,6 +59,7 @@ export default (canvas, updateOptsThree) => {
     function buildControls() {
         const controls = new THREE.OrbitControls(camera, renderer.domElement);
 
+
         //controls.autoRotate = true ;
         controls.autoRotateSpeed = 0.02;
         controls.target.z = 0
@@ -71,7 +71,7 @@ export default (canvas, updateOptsThree) => {
         controls.dampingFactor = 0.07;
         controls.rotateSpeed = 0.07;
         controlsType = "orbit"
-        console.log("je fais build control")
+
         return controls;
     }
 
@@ -84,10 +84,7 @@ export default (canvas, updateOptsThree) => {
             return;
 
         }
-        controlsType = "orientation"
-        controls = new THREE.DeviceOrientationControls(camera, true);
-        controls.connect();
-        //controls.update();
+        buildOrientationControl(optsThreeGlobal, updateOptsThree);
         window.removeEventListener('deviceorientation', setOrientationControls, true);
     }
 
@@ -112,6 +109,7 @@ export default (canvas, updateOptsThree) => {
         const camera = new THREE.PerspectiveCamera(fieldOfView, aspectRatio, nearPlane, farPlane);
 
         camera.position.set(0.1, 0, 0);
+        camera.name = "camera"
 
         return camera;
     }
@@ -122,7 +120,7 @@ export default (canvas, updateOptsThree) => {
         const sceneSubjects = [
             new Light(scene),
             new Planets(scene, objectsPlanets),
-            new SkyStars(scene),
+            //new SkyStars(scene),
             new Horizon(scene),
             //new SceneSubjecttt(scene)
         ];
@@ -130,12 +128,41 @@ export default (canvas, updateOptsThree) => {
         return sceneSubjects;
     }
 
+    let focusZoomVal = null;
+
+    async function collisionCam() {
+
+        //clearText();
+
+        //console.log("optsThreeGlobal dans collision = ", optsThree)
+
+        var vector = new THREE.Vector3(); // create once and reuse it!
+        var cameraDirection = optsThree.camera.getWorldDirection(vector);
+
+
+        var ray = new THREE.Raycaster(optsThree.camera.getWorldPosition(vector), cameraDirection);
+
+        var intersects = ray.intersectObjects(optsThree.objectsPlanets, true);
+        if (intersects.length > 0) {
+            console.log(intersects[0].distance);
+            console.log("focusZoomVal : " + focusZoomVal)
+            if (intersects[0].distance < 7 && focusZoomVal) {
+                console.log("__________------------ collision")
+                focusZoomVal.stop();
+                focusZoomVal = null;
+            }
+        }
+
+        //appendText(hits);
+
+    }
+
 
     function update() {
         const elapsedTime = clock.getElapsedTime();
 
 
-        collisionCam(optsThree);
+        collisionCam();
         TWEEN.update();
         controls.update();
         renderer.render(scene, camera);
@@ -171,11 +198,15 @@ export default (canvas, updateOptsThree) => {
 
     async function onMouseDown(mouseX, mouseY, updateOptsThree) {
 
+        console.log("before control : ", optsThreeGlobal)
+
         if (controlsType === "orientation") {
-            console.log(" controlsType : " + controlsType)
+            console.log(" controlsType : " + optsThreeGlobal.controlsType)
             controls = await buildControls();
+            updateOptsThree(optsThreeGlobal)
         }
-        onDocumentMouseDown(optsThree, mouseX, mouseY, updateOptsThree, controlsType)
+        console.log("after controls : ", optsThreeGlobal)
+        onDocumentMouseDown(mouseX, mouseY, updateOptsThree, optsThreeGlobal)
     }
 
 
@@ -193,6 +224,19 @@ export default (canvas, updateOptsThree) => {
         onWindowResize,
         onMouseDown,
         // onMouseMove,
-
     }
+
+}
+
+export async function buildOrientationControl(optsThreeGlobal, updateOptsThree) {
+    console.log(" je passe dans buildOrientationControl ")
+    optsThreeGlobal.controlsType = "orientation"
+    optsThreeGlobal.controls = await new THREE.DeviceOrientationControls(optsThreeGlobal.camera, true);
+    // optsThreeGlobal.controls.connect();
+
+
+    updateOptsThree(optsThreeGlobal);
+    console.log(" orientation : ", optsThreeGlobal)
+
+
 }

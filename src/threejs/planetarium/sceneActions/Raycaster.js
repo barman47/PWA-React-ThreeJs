@@ -16,26 +16,27 @@ import EarthPlanet from './../sceneSubjects/Earth'
 
 let currentObj = null
 
-export function onDocumentMouseDown(optsThree, mouseX, mouseY, updateOptsThree, controlsType) {
+export function onDocumentMouseDown(mouseX, mouseY, updateOptsThree, optsThreeGlobal) {
 
 
     //console.log("evenet touche : " + event.touches[0].clientX )
     let raycaster = new THREE.Raycaster();
     let mouse = new THREE.Vector2();
 
+    console.log("optsThreeGlobal : ", optsThreeGlobal)
 
     //event.preventDefault();
-    mouse.x = (mouseX / optsThree.renderer.domElement.clientWidth) * 2 - 1;
-    mouse.y = -(mouseY / optsThree.renderer.domElement.clientHeight) * 2 + 1;
+    mouse.x = (mouseX / optsThreeGlobal.renderer.domElement.clientWidth) * 2 - 1;
+    mouse.y = -(mouseY / optsThreeGlobal.renderer.domElement.clientHeight) * 2 + 1;
 
-    raycaster.setFromCamera(mouse, optsThree.camera);
-    let intersects = raycaster.intersectObjects(optsThree.objectsPlanets, true);
+    raycaster.setFromCamera(mouse, optsThreeGlobal.camera);
+    let intersects = raycaster.intersectObjects(optsThreeGlobal.objectsPlanets, true);
 
-    //console.log("position camera : " + optsThree.camera.position.x + " - " + optsThree.camera.position.y)
+    //console.log("position camera : " + optsThreeGlobal.camera.position.x + " - " + optsThreeGlobal.camera.position.y)
     if (intersects.length > 0) {
         let namePlanet = intersects[0].object.parent.name;
-        switchValue(namePlanet, optsThree, currentObj, controlsType);
-        updateOptsThree(optsThree);
+        switchValue(namePlanet, optsThreeGlobal, currentObj);
+        updateOptsThree(optsThreeGlobal);
 
     }
 
@@ -47,7 +48,7 @@ let accueil = true;
 let earthExist = false;
 
 // {camera, modal, scene, controls}
-export function switchValue(choix, optsThree, currentObj, controlsType) {
+export function switchValue(choix, optsThreeGlobal, currentObj) {
 
     // fermer le modal quand on appui sur la navette
     // if (modal.style.display = "block") {
@@ -58,7 +59,7 @@ export function switchValue(choix, optsThree, currentObj, controlsType) {
     // retour sur la planete terre
     if (choix === "Back") {
 
-        optsThree.controls.autoRotate = false;
+        optsThreeGlobal.controls.autoRotate = false;
 
         if (currentObj != null) {
 
@@ -80,19 +81,19 @@ export function switchValue(choix, optsThree, currentObj, controlsType) {
                 directZ = 0.1;
             }
 
-            Navigation.unfocusTarget(optsThree.controls);
+            Navigation.unfocusTarget(optsThreeGlobal.controls);
 
             setTimeout(function () {
-                Navigation.unfocusZoom(directX, directZ, optsThree.camera)
+                Navigation.unfocusZoom(directX, directZ, optsThreeGlobal.camera)
             }, 500);
             console.log(choix + " : Retour a la casa !  ")
 
-            if (optsThree.camera.position.x < 0.15 || optsThree.camera.position.z < 0.15) {
+            if (optsThreeGlobal.camera.position.x < 0.15 || optsThreeGlobal.camera.position.z < 0.15) {
                 setTimeout(function () {
 
                     if (earthExist) {
-                        let earth = optsThree.scene.getObjectByName("Earth");
-                        optsThree.scene.remove(earth)
+                        let earth = optsThreeGlobal.scene.getObjectByName("Earth");
+                        optsThreeGlobal.scene.remove(earth)
                         // console.log("- Suppr : " + earth.name)
                         earthExist = false
                     }
@@ -113,7 +114,7 @@ export function switchValue(choix, optsThree, currentObj, controlsType) {
 
         // direction la planet selectionné
 
-        let planet = optsThree.scene.getObjectByName(choix);
+        let planet = optsThreeGlobal.scene.getObjectByName(choix);
 
         currentObj = planet; // pour gerer la direction de la camera quand on revient sur terreconsole.log("e.currentPlanet : " + currentObj )
 
@@ -125,8 +126,8 @@ export function switchValue(choix, optsThree, currentObj, controlsType) {
 
 
         // test pour savoir si on clique sur la planete sur laquelle nous sommes deja
-        let controlX = optsThree.controls.target.x;
-        let controlZ = optsThree.controls.target.z;
+        let controlX = optsThreeGlobal.controls.target.x;
+        let controlZ = optsThreeGlobal.controls.target.z;
 
         let planetX = planet.position.x
         let planetZ = planet.position.z;
@@ -136,20 +137,20 @@ export function switchValue(choix, optsThree, currentObj, controlsType) {
         if (controlX !== planetX || controlZ !== planetZ) {
             console.log("Direction la planete " + choix + " ! ")
 
-            Navigation.focusTarget(planet, optsThree.controls);
+            Navigation.focusTarget(planet, optsThreeGlobal.controls);
 
             setTimeout(function () {
-                focusZoomVal = Navigation.focusZoom(planet, optsThree.camera)
+                focusZoomVal = Navigation.focusZoom(planet, optsThreeGlobal.camera)
                 if (!earthExist) {
-                    EarthPlanet(optsThree.scene);
+                    EarthPlanet(optsThreeGlobal.scene);
                     earthExist = true
                 }
 
             }, 500);
 
-            console.log(" controls-target : " + optsThree.controls.target.x)
-            optsThree.controls.autoRotate = true;
-            console.log(" optsThree.controls.autoRotate : " + optsThree.controls.autoRotate)
+            console.log(" controls-target : " + optsThreeGlobal.controls.target.x)
+            optsThreeGlobal.controls.autoRotate = true;
+            console.log(" optsThreeGlobal.controls.autoRotate : " + optsThreeGlobal.controls.autoRotate)
             if (accueil) {
                 window.dispatchEvent(new Event('btnToParachute'));
 
@@ -162,31 +163,6 @@ export function switchValue(choix, optsThree, currentObj, controlsType) {
             console.log("Je suis deja sur la planete en question ! ")
         }
     }
-
-}
-
-export async function collisionCam(optsThree) {
-
-    //clearText();
-
-    var vector = new THREE.Vector3(); // create once and reuse it!
-    var cameraDirection = optsThree.camera.getWorldDirection(vector);
-
-
-    var ray = new THREE.Raycaster(optsThree.camera.getWorldPosition(vector), cameraDirection);
-
-    var intersects = ray.intersectObjects(optsThree.objectsPlanets, true);
-    if (intersects.length > 0) {
-        console.log(intersects[0].distance);
-        console.log("focusZoomVal : " + focusZoomVal)
-        if (intersects[0].distance < 7 && focusZoomVal) {
-            console.log("__________------------ collision")
-            focusZoomVal.stop();
-            focusZoomVal = null;
-        }
-    }
-
-    //appendText(hits);
 
 }
 

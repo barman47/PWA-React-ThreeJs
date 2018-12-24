@@ -1,10 +1,9 @@
 import SceneManager from './planetarium/SceneManager';
 
 
-export default (container, updateOptsThree) => {
+export default (container, updateOptsThree, optsThreeGlobal) => {
     const canvas = createCanvas(document, container);
-    const sceneManager = new SceneManager(canvas, updateOptsThree);
-
+    const sceneManager = new SceneManager(canvas, updateOptsThree, optsThreeGlobal);
 
     let alphaVal;
 
@@ -22,6 +21,7 @@ export default (container, updateOptsThree) => {
     function createCanvas(document, container) {
         const canvas = document.createElement('canvas');
         container.appendChild(canvas);
+
         return canvas;
     }
 
@@ -67,7 +67,7 @@ export default (container, updateOptsThree) => {
             mouseY = (e.targetTouches[0] ? e.targetTouches[0].pageY : e.changedTouches[e.changedTouches.length - 1].pageY);
         }
 
-        sceneManager.onMouseDown(mouseX, mouseY, updateOptsThree);
+        sceneManager.onMouseDown(mouseX, mouseY);
     }
 
     function render(time) {

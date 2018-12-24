@@ -6,6 +6,8 @@ import ButtonsPhoto from './ButtonsPhoto'
 import Modal from './Modal'
 
 import {switchValue} from './../threejs/planetarium/sceneActions/Raycaster'
+import {buildOrientationControl} from './../threejs/planetarium/SceneManager'
+import THREE from "../threejs/three";
 
 //import {Context} from "../store/Context";
 
@@ -15,9 +17,7 @@ export default class NavBarBottom extends Component {
         super(props);
         this.state = {
             isOpen: false,
-
             btnLocalisation: faCompass,
-
             currentObj: null,
             //accueil: true,
             //earthExist: false,
@@ -37,7 +37,11 @@ export default class NavBarBottom extends Component {
         this.setState({
             btnLocalisation: faCompass,
         });
-        switchValue("Back", this.props.optsThree, this.state.currentObj)
+
+        switchValue("Back", this.props.optsThree, this.state.currentObj);
+
+        buildOrientationControl(this.props.optsThree, this.props.updateOptsThree);
+
     }
 
 

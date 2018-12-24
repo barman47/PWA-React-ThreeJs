@@ -587,11 +587,11 @@ export default (scene, objectsPlanets) => {
 
     //sky
 
-    // var Sky = THREEx.createStarfield()
-    // Sky.receiveShadow = true
-    // Sky.castShadow = true
-    //
-    // scene.add(Sky);
+    var Sky = THREEx.createStarfield()
+    Sky.receiveShadow = true
+    Sky.castShadow = true
+
+    scene.add(Sky);
 
 
 

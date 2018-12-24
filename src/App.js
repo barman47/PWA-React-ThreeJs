@@ -14,8 +14,10 @@ class App extends Component {
         this.state = {
             updatePresent: "non",
             accueil: false,
-            toggleAccueil: this.toggleAccueil
+            toggleAccueil: this.toggleAccueil,
+            optsThree: "patate"
         };
+
 
         // test de l'api context de react : store global disponible dans les composants
         this.toggleAccueil = () => {
@@ -27,19 +29,19 @@ class App extends Component {
     }
 
     updateOptsThree = (opts) => {
-        this.setState({
-            optsThree: opts
-        })
-
+        this.setState({optsThree: opts}, () => {
+            console.log("this.state.optsThree: ", this.state.optsThree);
+        });
     }
 
 
     render() {
+        console.log("frefef : o ," , this.state.optsThree)
         return (
             <div>
                 <Context.Provider value={this.state}>
-                    <ThreeContainer updateOptsThree={this.updateOptsThree}/>
-                    <NavBarBottom optsThree={this.state.optsThree}/>
+                    <ThreeContainer updateOptsThree={this.updateOptsThree} optsThreeGlobal={this.state.optsThree}/>
+                    <NavBarBottom optsThreeGlobal={this.state.optsThree} updateOptsThree={this.updateOptsThree}/>
                 </Context.Provider>
             </div>
         );
