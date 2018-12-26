@@ -30,13 +30,12 @@ class App extends Component {
 
     updateOptsThree = (opts) => {
         this.setState({optsThree: opts}, () => {
-            console.log("this.state.optsThree: ", this.state.optsThree);
+            //  console.log("this.state.optsThree: ", this.state.optsThree);
         });
     }
 
 
     render() {
-        console.log("frefef : o ," , this.state.optsThree)
         return (
             <div>
                 <Context.Provider value={this.state}>

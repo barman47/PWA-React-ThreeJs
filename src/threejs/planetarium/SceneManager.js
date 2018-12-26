@@ -223,13 +223,15 @@ export default (canvas, updateOptsThree, optsThreeGlobal) => {
         update,
         onWindowResize,
         onMouseDown,
+        buildControls,
+        setOrientationControls
         // onMouseMove,
     }
 
 }
 
 export async function buildOrientationControl(optsThreeGlobal, updateOptsThree) {
-    console.log(" je passe dans buildOrientationControl ")
+    console.log(" je met le controle en mode Orientation Device ")
     optsThreeGlobal.controlsType = "orientation"
     optsThreeGlobal.controls = await new THREE.DeviceOrientationControls(optsThreeGlobal.camera, true);
     // optsThreeGlobal.controls.connect();

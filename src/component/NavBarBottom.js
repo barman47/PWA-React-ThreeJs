@@ -21,7 +21,6 @@ export default class NavBarBottom extends Component {
             currentObj: null,
             //accueil: true,
             //earthExist: false,
-            optsThree: {}
 
         };
     }
@@ -38,10 +37,20 @@ export default class NavBarBottom extends Component {
             btnLocalisation: faCompass,
         });
 
-        switchValue("Back", this.props.optsThree, this.state.currentObj);
+        switchValue("Back", this.props.optsThreeGlobal, this.state.currentObj);
 
-        buildOrientationControl(this.props.optsThree, this.props.updateOptsThree);
+        window.addEventListener('deviceorientation', setOrientationControls, true);
 
+        function setOrientationControls(e) {
+
+            if (!e.alpha) {
+                //orientation control pas possible
+                return;
+
+            }
+            buildOrientationControl(this.props.optsThreeGlobal, this.props.updateOptsThree);
+            window.removeEventListener('deviceorientation', setOrientationControls, true);
+        }
     }
 
 
@@ -70,7 +79,6 @@ export default class NavBarBottom extends Component {
     }
 
     render() {
-
         let ButtonsPh;
         if (this.state.btnLocalisation.iconName === "parachute-box") {
             ButtonsPh = (<ButtonsPhoto/>)
@@ -115,7 +123,7 @@ export default class NavBarBottom extends Component {
                 {this.state.isOpen && <Modal show={this.state.isOpen}
                                              onClose={this.toggleModal}
                                              currentObj={this.state.currentObj}
-                                             optsThree={this.props.optsThree}>
+                                             optsThree={this.props.optsThreeGlobal}>
                 </Modal>}>
 
             </div>

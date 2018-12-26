@@ -6,11 +6,9 @@ export default (container, updateOptsThree, optsThreeGlobal) => {
     const sceneManager = new SceneManager(canvas, updateOptsThree, optsThreeGlobal);
 
     let alphaVal;
-
     window.addEventListener('deviceorientation', setOrientationControls, true);
 
     function setOrientationControls(e) {
-
         alphaVal = e.alpha;
         window.removeEventListener('deviceorientation', setOrientationControls, true);
     }

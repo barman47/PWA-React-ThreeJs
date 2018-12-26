@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import threeEntryPoint from './../threejs/threeEntryPoint';
+import mouseDown from './../threejs/mouseDown';
 
 export default class ThreeContainer extends Component {
     constructor(props) {
@@ -16,9 +17,10 @@ export default class ThreeContainer extends Component {
 
 
     static getDerivedStateFromProps(props, state) {
+        // console.log("props.optsThreeGlobal : ", props.optsThreeGlobal + " - state.optsSave : " + state.optsSave)
         if (props.optsThreeGlobal !== state.optsSave && null !== state.optsSave) {
-            // threeEntryPoint(this.threeRootElement, this.props.updateOptsThree, this.props.optsThreeGlobal);
-        console.log("je suis diffrent du coup relance ")
+            mouseDown(props.updateOptsThree, props.optsThreeGlobal);
+            console.log("je suis diffrent du coup relance ")
         }
         return null;
     }
