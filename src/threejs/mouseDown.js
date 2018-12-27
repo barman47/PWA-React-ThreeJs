@@ -1,5 +1,6 @@
 import SceneManager, {buildOrientationControl} from './planetarium/SceneManager';
 import {onDocumentMouseDown} from "./planetarium/sceneActions/Raycaster";
+import {buildOrbitControls, collisionCam} from "./planetarium/SceneManager";
 import THREE from "./three";
 
 var TWEEN = require('@tweenjs/tween.js');
@@ -7,13 +8,11 @@ var TWEEN = require('@tweenjs/tween.js');
 export default (updateOptsThree, optsThreeGlobal) => {
 
     bindEventListeners();
-
+    render();
 
     function bindEventListeners() {
-
         window.onmousedown = mouseDown;
         window.ontouchstart = mouseDown;
-
 
     }
 
@@ -40,7 +39,7 @@ export default (updateOptsThree, optsThreeGlobal) => {
 
         if (optsThreeGlobal.controlsType === "orientation") {
             console.log(" controlsType : " + optsThreeGlobal.controlsType)
-            optsThreeGlobal.controls = await SceneManager.buildControls();
+            optsThreeGlobal.controls = await buildOrbitControls(optsThreeGlobal, updateOptsThree);
             updateOptsThree(optsThreeGlobal)
         }
         onDocumentMouseDown(mouseX, mouseY, updateOptsThree, optsThreeGlobal)
@@ -54,10 +53,10 @@ export default (updateOptsThree, optsThreeGlobal) => {
 
 
     function update() {
-
         TWEEN.update();
-        optsThreeGlobal.controls.update();
         optsThreeGlobal.renderer.render(optsThreeGlobal.scene, optsThreeGlobal.camera);
+        optsThreeGlobal.controls.update();
+        collisionCam(optsThreeGlobal);
 
     }
 

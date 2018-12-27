@@ -30,7 +30,6 @@ export default (container, updateOptsThree, optsThreeGlobal) => {
         window.onmousedown = mouseDown;
         window.ontouchstart = mouseDown;
 
-
         resizeCanvas();
     }
 
@@ -41,9 +40,7 @@ export default (container, updateOptsThree, optsThreeGlobal) => {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-
         sceneManager.onWindowResize()
-
     }
 
     // function mouseMove({screenX, screenY}) {
@@ -64,7 +61,6 @@ export default (container, updateOptsThree, optsThreeGlobal) => {
             mouseX = (e.targetTouches[0] ? e.targetTouches[0].pageX : e.changedTouches[e.changedTouches.length - 1].pageX)
             mouseY = (e.targetTouches[0] ? e.targetTouches[0].pageY : e.changedTouches[e.changedTouches.length - 1].pageY);
         }
-
         sceneManager.onMouseDown(mouseX, mouseY);
     }
 
@@ -72,9 +68,4 @@ export default (container, updateOptsThree, optsThreeGlobal) => {
         requestAnimationFrame(render);
         sceneManager.update();
     }
-
-
-    //click
-
-
 }
