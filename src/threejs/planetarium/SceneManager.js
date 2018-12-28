@@ -3,9 +3,6 @@ import THREE from '../three';
 import Horizon from './sceneSubjects/Horizon';
 import Light from './sceneSubjects/Light';
 import Planets from './sceneSubjects/Planets';
-import {onDocumentMouseDown} from "./sceneActions/Raycaster";
-
-var TWEEN = require('@tweenjs/tween.js');
 
 
 export default (canvas, updateOptsThree, optsThreeGlobal) => {

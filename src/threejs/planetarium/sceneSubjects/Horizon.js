@@ -4,7 +4,7 @@ import THREE from './../../three';
 export default scene => {
 
 
-    var geometry = new THREE.CircleGeometry(80, 50);
+    var geometry = new THREE.CircleGeometry(48, 50);
     var material = new THREE.LineBasicMaterial({color: 0xfff});
     var circle = new THREE.LineLoop(geometry, material);
     geometry.vertices.shift();

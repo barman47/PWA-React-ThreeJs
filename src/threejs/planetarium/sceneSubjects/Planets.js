@@ -594,9 +594,6 @@ export default (scene, objectsPlanets) => {
     scene.add(Sky);
 
 
-
-
-
     //Ajout de toutes les planets a la scene
     for (var i = 0; i < objectsPlanets.length; i++) {
         scene.add(objectsPlanets[i]);

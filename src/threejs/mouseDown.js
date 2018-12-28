@@ -1,7 +1,5 @@
-import SceneManager, {buildOrientationControl} from './planetarium/SceneManager';
 import {onDocumentMouseDown} from "./planetarium/sceneActions/Raycaster";
 import {buildOrbitControls, collisionCam} from "./planetarium/SceneManager";
-import THREE from "./three";
 
 var TWEEN = require('@tweenjs/tween.js');
 

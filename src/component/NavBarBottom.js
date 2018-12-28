@@ -7,8 +7,6 @@ import Modal from './Modal'
 
 import {switchValue} from './../threejs/planetarium/sceneActions/Raycaster'
 import {buildOrientationControl} from './../threejs/planetarium/SceneManager'
-import THREE from "../threejs/three";
-import mouseDown from "../threejs/mouseDown";
 
 //import {Context} from "../store/Context";
 
