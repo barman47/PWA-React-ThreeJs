@@ -69,7 +69,7 @@ export default (canvas, updateOptsThree, optsThreeGlobal) => {
         controls.maxPolarAngle = Math.PI;
         controls.dampingFactor = 0.07;
         controls.rotateSpeed = 0.07;
-        controlsType = "orbit"
+        controlsType = "orbitBase"
 
         return controls;
     }
@@ -233,10 +233,9 @@ export function collisionCam(optsThreeGlobal) {
 
     var ray = new THREE.Raycaster(optsThreeGlobal.camera.getWorldPosition(vector), cameraDirection);
 
-
-    console.log("optsThreeGlobal : ", optsThreeGlobal)
     var intersects = ray.intersectObjects(optsThreeGlobal.objectsPlanets, true);
-    console.log(" intersects.length :" + intersects.length)
+
+    //console.log(" intersects.length :" + intersects.length)
     if (intersects.length > 0) {
         console.log(intersects[0].distance);
         if (intersects[0].distance < 7) {
@@ -244,7 +243,4 @@ export function collisionCam(optsThreeGlobal) {
             //focusZoomVal.stop();
         }
     }
-
-    //appendText(hits);
-
 }

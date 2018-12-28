@@ -8,6 +8,7 @@ import Modal from './Modal'
 import {switchValue} from './../threejs/planetarium/sceneActions/Raycaster'
 import {buildOrientationControl} from './../threejs/planetarium/SceneManager'
 import THREE from "../threejs/three";
+import mouseDown from "../threejs/mouseDown";
 
 //import {Context} from "../store/Context";
 
@@ -19,12 +20,22 @@ export default class NavBarBottom extends Component {
             isOpen: false,
             btnLocalisation: faCompass,
             currentObj: null,
-            //accueil: true,
+            optsThreeGlobal: this.props.optsThreeGlobal,
             //earthExist: false,
 
         };
     }
 
+    // mise a jour du state quand le props change
+    static getDerivedStateFromProps(props, state) {
+        if (props.optsThreeGlobal !== state.optsThreeGlobal && null !== state.optsThreeGlobal) {
+            return {optsThreeGlobal: props.optsThreeGlobal};
+        }
+        return null;
+    }
+
+
+    // ouvre le modal lors du clique sur le bouton recherche
     toggleModal = () => {
         this.setState({
             isOpen: !this.state.isOpen,
@@ -32,27 +43,23 @@ export default class NavBarBottom extends Component {
         });
     }
 
+    // click sur le bouton parachute
     clickBtnLoca = () => {
         this.setState({
             btnLocalisation: faCompass,
         });
 
-        switchValue("Back", this.props.optsThreeGlobal, this.state.currentObj);
+        // on revient sur la terre
+        switchValue("Back", this.state.optsThreeGlobal, this.state.currentObj);
 
-        window.addEventListener('deviceorientation', setOrientationControls, true);
+        if (this.state.optsThreeGlobal.controlsType === "orbit") {
+            setTimeout(
+                () => {
+                    buildOrientationControl(this.state.optsThreeGlobal, this.props.updateOptsThree);
+                }, 3000);
 
-        function setOrientationControls(e) {
-
-            if (!e.alpha) {
-                //orientation control pas possible
-                return;
-
-            }
-            buildOrientationControl(this.props.optsThreeGlobal, this.props.updateOptsThree);
-            window.removeEventListener('deviceorientation', setOrientationControls, true);
         }
     }
-
 
     btnToParachute = () => {
         this.setState({
@@ -115,7 +122,7 @@ export default class NavBarBottom extends Component {
                     <button id="btnAgenda">
                         <FontAwesomeIcon icon={faCalendarCheck} size="2x"/>
                     </button>
-                    <button id="btnLocalisation" onClick={() => this.clickBtnLoca()}>
+                    <button id="btnLocalisation" onClick={() => this.clickBtnLoca(this.state.optsThreeGlobal)}>
                         <FontAwesomeIcon icon={this.state.btnLocalisation} size="2x"/>
                     </button>
                 </div>
@@ -123,7 +130,7 @@ export default class NavBarBottom extends Component {
                 {this.state.isOpen && <Modal show={this.state.isOpen}
                                              onClose={this.toggleModal}
                                              currentObj={this.state.currentObj}
-                                             optsThree={this.props.optsThreeGlobal}>
+                                             optsThree={this.state.optsThreeGlobal}>
                 </Modal>}>
 
             </div>

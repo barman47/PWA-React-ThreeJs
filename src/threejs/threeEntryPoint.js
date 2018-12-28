@@ -26,9 +26,9 @@ export default (container, updateOptsThree, optsThreeGlobal) => {
 
     function bindEventListeners() {
         window.onresize = resizeCanvas;
-        // window.onmousemove = mouseMove;
-        window.onmousedown = mouseDown;
-        window.ontouchstart = mouseDown;
+        // // window.onmousemove = mouseMove;
+        // window.onmousedown = mouseDown;
+        // window.ontouchstart = mouseDown;
 
         resizeCanvas();
     }
@@ -50,19 +50,19 @@ export default (container, updateOptsThree, optsThreeGlobal) => {
     // }
 
 
-    function mouseDown(e) {
-
-        let mouseX;
-        let mouseY;
-        if (!alphaVal) {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        } else {
-            mouseX = (e.targetTouches[0] ? e.targetTouches[0].pageX : e.changedTouches[e.changedTouches.length - 1].pageX)
-            mouseY = (e.targetTouches[0] ? e.targetTouches[0].pageY : e.changedTouches[e.changedTouches.length - 1].pageY);
-        }
-        sceneManager.onMouseDown(mouseX, mouseY);
-    }
+    // function mouseDown(e) {
+    //
+    //     let mouseX;
+    //     let mouseY;
+    //     if (!alphaVal) {
+    //         mouseX = e.clientX;
+    //         mouseY = e.clientY;
+    //     } else {
+    //         mouseX = (e.targetTouches[0] ? e.targetTouches[0].pageX : e.changedTouches[e.changedTouches.length - 1].pageX)
+    //         mouseY = (e.targetTouches[0] ? e.targetTouches[0].pageY : e.changedTouches[e.changedTouches.length - 1].pageY);
+    //     }
+    //     sceneManager.onMouseDown(mouseX, mouseY);
+    // }
 
     function render(time) {
         requestAnimationFrame(render);
