@@ -17,9 +17,13 @@ export default (updateOptsThree, optsThreeGlobal) => {
     let alphaVal;
     window.addEventListener('deviceorientation', setOrientationControls, true);
 
+
     function setOrientationControls(e) {
         alphaVal = e.alpha;
-        window.removeEventListener('deviceorientation', setOrientationControls, true);
+
+        let orientation = Math.round(e.webkitCompassHeading);
+        // console.log("orientation : " + orientation)
+        // window.removeEventListener('deviceorientation', setOrientationControls, true);
     }
 
     async function mouseDown(e) {
@@ -55,6 +59,7 @@ export default (updateOptsThree, optsThreeGlobal) => {
         optsThreeGlobal.renderer.render(optsThreeGlobal.scene, optsThreeGlobal.camera);
         optsThreeGlobal.controls.update();
         collisionCam(optsThreeGlobal);
+
 
     }
 

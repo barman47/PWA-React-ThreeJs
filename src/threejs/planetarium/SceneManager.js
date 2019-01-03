@@ -49,6 +49,7 @@ export default (canvas, updateOptsThree, optsThreeGlobal) => {
         const scene = new THREE.Scene();
         scene.background = new THREE.Color("#FFF");
 
+
         return scene;
     }
 
@@ -73,15 +74,30 @@ export default (canvas, updateOptsThree, optsThreeGlobal) => {
 
     window.addEventListener('deviceorientation', setOrientationControls, true);
 
-    function setOrientationControls(e) {
+    async function setOrientationControls(e) {
 
         if (!e.alpha) {
-            //orientation control pas possible
             return;
-
         }
-        buildOrientationControl(optsThree, updateOptsThree);
-        window.removeEventListener('deviceorientation', setOrientationControls, true);
+
+        let orientation = Math.round(e.webkitCompassHeading);
+
+        console.log("orientation init :" + orientation)
+
+
+        if (orientation != 0) {
+            if (orientation > 180) {
+                orientation = 360 - orientation;
+                orientation = -orientation;
+                console.log("orientation de base >180 :" + orientation)
+            }
+
+
+            optsThree.scene.rotation.y = ((2 * Math.PI) / 100) * orientation;
+            console.log(" optsThree.scene.rotation.y :" + optsThree.scene.rotation.y)
+            buildOrientationControl(optsThree, updateOptsThree);
+            window.removeEventListener('deviceorientation', setOrientationControls, true);
+        }
     }
 
 
@@ -201,6 +217,7 @@ export function buildOrbitControls(optsThreeGlobal, updateOptsThree) {
 
     console.log(" je met le controle en mode Orbit Device ")
     optsThreeGlobal.controlsType = "orbit"
+
 
     optsThreeGlobal.controls = new THREE.OrbitControls(optsThreeGlobal.camera, optsThreeGlobal.renderer.domElement);
     optsThreeGlobal.controls.autoRotateSpeed = 0.02;
