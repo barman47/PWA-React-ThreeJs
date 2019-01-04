@@ -22,7 +22,7 @@ export default (updateOptsThree, optsThreeGlobal) => {
         alphaVal = e.alpha;
 
         let orientation = Math.round(e.webkitCompassHeading);
-        // console.log("orientation : " + orientation)
+        console.log("orientation : " + orientation)
         // window.removeEventListener('deviceorientation', setOrientationControls, true);
     }
 

@@ -63,10 +63,10 @@ export default (canvas, updateOptsThree, optsThreeGlobal) => {
         controls.enablePan = false;
         controls.enableZoom = true;
         controls.enableDamping = true;
-        controls.minPolarAngle = 0.8;
         controls.maxPolarAngle = Math.PI;
-        controls.dampingFactor = 0.07;
         controls.rotateSpeed = 0.07;
+        controls.minDistance = 1;
+        controls.maxDistance = 50;
         controlsType = "orbitBase"
 
         return controls;
@@ -120,7 +120,7 @@ export default (canvas, updateOptsThree, optsThreeGlobal) => {
         const farPlane = 100;
         const camera = new THREE.PerspectiveCamera(fieldOfView, aspectRatio, nearPlane, farPlane);
 
-        camera.position.set(0.1, 0, 0);
+        camera.position.set(0, 0, 0.1);
         camera.name = "camera"
 
         return camera;

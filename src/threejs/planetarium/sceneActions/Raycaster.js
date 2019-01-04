@@ -23,7 +23,7 @@ export function onDocumentMouseDown(mouseX, mouseY, updateOptsThree, optsThreeGl
     let raycaster = new THREE.Raycaster();
     let mouse = new THREE.Vector2();
 
-    console.log("--- onDocumentMouseDown : optsThreeGlobal  ", optsThreeGlobal)
+    //console.log("--- onDocumentMouseDown : optsThreeGlobal  ", optsThreeGlobal)
 
     //event.preventDefault();
     mouse.x = (mouseX / optsThreeGlobal.renderer.domElement.clientWidth) * 2 - 1;
