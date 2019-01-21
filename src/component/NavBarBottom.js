@@ -128,7 +128,8 @@ export default class NavBarBottom extends Component {
                 {this.state.isOpen && <Modal show={this.state.isOpen}
                                              onClose={this.toggleModal}
                                              currentObj={this.state.currentObj}
-                                             optsThree={this.state.optsThreeGlobal}>
+                                             optsThree={this.state.optsThreeGlobal}
+                                             updateOptsThree={this.props.updateOptsThree}>
                 </Modal>}>
 
             </div>

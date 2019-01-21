@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faGlobe, faInfo, faSpaceShuttle, faSearch, faTimes} from '@fortawesome/free-solid-svg-icons'
 import {switchValue} from './../threejs/planetarium/sceneActions/Raycaster'
+import {buildOrbitControls} from './../threejs/planetarium/SceneManager'
 
 export default class Modal extends Component {
 
@@ -57,6 +58,7 @@ export default class Modal extends Component {
                               onClose={this.props.onClose}
                               currentObj={this.props.currentObj}
                               optsThree={this.props.optsThree}
+                              updateOptsThree={this.props.updateOptsThree}
                         />
 
                     </div>
@@ -75,6 +77,11 @@ class List extends React.Component {
     }
 
     btnNavette(item) {
+        if (this.props.optsThree.controlsType === "orientation") {
+            buildOrbitControls(this.props.optsThree, this.props.updateOptsThree)
+            console.log(" <<<<<>>>>>>> c'est fait : " + this.props.optsThree.controlsType)
+
+        }
         switchValue(item, this.props.optsThree, this.props.currentObj);
         this.props.onClose();
     }

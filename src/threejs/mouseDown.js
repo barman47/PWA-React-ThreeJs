@@ -9,8 +9,8 @@ export default (updateOptsThree, optsThreeGlobal) => {
     render();
 
     function bindEventListeners() {
-        window.onmousedown = mouseDown;
-        window.ontouchstart = mouseDown;
+        optsThreeGlobal.canvas.onmousedown = mouseDown;
+        optsThreeGlobal.canvas.ontouchstart = mouseDown;
 
     }
 
@@ -21,8 +21,8 @@ export default (updateOptsThree, optsThreeGlobal) => {
     function setOrientationControls(e) {
         alphaVal = e.alpha;
 
-        let orientation = Math.round(e.webkitCompassHeading);
-        console.log("orientation : " + orientation)
+        // let orientation = Math.round(e.webkitCompassHeading);
+        // console.log("orientation : " + orientation)
         // window.removeEventListener('deviceorientation', setOrientationControls, true);
     }
 
@@ -36,8 +36,8 @@ export default (updateOptsThree, optsThreeGlobal) => {
         } else {
             mouseX = (e.targetTouches[0] ? e.targetTouches[0].pageX : e.changedTouches[e.changedTouches.length - 1].pageX)
             mouseY = (e.targetTouches[0] ? e.targetTouches[0].pageY : e.changedTouches[e.changedTouches.length - 1].pageY);
-        }
 
+        }
 
         if (optsThreeGlobal.controlsType === "orientation") {
             console.log(" controlsType : " + optsThreeGlobal.controlsType)

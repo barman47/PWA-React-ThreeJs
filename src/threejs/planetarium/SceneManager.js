@@ -219,18 +219,21 @@ export function buildOrbitControls(optsThreeGlobal, updateOptsThree) {
     optsThreeGlobal.controlsType = "orbit"
 
 
+    console.log("dispose")
+    optsThreeGlobal.controls.dispose()
     optsThreeGlobal.controls = new THREE.OrbitControls(optsThreeGlobal.camera, optsThreeGlobal.renderer.domElement);
     optsThreeGlobal.controls.autoRotateSpeed = 0.02;
-    optsThreeGlobal.controls.target.z = 0;
+    optsThreeGlobal.controls.target.z = 0
     optsThreeGlobal.controls.enablePan = false;
     optsThreeGlobal.controls.enableZoom = true;
     optsThreeGlobal.controls.enableDamping = true;
-    optsThreeGlobal.controls.minPolarAngle = 0.8;
     optsThreeGlobal.controls.maxPolarAngle = Math.PI;
-    optsThreeGlobal.controls.dampingFactor = 0.07;
     optsThreeGlobal.controls.rotateSpeed = 0.07;
+    optsThreeGlobal.controls.minDistance = 1;
+    optsThreeGlobal.controls.maxDistance = 50;
     optsThreeGlobal.controls.connect();
-    optsThreeGlobal.controls.update();
+    //optsThreeGlobal.controls.update();
+    console.log("testtttt controle = ", optsThreeGlobal.controls)
 
     console.log(" orbit : ", optsThreeGlobal)
     updateOptsThree(optsThreeGlobal);
