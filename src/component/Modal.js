@@ -1,9 +1,10 @@
-import React, {Component} from 'react';
+import React, {Component} from "react";
 
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faGlobe, faInfo, faSpaceShuttle, faSearch, faTimes} from '@fortawesome/free-solid-svg-icons'
-import {switchValue} from './../threejs/planetarium/sceneActions/Raycaster'
-import {buildOrbitControls} from './../threejs/planetarium/SceneManager'
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
+import {faGlobe, faInfo, faSpaceShuttle, faSearch, faTimes} from "@fortawesome/free-solid-svg-icons"
+import {switchValue} from "./../threejs/planetarium/sceneActions/Raycaster"
+import {buildOrbitControls} from "./../threejs/planetarium/SceneManager"
+import "../style/menuModal.css";
 
 export default class Modal extends Component {
 
@@ -32,9 +33,6 @@ export default class Modal extends Component {
     }
 
     render() {
-        // if (!this.props.show) {
-        //     return null;
-        // }
         return (
             <div id="myModal" className="modal">
                 <div className="modal-content">
@@ -87,7 +85,6 @@ class List extends React.Component {
     }
 
     render() {
-
 
         return <ul>
             {

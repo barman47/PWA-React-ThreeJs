@@ -597,7 +597,6 @@ export default (scene, objectsPlanets) => {
     //Ajout de toutes les planets a la scene
     for (var i = 0; i < objectsPlanets.length; i++) {
         scene.add(objectsPlanets[i]);
-        console.log(" j'ajoute a la scene la planete : " + objectsPlanets[i].name)
     }
 
 

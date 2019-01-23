@@ -20,17 +20,18 @@ export default (canvas, updateOptsThree, optsThreeGlobal) => {
     //     y: 0
     // }
 
-
     let controlsType = null;
-    const objectsPlanets = [];
-    const scene = buildScene();
+    let objectsPlanets = [];
+    let scene = buildScene();
     const renderer = buildRender(screenDimensions);
     const camera = buildCamera(screenDimensions);
-    let controls = buildControls();
+    const controls = buildControls();
+    let typeDevice = "desktop";
 
 
-    //const sceneSubjects = createSceneSubjects(scene);
+//const sceneSubjects = createSceneSubjects(scene);
     createSceneSubjects(scene);
+
 
     let optsThree = {
         canvas: canvas,
@@ -40,9 +41,30 @@ export default (canvas, updateOptsThree, optsThreeGlobal) => {
         camera: camera,
         controls: controls,
         controlsType: controlsType,
+        typeDevice: typeDevice
     }
 
-    //envoie de options three
+
+    window.addEventListener('deviceorientation', differentDevice, true);
+
+    function differentDevice(e) {
+
+        if (!e.alpha) {
+            typeDevice = "desktop"
+        } else {
+            typeDevice = "mobile"
+        }
+
+
+        optsThree.typeDevice = typeDevice;
+
+        updateOptsThree(optsThree);
+
+        window.removeEventListener('deviceorientation', differentDevice, true);
+        return typeDevice;
+    }
+
+//envoie de options three
     updateOptsThree(optsThree);
 
     function buildScene() {
@@ -72,33 +94,35 @@ export default (canvas, updateOptsThree, optsThreeGlobal) => {
         return controls;
     }
 
-    window.addEventListener('deviceorientation', setOrientationControls, true);
 
-    async function setOrientationControls(e) {
-
-        if (!e.alpha) {
-            return;
-        }
-
-        let orientation = Math.round(e.webkitCompassHeading);
-
-        console.log("orientation init :" + orientation)
+    calibrerCompass(optsThree, updateOptsThree)
 
 
-        if (orientation != 0) {
-            if (orientation > 180) {
-                orientation = 360 - orientation;
-                orientation = -orientation;
-                console.log("orientation de base >180 :" + orientation)
-            }
-
-
-            optsThree.scene.rotation.y = ((2 * Math.PI) / 100) * orientation;
-            console.log(" optsThree.scene.rotation.y :" + optsThree.scene.rotation.y)
-            buildOrientationControl(optsThree, updateOptsThree);
-            window.removeEventListener('deviceorientation', setOrientationControls, true);
-        }
-    }
+    // async function setOrientationControls(e) {
+    //
+    //     if (!e.alpha) {
+    //         return;
+    //     }
+    //
+    //     let orientation = Math.round(e.webkitCompassHeading);
+    //
+    //     console.log("orientation init :" + orientation)
+    //
+    //
+    //     if (orientation != 0) {
+    //         if (orientation > 180) {
+    //             orientation = 360 - orientation;
+    //             orientation = -orientation;
+    //             console.log("orientation de base >180 :" + orientation)
+    //         }
+    //
+    //
+    //         optsThree.scene.rotation.y = ((2 * Math.PI) / 100) * orientation;
+    //         console.log(" optsThree.scene.rotation.y :" + optsThree.scene.rotation.y)
+    //         buildOrientationControl(optsThree, updateOptsThree);
+    //         window.removeEventListener('deviceorientation', setOrientationControls, true);
+    //     }
+    // }
 
 
     function buildRender({width, height}) {
@@ -232,7 +256,7 @@ export function buildOrbitControls(optsThreeGlobal, updateOptsThree) {
     optsThreeGlobal.controls.minDistance = 1;
     optsThreeGlobal.controls.maxDistance = 50;
     optsThreeGlobal.controls.connect();
-    //optsThreeGlobal.controls.update();
+    optsThreeGlobal.controls.update();
     console.log("testtttt controle = ", optsThreeGlobal.controls)
 
     console.log(" orbit : ", optsThreeGlobal)
@@ -260,4 +284,47 @@ export function collisionCam(optsThreeGlobal) {
             //focusZoomVal.stop();
         }
     }
+}
+
+
+export function calibrerCompass(optsThreeGlobal, updateOptsThree) {
+
+
+    window.addEventListener('deviceorientation', setOrientationControls, true);
+
+    console.log("optsThreeGlobal :", optsThreeGlobal)
+
+    function setOrientationControls(e) {
+
+        if (!e.alpha) {
+            window.removeEventListener('deviceorientation', setOrientationControls, true);
+            return;
+        }
+
+        let orientation = Math.round(e.webkitCompassHeading);
+
+        console.log("orientation init :" + orientation)
+
+
+        if (orientation != 0) {
+            if (orientation > 180) {
+                orientation = 360 - orientation;
+                orientation = -orientation;
+                console.log("orientation de base >180 :" + orientation)
+            }
+
+
+            optsThreeGlobal.scene.rotation.y = ((2 * Math.PI) / 100) * orientation;
+            console.log(" optsThree.scene.rotation.y :" + optsThreeGlobal.scene.rotation.y)
+            if (optsThreeGlobal.controlsType != "orientation") {
+                buildOrientationControl(optsThreeGlobal, updateOptsThree);
+            } else {
+                updateOptsThree(optsThreeGlobal);
+            }
+
+            window.removeEventListener('deviceorientation', setOrientationControls, true);
+        }
+    }
+
+
 }

@@ -15,7 +15,7 @@ class App extends Component {
             updatePresent: "non",
             accueil: false,
             toggleAccueil: this.toggleAccueil,
-            optsThree: "patate"
+            optsThree: ""
         };
 
 
@@ -30,7 +30,7 @@ class App extends Component {
 
     updateOptsThree = (opts) => {
         this.setState({optsThree: opts}, () => {
-            //  console.log("this.state.optsThree: ", this.state.optsThree);
+            console.log("this.state.optsThree: ", this.state.optsThree);
         });
     }
 

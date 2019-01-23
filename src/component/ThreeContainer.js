@@ -16,13 +16,11 @@ export default class ThreeContainer extends Component {
     }
 
 
+    // detecte le changement de la valeur des props
     static getDerivedStateFromProps(props, state) {
-        // console.log("props.optsThreeGlobal : ", props.optsThreeGlobal + " - state.optsSave : " + state.optsSave)
+        // si le props : optsSave est different du props : optsThreeGlobal
         if (props.optsThreeGlobal !== state.optsSave && null !== state.optsSave) {
-            //threeEntryPoint(threeRootElement, props.updateOptsThree, props.optsThreeGlobal);
-
             mouseDown(props.updateOptsThree, props.optsThreeGlobal);
-            console.log("je suis diffrent du coup relance ")
         }
         return null;
     }

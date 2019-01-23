@@ -5,14 +5,6 @@ export default (container, updateOptsThree, optsThreeGlobal) => {
     const canvas = createCanvas(document, container);
     const sceneManager = new SceneManager(canvas, updateOptsThree, optsThreeGlobal);
 
-    let alphaVal;
-    window.addEventListener('deviceorientation', setOrientationControls, true);
-
-    function setOrientationControls(e) {
-        alphaVal = e.alpha;
-        window.removeEventListener('deviceorientation', setOrientationControls, true);
-    }
-
     bindEventListeners();
     render();
 
@@ -43,26 +35,6 @@ export default (container, updateOptsThree, optsThreeGlobal) => {
         sceneManager.onWindowResize()
     }
 
-    // function mouseMove({screenX, screenY}) {
-    //
-    //   //  console.log( " clientX:" + canvas.clientX )
-    //     sceneManager.onMouseMove(screenX-canvasHalfWidth, screenY-canvasHalfHeight);
-    // }
-
-
-    // function mouseDown(e) {
-    //
-    //     let mouseX;
-    //     let mouseY;
-    //     if (!alphaVal) {
-    //         mouseX = e.clientX;
-    //         mouseY = e.clientY;
-    //     } else {
-    //         mouseX = (e.targetTouches[0] ? e.targetTouches[0].pageX : e.changedTouches[e.changedTouches.length - 1].pageX)
-    //         mouseY = (e.targetTouches[0] ? e.targetTouches[0].pageY : e.changedTouches[e.changedTouches.length - 1].pageY);
-    //     }
-    //     sceneManager.onMouseDown(mouseX, mouseY);
-    // }
 
     function render(time) {
         requestAnimationFrame(render);

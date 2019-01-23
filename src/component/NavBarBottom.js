@@ -1,12 +1,13 @@
-import React, {Component} from 'react';
+import React, {Component} from "react";
 
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faCogs, faSearch, faEye, faCompass, faCalendarCheck, faParachuteBox} from '@fortawesome/free-solid-svg-icons'
-import ButtonsPhoto from './ButtonsPhoto'
-import Modal from './Modal'
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
+import {faCogs, faSearch, faEye, faCompass, faCalendarCheck, faParachuteBox} from "@fortawesome/free-solid-svg-icons"
+import ButtonsPhoto from "./ButtonsPhoto"
+import Modal from "./Modal"
+import ModalParam from "./ModalParam"
 
-import {switchValue} from './../threejs/planetarium/sceneActions/Raycaster'
-import {buildOrientationControl} from './../threejs/planetarium/SceneManager'
+import {switchValue} from "./../threejs/planetarium/sceneActions/Raycaster"
+import {buildOrientationControl} from "./../threejs/planetarium/SceneManager"
 
 //import {Context} from "../store/Context";
 
@@ -15,11 +16,11 @@ export default class NavBarBottom extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isOpen: false,
+            recherche: false,
+            param: false,
             btnLocalisation: faCompass,
             currentObj: null,
             optsThreeGlobal: this.props.optsThreeGlobal,
-            //earthExist: false,
 
         };
     }
@@ -34,10 +35,16 @@ export default class NavBarBottom extends Component {
 
 
     // ouvre le modal lors du clique sur le bouton recherche
-    toggleModal = () => {
+    toggleModalRecherche = () => {
         this.setState({
-            isOpen: !this.state.isOpen,
+            recherche: !this.state.recherche,
+        });
+    }
 
+    // ouvre le modalParam lors du clique sur le bouton param
+    toggleModalParam = () => {
+        this.setState({
+            param: !this.state.param,
         });
     }
 
@@ -108,10 +115,10 @@ export default class NavBarBottom extends Component {
 
                 <div id="btn-navigation">
 
-                    <button id="btnRecherche" onClick={this.toggleModal}>
+                    <button id="btnRecherche" onClick={this.toggleModalRecherche}>
                         <FontAwesomeIcon icon={faSearch} size="2x"/>
                     </button>
-                    <button>
+                    <button onClick={this.toggleModalParam}>
                         <FontAwesomeIcon icon={faCogs} size="2x"/>
                     </button>
                     <button>
@@ -125,12 +132,18 @@ export default class NavBarBottom extends Component {
                     </button>
                 </div>
 
-                {this.state.isOpen && <Modal show={this.state.isOpen}
-                                             onClose={this.toggleModal}
-                                             currentObj={this.state.currentObj}
-                                             optsThree={this.state.optsThreeGlobal}
-                                             updateOptsThree={this.props.updateOptsThree}>
+                {this.state.recherche && <Modal show={this.state.recherche}
+                                                onClose={this.toggleModalRecherche}
+                                                currentObj={this.state.currentObj}
+                                                optsThree={this.state.optsThreeGlobal}
+                                                updateOptsThree={this.props.updateOptsThree}>
                 </Modal>}>
+
+                {this.state.param && <ModalParam show={this.state.recherche}
+                                                 onClose={this.toggleModalParam}
+                                                 optsThree={this.state.optsThreeGlobal}
+                                                 updateOptsThree={this.props.updateOptsThree}>
+                </ModalParam>}>
 
             </div>
 
