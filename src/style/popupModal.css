@@ -1,6 +1,8 @@
 /* The Modal (background) */
-.popup {
-    display: block; /* Hidden by default */
+.shade {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
     left: 0;
@@ -9,44 +11,41 @@
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0, 0, 0); /* Fallback color */
-    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+    background-color: rgba(0, 0, 0, 0.6); /* Black w/ opacity */
 }
 
 /* Modal Content */
-.popup-content {
+.popup {
     position: fixed;
     background-color: #fefefe;
-
-
+    z-index: 1;
+    margin: auto;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
     border-radius: 5px;
 
-    margin: 50px
-
-
 }
 
-.popup-content > div:first-child {
-    border-radius: 5px 5px 0 0 ;
+.popup > div:first-child {
+    border-radius: 5px 5px 0 0;
 }
 
 
-.popup-content > div > h2 {
+.popup > div > h2 {
     color: white;
     padding: 35px 10px 20px 10px;
 
 }
 
 
-.popup-content > div {
+.popup > div {
 
     flex-grow: 1;
     text-align: center;
 }
 
-.popup-content > div > button {
+.popup > div > button {
 
 }
 
@@ -101,4 +100,49 @@
     text-decoration: none;
     cursor: pointer;
 }
+
+/* Animation shade */
+
+.shade-enter {
+    opacity: 0.01;
+}
+
+.shade-enter-active {
+    opacity: 1;
+    transition: all 200ms ease-out;
+}
+
+.shade-exit {
+    opacity: 1;
+}
+
+.shade-exit-active {
+    opacity: 0.01;
+    transition: all 200ms ease-out;
+}
+
+/* Animation popup */
+
+.popup-enter {
+    opacity: 0.01;
+    transform: scale(0.9) translateY(50%);
+}
+
+.popup-enter-active {
+    opacity: 1;
+    transform: scale(1) translateY(0%);
+    transition: all 200ms ease-out;
+}
+
+.popup-exit {
+    opacity: 1;
+    transform: scale(1) translateY(0%);
+}
+
+.popup-exit-active {
+    opacity: 0.01;
+    transform: scale(0.9) translateY(50%);
+    transition: all 200ms ease-out;
+}
+
 

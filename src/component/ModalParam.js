@@ -1,5 +1,8 @@
 import React, {Component} from "react";
 import ModalCompass from "./ModalCompass"
+import "../style/popupModal.css"
+import ReactDOM from 'react-dom';
+import {CSSTransition} from 'react-transition-group';
 
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
@@ -11,15 +14,17 @@ import {
     faTimes,
     faInfoCircle
 } from "@fortawesome/free-solid-svg-icons"
-import ModalParam from "./NavBarBottom";
+
 
 export default class Modal extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            compass: false
+            compass: false,
+            in: false
         }
+
     }
 
     // ouvre le modalParam lors du clique sur le bouton param
@@ -31,9 +36,12 @@ export default class Modal extends Component {
 
 
     render() {
-        // if (!this.props.show) {
-        //     return null;
-        // }
+        const modalo = () => (
+                <p> cocuco </p>
+            )
+
+        ;
+
         return (
             <div id="myModal" className="modal">
                 <div className="modal-content">
@@ -82,11 +90,21 @@ export default class Modal extends Component {
 
                     </div>
 
-                    {this.state.compass && <ModalCompass show={this.state.compass}
-                                                         onClose={this.toggleModalCompass}
-                                                         optsThree={this.props.optsThree}
-                                                         updateOptsThree={this.props.updateOptsThree}>
-                    </ModalCompass>}>
+                    {/*{this.state.compass && <ModalCompass show={this.state.compass}*/}
+                    {/*onClose={this.toggleModalCompass}*/}
+                    {/*optsThree={this.props.optsThree}*/}
+                    {/*updateOptsThree={this.props.updateOptsThree}>*/}
+                    {/*</ModalCompass>}>*/}
+
+                    <div>
+                            <ModalCompass show={this.state.compass}
+                                          onClose={this.toggleModalCompass}
+                                          optsThree={this.props.optsThree}
+                                          updateOptsThree={this.props.updateOptsThree}>
+                            </ModalCompass>
+
+                    </div>
+
 
                 </div>
             </div>
