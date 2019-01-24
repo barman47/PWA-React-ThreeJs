@@ -4,7 +4,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import {faGlobe, faInfo, faSpaceShuttle, faSearch, faTimes} from "@fortawesome/free-solid-svg-icons"
 import {switchValue} from "./../threejs/planetarium/sceneActions/Raycaster"
 import {buildOrbitControls} from "./../threejs/planetarium/SceneManager"
-import "../style/menuModal.css";
+import "../style/Modal.css";
 
 import {
     CSSTransition,
@@ -41,7 +41,7 @@ export default class ModalRecherche extends Component {
         return (
             <CSSTransition
                 in={this.props.show}
-                timeout={300}
+                timeout={200}
                 classNames="popup"
                 unmountOnExit
             >
@@ -114,7 +114,7 @@ class List extends React.Component {
                             <div>
                                 <FontAwesomeIcon icon={faGlobe} size="lg"/>
                                 {item}</div>
-                            <div>
+                            <div className="right">
                                 <FontAwesomeIcon icon={faInfo} size="lg"
                                                  onClick={() => console.log("info planet : " + item)}/>
                                 <FontAwesomeIcon icon={faSpaceShuttle} transform={{rotate: 300}} size="lg"

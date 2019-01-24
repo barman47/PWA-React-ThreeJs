@@ -139,9 +139,9 @@ export default (canvas, updateOptsThree, optsThreeGlobal) => {
 
     function buildCamera({width, height}) {
         const aspectRatio = width / height;
-        const fieldOfView = 60;
-        const nearPlane = 4;
-        const farPlane = 100;
+        const fieldOfView = 45;
+        const nearPlane = 2;
+        const farPlane = 500;
         const camera = new THREE.PerspectiveCamera(fieldOfView, aspectRatio, nearPlane, farPlane);
 
         camera.position.set(0, 0, 0.1);

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {styleGlobal} from "../style/StyleGlobal"
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faAngleRight, faTimes} from '@fortawesome/free-solid-svg-icons'
-import "../style/popupModal.css"
+import "../style/Popup.css"
 import {calibrerCompass} from './../threejs/planetarium/SceneManager'
 
 import {CSSTransition} from 'react-transition-group';
@@ -10,7 +10,7 @@ import {CSSTransition} from 'react-transition-group';
 import {switchValue} from './../threejs/planetarium/sceneActions/Raycaster'
 import {buildOrbitControls} from './../threejs/planetarium/SceneManager'
 
-export default class ModalCompass extends Component {
+export default class PopupCompass extends Component {
 
     constructor(props) {
         super(props);

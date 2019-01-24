@@ -148,7 +148,7 @@ button:focus {
     flex: 2;
 }
 
-#listPlanete li div:last-child svg:last-child {
+#listPlanete li .right svg:last-child {
     padding: 0 0 0 10px;
     flex: 2;
 }
