@@ -6,7 +6,12 @@ import {switchValue} from "./../threejs/planetarium/sceneActions/Raycaster"
 import {buildOrbitControls} from "./../threejs/planetarium/SceneManager"
 import "../style/menuModal.css";
 
-export default class Modal extends Component {
+import {
+    CSSTransition,
+    TransitionGroup,
+} from 'react-transition-group';
+
+export default class ModalRecherche extends Component {
 
     constructor(props) {
         super(props)
@@ -34,7 +39,12 @@ export default class Modal extends Component {
 
     render() {
         return (
-            <div id="myModal" className="modal">
+            <CSSTransition
+                in={this.props.show}
+                timeout={300}
+                classNames="popup"
+                unmountOnExit
+            >
                 <div className="modal-content">
                     <div className="modal-header">
                         <FontAwesomeIcon className="close" icon={faTimes} size="lg" onClick={this.props.onClose}/>
@@ -52,6 +62,7 @@ export default class Modal extends Component {
 
                         <h3> Planètes </h3>
 
+
                         <List items={this.state.items}
                               onClose={this.props.onClose}
                               currentObj={this.props.currentObj}
@@ -59,10 +70,12 @@ export default class Modal extends Component {
                               updateOptsThree={this.props.updateOptsThree}
                         />
 
+
                     </div>
 
                 </div>
-            </div>
+
+            </CSSTransition>
 
         );
     }
@@ -86,21 +99,36 @@ class List extends React.Component {
 
     render() {
 
-        return <ul>
-            {
-                this.props.items.map((item, index) => {
-                    return (
+        return (
+            <TransitionGroup className="todo-list">
+
+
+                {this.props.items.map((item, index) => (
+
+                    <CSSTransition
+                        key={index}
+                        timeout={500}
+                        classNames="fade"
+                    >
                         <li key={index}>
-                            <FontAwesomeIcon icon={faGlobe} size="lg"/>
-                            <a>{item}</a>
-                            <FontAwesomeIcon icon={faInfo} size="lg"
-                                             onClick={() => console.log("info planet : " + item)}/>
-                            <FontAwesomeIcon icon={faSpaceShuttle} transform={{rotate: 300}} size="lg"
-                                             onClick={() => this.btnNavette(item)}/>
+                            <div>
+                                <FontAwesomeIcon icon={faGlobe} size="lg"/>
+                                {item}</div>
+                            <div>
+                                <FontAwesomeIcon icon={faInfo} size="lg"
+                                                 onClick={() => console.log("info planet : " + item)}/>
+                                <FontAwesomeIcon icon={faSpaceShuttle} transform={{rotate: 300}} size="lg"
+                                                 onClick={() => this.btnNavette(item)}/>
+                            </div>
                         </li>
-                    )
-                })
-            }
-        </ul>
+                    </CSSTransition>
+
+
+                ))
+                }
+
+            </TransitionGroup>
+        )
+
     }
 }

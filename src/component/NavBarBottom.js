@@ -3,7 +3,7 @@ import React, {Component} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import {faCogs, faSearch, faEye, faCompass, faCalendarCheck, faParachuteBox} from "@fortawesome/free-solid-svg-icons"
 import ButtonsPhoto from "./ButtonsPhoto"
-import Modal from "./Modal"
+import ModalRecherche from "./ModalRecherche"
 import ModalParam from "./ModalParam"
 
 import {switchValue} from "./../threejs/planetarium/sceneActions/Raycaster"
@@ -132,18 +132,18 @@ export default class NavBarBottom extends Component {
                     </button>
                 </div>
 
-                {this.state.recherche && <Modal show={this.state.recherche}
-                                                onClose={this.toggleModalRecherche}
-                                                currentObj={this.state.currentObj}
-                                                optsThree={this.state.optsThreeGlobal}
-                                                updateOptsThree={this.props.updateOptsThree}>
-                </Modal>}>
+                <ModalRecherche show={this.state.recherche}
+                                onClose={this.toggleModalRecherche}
+                                currentObj={this.state.currentObj}
+                                optsThree={this.state.optsThreeGlobal}
+                                updateOptsThree={this.props.updateOptsThree}>
+                </ModalRecherche>
 
-                {this.state.param && <ModalParam show={this.state.recherche}
-                                                 onClose={this.toggleModalParam}
-                                                 optsThree={this.state.optsThreeGlobal}
-                                                 updateOptsThree={this.props.updateOptsThree}>
-                </ModalParam>}>
+                <ModalParam show={this.state.param}
+                            onClose={this.toggleModalParam}
+                            optsThree={this.state.optsThreeGlobal}
+                            updateOptsThree={this.props.updateOptsThree}>
+                </ModalParam>
 
             </div>
 

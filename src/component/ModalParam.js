@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import ModalCompass from "./ModalCompass"
 import "../style/popupModal.css"
-import ReactDOM from 'react-dom';
 import {CSSTransition} from 'react-transition-group';
 
 
@@ -22,7 +21,6 @@ export default class Modal extends Component {
         super(props)
         this.state = {
             compass: false,
-            in: false
         }
 
     }
@@ -36,14 +34,15 @@ export default class Modal extends Component {
 
 
     render() {
-        const modalo = () => (
-                <p> cocuco </p>
-            )
-
-        ;
-
         return (
-            <div id="myModal" className="modal">
+
+            <CSSTransition
+                in={this.props.show}
+                timeout={300}
+                classNames="popup"
+                unmountOnExit
+            >
+
                 <div className="modal-content">
                     <div className="modal-header">
                         <FontAwesomeIcon className="close" icon={faTimes} size="lg" onClick={this.props.onClose}/>
@@ -55,60 +54,60 @@ export default class Modal extends Component {
 
                     <div id="listPlanete">
 
-                        <h3></h3>
+                        {/*<h3> </h3>*/}
 
                         <ul>
 
 
-                            <li onClick={this.toggleModalCompass}>
-                                <FontAwesomeIcon icon={faCompass} size="lg" fixedWidth/>
-                                <a>Calibrer la boussole</a>
+                            <li>
+                                <div onClick={this.toggleModalCompass}>
+                                    <FontAwesomeIcon icon={faCompass} size="lg" fixedWidth/>
+                                    Calibrer la boussole
+                                </div>
                                 {this.props.optsThree.typeDevice != "mobile" &&
                                 <div>Disponible seulement sur mobile et tablette </div>}
                             </li>
 
                             <li>
-                                <FontAwesomeIcon icon={faVrCardboard} size="lg" fixedWidth/>
-                                <a>Réalité augmenté</a>
+                                <div>
+                                    <FontAwesomeIcon icon={faVrCardboard} size="lg" fixedWidth/>
+                                    Réalité augmenté
+                                </div>
                                 {this.props.optsThree.typeDevice != "mobile" &&
                                 <div>Disponible seulement sur mobile et tablette </div>}
                             </li>
                             <li>
-                                <FontAwesomeIcon icon={faUserAstronaut} size="lg" fixedWidth/>
-                                <a>Compte</a>
+                                <div>
+                                    <FontAwesomeIcon icon={faUserAstronaut} size="lg" fixedWidth/>
+                                    Compte
+                                </div>
                             </li>
                             <li>
-                                <FontAwesomeIcon icon={faInfoCircle} size="lg" fixedWidth/>
-                                <a>A propos</a>
+                                <div>
+                                    <FontAwesomeIcon icon={faInfoCircle} size="lg" fixedWidth/>
+                                    A propos
+                                </div>
                             </li>
                             <li>
-                                <FontAwesomeIcon icon={faSignOutAlt} size="lg" fixedWidth/>
-                                <a>Déconnexion</a>
+                                <div>
+                                    <FontAwesomeIcon icon={faSignOutAlt} size="lg" fixedWidth/>
+                                    Déconnexion
+                                </div>
                             </li>
 
                         </ul>
 
                     </div>
 
-                    {/*{this.state.compass && <ModalCompass show={this.state.compass}*/}
-                    {/*onClose={this.toggleModalCompass}*/}
-                    {/*optsThree={this.props.optsThree}*/}
-                    {/*updateOptsThree={this.props.updateOptsThree}>*/}
-                    {/*</ModalCompass>}>*/}
-
-                    <div>
-                            <ModalCompass show={this.state.compass}
-                                          onClose={this.toggleModalCompass}
-                                          optsThree={this.props.optsThree}
-                                          updateOptsThree={this.props.updateOptsThree}>
-                            </ModalCompass>
-
-                    </div>
+                    <ModalCompass show={this.state.compass}
+                                  onClose={this.toggleModalCompass}
+                                  optsThree={this.props.optsThree}
+                                  updateOptsThree={this.props.updateOptsThree}>
+                    </ModalCompass>
 
 
                 </div>
-            </div>
-
+            </CSSTransition>
         );
     }
 }

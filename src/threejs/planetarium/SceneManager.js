@@ -306,7 +306,7 @@ export function calibrerCompass(optsThreeGlobal, updateOptsThree) {
         console.log("orientation init :" + orientation)
 
 
-        if (orientation != 0) {
+        if (orientation !== 0) {
             if (orientation > 180) {
                 orientation = 360 - orientation;
                 orientation = -orientation;
@@ -316,7 +316,7 @@ export function calibrerCompass(optsThreeGlobal, updateOptsThree) {
 
             optsThreeGlobal.scene.rotation.y = ((2 * Math.PI) / 100) * orientation;
             console.log(" optsThree.scene.rotation.y :" + optsThreeGlobal.scene.rotation.y)
-            if (optsThreeGlobal.controlsType != "orientation") {
+            if (optsThreeGlobal.controlsType !== "orientation") {
                 buildOrientationControl(optsThreeGlobal, updateOptsThree);
             } else {
                 updateOptsThree(optsThreeGlobal);

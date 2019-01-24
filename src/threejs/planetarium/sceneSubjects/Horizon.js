@@ -4,9 +4,9 @@ import THREE from './../../three';
 export default scene => {
 
 
-    var geometry = new THREE.CircleGeometry(48, 50);
-    var material = new THREE.LineBasicMaterial({color: 0xfff});
-    var circle = new THREE.LineLoop(geometry, material);
+    let geometry = new THREE.CircleGeometry(48, 50);
+    let material = new THREE.LineBasicMaterial({color: 0xfff});
+    let circle = new THREE.LineLoop(geometry, material);
     geometry.vertices.shift();
 
     circle.rotation.x = Math.PI / 2;
@@ -19,11 +19,11 @@ export default scene => {
     scene.add(new THREE.AxesHelper(8000));
 
     //Nord
-    var loader = new THREE.FontLoader();
+    let loader = new THREE.FontLoader();
 
     loader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', function (font) {
 
-        var geometry = new THREE.TextGeometry('EST', {
+        let geometry = new THREE.TextGeometry('EST', {
             font: font,
             size: 0.8,
             height: 0.2,
@@ -45,11 +45,10 @@ export default scene => {
 
 
     //Ouest
-    var loader = new THREE.FontLoader();
 
     loader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', function (font) {
 
-        var geometry = new THREE.TextGeometry('NORD', {
+        let geometry = new THREE.TextGeometry('NORD', {
             font: font,
             size: 0.8,
             height: 0.2,
@@ -71,11 +70,10 @@ export default scene => {
 
 
     //Est
-    var loader = new THREE.FontLoader();
 
     loader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', function (font) {
 
-        var geometry = new THREE.TextGeometry('SUD', {
+        let geometry = new THREE.TextGeometry('SUD', {
             font: font,
             size: 0.8,
             height: 0.2,
@@ -97,11 +95,9 @@ export default scene => {
 
 
     //SUD
-    var loader = new THREE.FontLoader();
-
     loader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', function (font) {
 
-        var geometry = new THREE.TextGeometry('OUEST', {
+        let geometry = new THREE.TextGeometry('OUEST', {
             font: font,
             size: 0.8,
             height: 0.2,

@@ -1,4 +1,4 @@
-/* The Modal (background) */
+/* The ModalRecherche (background) */
 .shade {
     display: flex;
     align-items: center;
@@ -14,7 +14,7 @@
     background-color: rgba(0, 0, 0, 0.6); /* Black w/ opacity */
 }
 
-/* Modal Content */
+/* ModalRecherche Content */
 .popup {
     position: fixed;
     background-color: #fefefe;
@@ -109,7 +109,7 @@
 
 .shade-enter-active {
     opacity: 1;
-    transition: all 200ms ease-out;
+    transition: all 100ms ease-out;
 }
 
 .shade-exit {
@@ -118,7 +118,7 @@
 
 .shade-exit-active {
     opacity: 0.01;
-    transition: all 200ms ease-out;
+    transition: all 100ms ease-out;
 }
 
 /* Animation popup */
