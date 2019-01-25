@@ -10,16 +10,16 @@ export default scene => {
 
 
     // import toute les images des planets de la lib
-    function importAll(r) {
+    function importAll(dossier) {
         let images = {};
-        r.keys().map((item, index) => {
-            images[item.replace('./', '')] = r(item);
+        dossier.keys().map((item, index) => {
+            images[item.replace('./', '')] = dossier(item);
+            return null ;
         });
         return images;
     }
 
     const images = importAll(require.context('../../../threejs/planetarium/libs/threex.planets/images', false, /\.(png|jpe?g|svg|gif)$/));
-
 
     THREEx.createEarth = function (radius) {
         let geometry = new THREE.SphereGeometry(radius, 32, 32)
@@ -218,7 +218,6 @@ export default scene => {
     return {
         update
     }
-
 
 
 }

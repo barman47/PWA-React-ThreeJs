@@ -83,9 +83,6 @@ export default class ModalRecherche extends Component {
 
 class List extends React.Component {
 
-    constructor(props) {
-        super(props)
-    }
 
     btnNavette(item) {
         if (this.props.optsThree.controlsType === "orientation") {

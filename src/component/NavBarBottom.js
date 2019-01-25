@@ -55,7 +55,7 @@ export default class NavBarBottom extends Component {
         });
 
         // on revient sur la terre
-        switchValue("Back", this.state.optsThreeGlobal, this.state.currentObj);
+        switchValue("Back", this.state.optsThreeGlobal, this.state.currentObj, this.props.updateOptsThree);
 
         if (this.state.optsThreeGlobal.controlsType === "orbit") {
             setTimeout(
@@ -91,12 +91,6 @@ export default class NavBarBottom extends Component {
     }
 
     render() {
-        let ButtonsPh;
-        if (this.state.btnLocalisation.iconName === "parachute-box") {
-            ButtonsPh = (<ButtonsPhoto/>)
-        } else {
-            ButtonsPh = null
-        }
 
 
         return (
@@ -111,7 +105,8 @@ export default class NavBarBottom extends Component {
                 {/*)}*/}
                 {/*</Context.Consumer>*/}
 
-                {ButtonsPh}
+
+                <ButtonsPhoto show={this.state.btnLocalisation.iconName}/>
 
                 <div id="btn-navigation">
 
@@ -145,8 +140,11 @@ export default class NavBarBottom extends Component {
                             updateOptsThree={this.props.updateOptsThree}>
                 </ModalParam>
 
+
+
             </div>
 
         );
     }
 }
+

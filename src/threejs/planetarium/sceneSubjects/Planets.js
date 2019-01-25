@@ -3,8 +3,7 @@ import THREE from './../../three';
 
 export default (scene, objectsPlanets) => {
 
-    var THREEx = THREEx || {}
-
+    let THREEx = THREEx || {}
 
     THREEx.baseURL = 'planetarium/libs/threex.planets/'
 
@@ -14,6 +13,7 @@ export default (scene, objectsPlanets) => {
         let images = {};
         r.keys().map((item, index) => {
             images[item.replace('./', '')] = r(item);
+            return null;
         });
         return images;
     }
@@ -24,88 +24,88 @@ export default (scene, objectsPlanets) => {
     THREEx.baseURL = './../libs/threex.planets/threex.planets/'
 
     THREEx.createSun = async function (radius) {
-        var geometry = new THREE.SphereGeometry(radius, 32, 32)
-        var texture = new THREE.TextureLoader().load().load(images['sunmap.jpg']);
-        var material = new THREE.MeshPhongMaterial({
+        let geometry = new THREE.SphereGeometry(radius, 32, 32)
+        let texture = new THREE.TextureLoader().load().load(images['sunmap.jpg']);
+        let material = new THREE.MeshPhongMaterial({
             map: texture,
             bumpMap: texture,
             bumpScale: 0.05,
         })
 
-        var mesh = new THREE.Mesh(geometry, material)
+        let mesh = new THREE.Mesh(geometry, material)
         return mesh
     }
 
     THREEx.createMercury = function (radius) {
-        var geometry = new THREE.SphereGeometry(radius, 32, 32)
-        var material = new THREE.MeshPhongMaterial({
+        let geometry = new THREE.SphereGeometry(radius, 32, 32)
+        let material = new THREE.MeshPhongMaterial({
             map: new THREE.TextureLoader().load(images['mercurymap.jpg']),
             bumpMap: new THREE.TextureLoader().load(images['mercurybump.jpg']),
             bumpScale: 0.005,
         })
-        var mesh = new THREE.Mesh(geometry, material)
+        let mesh = new THREE.Mesh(geometry, material)
         return mesh
     }
 
     THREEx.createVenus = function (radius) {
-        var geometry = new THREE.SphereGeometry(radius, 32, 32)
-        var material = new THREE.MeshPhongMaterial({
+        let geometry = new THREE.SphereGeometry(radius, 32, 32)
+        let material = new THREE.MeshPhongMaterial({
             map: new THREE.TextureLoader().load(images['venusmap.jpg']),
             bumpMap: new THREE.TextureLoader().load(images['venusbump.jpg']),
             bumpScale: 0.005,
         })
-        var mesh = new THREE.Mesh(geometry, material)
+        let mesh = new THREE.Mesh(geometry, material)
         return mesh
     }
 
     THREEx.createEarth = function (radius) {
-        var geometry = new THREE.SphereGeometry(radius, 32, 32)
-        var material = new THREE.MeshPhongMaterial({
+        let geometry = new THREE.SphereGeometry(radius, 32, 32)
+        let material = new THREE.MeshPhongMaterial({
             map: new THREE.TextureLoader().load(images['earthmap1k.jpg']),
             bumpMap: new THREE.TextureLoader().load(images['earthbump1k.jpg']),
             bumpScale: 0.05,
             specularMap: new THREE.TextureLoader().load(images['earthspec1k.jpg']),
             specular: new THREE.Color('grey'),
         })
-        var mesh = new THREE.Mesh(geometry, material)
+        let mesh = new THREE.Mesh(geometry, material)
         return mesh
     }
 
     THREEx.createEarthCloud = function (radius) {
         // create destination canvas
-        var canvasResult = document.createElement('canvas')
+        let canvasResult = document.createElement('canvas')
         canvasResult.width = 1024
         canvasResult.height = 512
-        var contextResult = canvasResult.getContext('2d')
+        let contextResult = canvasResult.getContext('2d')
 
         // load earthcloudmap
-        var imageMap = new Image();
+        let imageMap = new Image();
         imageMap.crossOrigin = "Anonymous";
         //imageMap.setAttribute('crossOrigin', '');
         imageMap.addEventListener("load", function () {
 
             // create dataMap ImageData for earthcloudmap
-            var canvasMap = document.createElement('canvas')
+            let canvasMap = document.createElement('canvas')
             canvasMap.width = imageMap.width
             canvasMap.height = imageMap.height
-            var contextMap = canvasMap.getContext('2d')
+            let contextMap = canvasMap.getContext('2d')
             contextMap.drawImage(imageMap, 0, 0)
-            var dataMap = contextMap.getImageData(0, 0, canvasMap.width, canvasMap.height)
+            let dataMap = contextMap.getImageData(0, 0, canvasMap.width, canvasMap.height)
 
             // load earthcloudmaptrans
-            var imageTrans = new Image();
+            let imageTrans = new Image();
             imageTrans.addEventListener("load", function () {
                 // create dataTrans ImageData for earthcloudmaptrans
-                var canvasTrans = document.createElement('canvas')
+                let canvasTrans = document.createElement('canvas')
                 canvasTrans.width = imageTrans.width
                 canvasTrans.height = imageTrans.height
-                var contextTrans = canvasTrans.getContext('2d')
+                let contextTrans = canvasTrans.getContext('2d')
                 contextTrans.drawImage(imageTrans, 0, 0)
-                var dataTrans = contextTrans.getImageData(0, 0, canvasTrans.width, canvasTrans.height)
+                let dataTrans = contextTrans.getImageData(0, 0, canvasTrans.width, canvasTrans.height)
                 // merge dataMap + dataTrans into dataResult
-                var dataResult = contextMap.createImageData(canvasMap.width, canvasMap.height)
-                for (var y = 0, offset = 0; y < imageMap.height; y++) {
-                    for (var x = 0; x < imageMap.width; x++, offset += 4) {
+                let dataResult = contextMap.createImageData(canvasMap.width, canvasMap.height)
+                for (let y = 0, offset = 0; y < imageMap.height; y++) {
+                    for (let x = 0; x < imageMap.width; x++, offset += 4) {
                         dataResult.data[offset + 0] = dataMap.data[offset + 0]
                         dataResult.data[offset + 1] = dataMap.data[offset + 1]
                         dataResult.data[offset + 2] = dataMap.data[offset + 2]
@@ -120,65 +120,65 @@ export default (scene, objectsPlanets) => {
         }, false);
         imageMap.src = THREEx.baseURL + 'images/earthcloudmap.jpg';
 
-        var geometry = new THREE.SphereGeometry(radius, 32, 32) // 0.51
-        var material = new THREE.MeshPhongMaterial({
+        let geometry = new THREE.SphereGeometry(radius, 32, 32) // 0.51
+        let material = new THREE.MeshPhongMaterial({
             map: new THREE.Texture(canvasResult),
             side: THREE.DoubleSide,
             transparent: true,
             opacity: 0.8,
         })
-        var mesh = new THREE.Mesh(geometry, material)
+        let mesh = new THREE.Mesh(geometry, material)
         return mesh
     }
 
 
     THREEx.createMoon = function (radius) {
-        var geometry = new THREE.SphereGeometry(radius, 32, 32)
-        var texture = new THREE.TextureLoader().load(images['moonmap1k.jpg']);
-        var material = new THREE.MeshPhongMaterial({
+        let geometry = new THREE.SphereGeometry(radius, 32, 32)
+        let texture = new THREE.TextureLoader().load(images['moonmap1k.jpg']);
+        let material = new THREE.MeshPhongMaterial({
             //map: THREE.TextureLoader().load(THREEx.baseURL + 'images/moonmap1k.jpg'),
             map: texture,
             bumpMap: texture,
             bumpScale: 0.002,
         })
-        var mesh = new THREE.Mesh(geometry, material)
+        let mesh = new THREE.Mesh(geometry, material)
         return mesh
     }
 
     THREEx.createMars = function (radius) {
-        var geometry = new THREE.SphereGeometry(radius, 32, 32)
-        var material = new THREE.MeshPhongMaterial({
+        let geometry = new THREE.SphereGeometry(radius, 32, 32)
+        let material = new THREE.MeshPhongMaterial({
             map: new THREE.TextureLoader().load(images['marsmap1k.jpg']),
             bumpMap: new THREE.TextureLoader().load(images['marsbump1k.jpg']),
             bumpScale: 0.05,
         })
-        var mesh = new THREE.Mesh(geometry, material)
+        let mesh = new THREE.Mesh(geometry, material)
         return mesh
     }
 
     THREEx.createJupiter = function (radius) {
-        var geometry = new THREE.SphereGeometry(radius, 32, 32)
-        var texture = new THREE.TextureLoader().load(images['jupitermap.jpg'])
-        var material = new THREE.MeshPhongMaterial({
+        let geometry = new THREE.SphereGeometry(radius, 32, 32)
+        let texture = new THREE.TextureLoader().load(images['jupitermap.jpg'])
+        let material = new THREE.MeshPhongMaterial({
             map: texture,
             bumpMap: texture,
             bumpScale: 0.02,
         })
-        var mesh = new THREE.Mesh(geometry, material)
+        let mesh = new THREE.Mesh(geometry, material)
         return mesh
     }
 
 
     THREEx.createSaturn = function (radius) {
 
-        var geometry = new THREE.SphereGeometry(radius, 32, 32)
-        var texture = new THREE.TextureLoader().load(images['saturnmap.jpg'])
-        var material = new THREE.MeshPhongMaterial({
+        let geometry = new THREE.SphereGeometry(radius, 32, 32)
+        let texture = new THREE.TextureLoader().load(images['saturnmap.jpg'])
+        let material = new THREE.MeshPhongMaterial({
             map: texture,
             bumpMap: texture,
             bumpScale: 0.05,
         })
-        var mesh = new THREE.Mesh(geometry, material)
+        let mesh = new THREE.Mesh(geometry, material)
 
         return mesh
     }
@@ -186,37 +186,37 @@ export default (scene, objectsPlanets) => {
 
     THREEx.createSaturnRing = function (radius) {
         // create destination canvas
-        var canvasResult = document.createElement('canvas')
+        let canvasResult = document.createElement('canvas')
         canvasResult.width = 915
         canvasResult.height = 64
-        var contextResult = canvasResult.getContext('2d')
+        let contextResult = canvasResult.getContext('2d')
 
         // load earthcloudmap
-        var imageMap = new Image();
+        let imageMap = new Image();
         imageMap.addEventListener("load", function () {
 
             // create dataMap ImageData for earthcloudmap
-            var canvasMap = document.createElement('canvas')
+            let canvasMap = document.createElement('canvas')
             canvasMap.width = imageMap.width
             canvasMap.height = imageMap.height
-            var contextMap = canvasMap.getContext('2d')
+            let contextMap = canvasMap.getContext('2d')
             contextMap.drawImage(imageMap, 0, 0)
-            var dataMap = contextMap.getImageData(0, 0, canvasMap.width, canvasMap.height)
+            let dataMap = contextMap.getImageData(0, 0, canvasMap.width, canvasMap.height)
 
             // load earthcloudmaptrans
-            var imageTrans = new Image();
+            let imageTrans = new Image();
             imageTrans.addEventListener("load", function () {
                 // create dataTrans ImageData for earthcloudmaptrans
-                var canvasTrans = document.createElement('canvas')
+                let canvasTrans = document.createElement('canvas')
                 canvasTrans.width = imageTrans.width
                 canvasTrans.height = imageTrans.height
-                var contextTrans = canvasTrans.getContext('2d')
+                let contextTrans = canvasTrans.getContext('2d')
                 contextTrans.drawImage(imageTrans, 0, 0)
-                var dataTrans = contextTrans.getImageData(0, 0, canvasTrans.width, canvasTrans.height)
+                let dataTrans = contextTrans.getImageData(0, 0, canvasTrans.width, canvasTrans.height)
                 // merge dataMap + dataTrans into dataResult
-                var dataResult = contextMap.createImageData(canvasResult.width, canvasResult.height)
-                for (var y = 0, offset = 0; y < imageMap.height; y++) {
-                    for (var x = 0; x < imageMap.width; x++, offset += 4) {
+                let dataResult = contextMap.createImageData(canvasResult.width, canvasResult.height)
+                for (let y = 0, offset = 0; y < imageMap.height; y++) {
+                    for (let x = 0; x < imageMap.width; x++, offset += 4) {
                         dataResult.data[offset + 0] = dataMap.data[offset + 0]
                         dataResult.data[offset + 1] = dataMap.data[offset + 1]
                         dataResult.data[offset + 2] = dataMap.data[offset + 2]
@@ -231,65 +231,65 @@ export default (scene, objectsPlanets) => {
         }, false);
         imageMap.src = images['saturnringcolor.jpg'];
 
-        var geometry = new THREEx._RingGeometry(radius, 0.75, 64); //0.55
-        var material = new THREE.MeshPhongMaterial({
+        let geometry = new THREEx._RingGeometry(radius, 0.75, 64); //0.55
+        let material = new THREE.MeshPhongMaterial({
             map: new THREE.Texture(canvasResult),
             // map		: THREE.TextureLoader().load(THREEx.baseURL+'images/ash_uvgrid01.jpg'),
             side: THREE.DoubleSide,
             transparent: true,
             opacity: 0.8,
         })
-        var mesh = new THREE.Mesh(geometry, material)
+        let mesh = new THREE.Mesh(geometry, material)
         mesh.lookAt(new THREE.Vector3(0.5, -4, 1))
         return mesh
     }
 
 
     THREEx.createUranus = function (radius) {
-        var geometry = new THREE.SphereGeometry(radius, 32, 32)
-        var texture = new THREE.TextureLoader().load(images['uranusmap.jpg'])
-        var material = new THREE.MeshPhongMaterial({
+        let geometry = new THREE.SphereGeometry(radius, 32, 32)
+        let texture = new THREE.TextureLoader().load(images['uranusmap.jpg'])
+        let material = new THREE.MeshPhongMaterial({
             map: texture,
             bumpMap: texture,
             bumpScale: 0.05,
         })
-        var mesh = new THREE.Mesh(geometry, material)
+        let mesh = new THREE.Mesh(geometry, material)
         return mesh
     }
 
     THREEx.createUranusRing = function (radius) {
         // create destination canvas
-        var canvasResult = document.createElement('canvas')
+        let canvasResult = document.createElement('canvas')
         canvasResult.width = 1024
         canvasResult.height = 72
-        var contextResult = canvasResult.getContext('2d')
+        let contextResult = canvasResult.getContext('2d')
 
         // load earthcloudmap
-        var imageMap = new Image();
+        let imageMap = new Image();
         imageMap.addEventListener("load", function () {
 
             // create dataMap ImageData for earthcloudmap
-            var canvasMap = document.createElement('canvas')
+            let canvasMap = document.createElement('canvas')
             canvasMap.width = imageMap.width
             canvasMap.height = imageMap.height
-            var contextMap = canvasMap.getContext('2d')
+            let contextMap = canvasMap.getContext('2d')
             contextMap.drawImage(imageMap, 0, 0)
-            var dataMap = contextMap.getImageData(0, 0, canvasMap.width, canvasMap.height)
+            let dataMap = contextMap.getImageData(0, 0, canvasMap.width, canvasMap.height)
 
             // load earthcloudmaptrans
-            var imageTrans = new Image();
+            let imageTrans = new Image();
             imageTrans.addEventListener("load", function () {
                 // create dataTrans ImageData for earthcloudmaptrans
-                var canvasTrans = document.createElement('canvas')
+                let canvasTrans = document.createElement('canvas')
                 canvasTrans.width = imageTrans.width
                 canvasTrans.height = imageTrans.height
-                var contextTrans = canvasTrans.getContext('2d')
+                let contextTrans = canvasTrans.getContext('2d')
                 contextTrans.drawImage(imageTrans, 0, 0)
-                var dataTrans = contextTrans.getImageData(0, 0, canvasTrans.width, canvasTrans.height)
+                let dataTrans = contextTrans.getImageData(0, 0, canvasTrans.width, canvasTrans.height)
                 // merge dataMap + dataTrans into dataResult
-                var dataResult = contextMap.createImageData(canvasResult.width, canvasResult.height)
-                for (var y = 0, offset = 0; y < imageMap.height; y++) {
-                    for (var x = 0; x < imageMap.width; x++, offset += 4) {
+                let dataResult = contextMap.createImageData(canvasResult.width, canvasResult.height)
+                for (let y = 0, offset = 0; y < imageMap.height; y++) {
+                    for (let x = 0; x < imageMap.width; x++, offset += 4) {
                         dataResult.data[offset + 0] = dataMap.data[offset + 0]
                         dataResult.data[offset + 1] = dataMap.data[offset + 1]
                         dataResult.data[offset + 2] = dataMap.data[offset + 2]
@@ -304,51 +304,51 @@ export default (scene, objectsPlanets) => {
         }, false);
         imageMap.src = images['uranusringcolour.jpg'];
 
-        var geometry = new THREEx._RingGeometry(radius, 0.75, 64); //0.55
-        var material = new THREE.MeshPhongMaterial({
+        let geometry = new THREEx._RingGeometry(radius, 0.75, 64); //0.55
+        let material = new THREE.MeshPhongMaterial({
             map: new THREE.Texture(canvasResult),
             // map		: THREE.TextureLoader().load(THREEx.baseURL+'images/ash_uvgrid01.jpg'),
             side: THREE.DoubleSide,
             transparent: true,
             opacity: 0.8,
         })
-        var mesh = new THREE.Mesh(geometry, material)
+        let mesh = new THREE.Mesh(geometry, material)
         mesh.lookAt(new THREE.Vector3(0.5, -4, 1))
         return mesh
     }
 
 
     THREEx.createNeptune = function (radius) {
-        var geometry = new THREE.SphereGeometry(radius, 32, 32)
-        var texture = new THREE.TextureLoader().load(images['neptunemap.jpg'])
-        var material = new THREE.MeshPhongMaterial({
+        let geometry = new THREE.SphereGeometry(radius, 32, 32)
+        let texture = new THREE.TextureLoader().load(images['neptunemap.jpg'])
+        let material = new THREE.MeshPhongMaterial({
             map: texture,
             bumpScale: 0.05,
         })
-        var mesh = new THREE.Mesh(geometry, material)
+        let mesh = new THREE.Mesh(geometry, material)
         return mesh
     }
 
 
     THREEx.createPluto = function (radius) {
-        var geometry = new THREE.SphereGeometry(radius, 32, 32)
-        var material = new THREE.MeshPhongMaterial({
+        let geometry = new THREE.SphereGeometry(radius, 32, 32)
+        let material = new THREE.MeshPhongMaterial({
             map: new THREE.TextureLoader().load(images['plutomap1k.jpg']),
             bumpMap: new THREE.TextureLoader().load(images['plutobump1k.jpg']),
             bumpScale: 0.005,
         })
-        var mesh = new THREE.Mesh(geometry, material)
+        let mesh = new THREE.Mesh(geometry, material)
         return mesh
     }
 
     THREEx.createStarfield = function () {
-        var texture = new THREE.TextureLoader().load(images['galaxy_starfield.png'])
-        var material = new THREE.MeshBasicMaterial({
+        let texture = new THREE.TextureLoader().load(images['galaxy_starfield.png'])
+        let material = new THREE.MeshBasicMaterial({
             map: texture,
             side: THREE.BackSide
         })
-        var geometry = new THREE.SphereGeometry(50, 32, 32)
-        var mesh = new THREE.Mesh(geometry, material)
+        let geometry = new THREE.SphereGeometry(50, 32, 32)
+        let mesh = new THREE.Mesh(geometry, material)
         return mesh
     }
 
@@ -360,16 +360,16 @@ export default (scene, objectsPlanets) => {
         outerRadius = outerRadius || 50
         thetaSegments = thetaSegments || 8
 
-        var normal = new THREE.Vector3(0, 0, 1)
+        let normal = new THREE.Vector3(0, 0, 1)
 
-        for (var i = 0; i < thetaSegments; i++) {
-            var angleLo = (i / thetaSegments) * Math.PI * 2
-            var angleHi = ((i + 1) / thetaSegments) * Math.PI * 2
+        for (let i = 0; i < thetaSegments; i++) {
+            let angleLo = (i / thetaSegments) * Math.PI * 2
+            let angleHi = ((i + 1) / thetaSegments) * Math.PI * 2
 
-            var vertex1 = new THREE.Vector3(innerRadius * Math.cos(angleLo), innerRadius * Math.sin(angleLo), 0);
-            var vertex2 = new THREE.Vector3(outerRadius * Math.cos(angleLo), outerRadius * Math.sin(angleLo), 0);
-            var vertex3 = new THREE.Vector3(innerRadius * Math.cos(angleHi), innerRadius * Math.sin(angleHi), 0);
-            var vertex4 = new THREE.Vector3(outerRadius * Math.cos(angleHi), outerRadius * Math.sin(angleHi), 0);
+            let vertex1 = new THREE.Vector3(innerRadius * Math.cos(angleLo), innerRadius * Math.sin(angleLo), 0);
+            let vertex2 = new THREE.Vector3(outerRadius * Math.cos(angleLo), outerRadius * Math.sin(angleLo), 0);
+            let vertex3 = new THREE.Vector3(innerRadius * Math.cos(angleHi), innerRadius * Math.sin(angleHi), 0);
+            let vertex4 = new THREE.Vector3(outerRadius * Math.cos(angleHi), outerRadius * Math.sin(angleHi), 0);
 
             this.vertices.push(vertex1);
             this.vertices.push(vertex2);
@@ -377,48 +377,36 @@ export default (scene, objectsPlanets) => {
             this.vertices.push(vertex4);
 
 
-            var vertexIdx = i * 4;
+            let vertexIdx = i * 4;
 
             // Create the first triangle
-            var face = new THREE.Face3(vertexIdx + 0, vertexIdx + 1, vertexIdx + 2, normal);
-            var uvs = []
+            let face = new THREE.Face3(vertexIdx + 0, vertexIdx + 1, vertexIdx + 2, normal);
+            let uvs = []
 
-            var uv = new THREE.Vector2(0, 0)
+            let uv = new THREE.Vector2(0, 0)
             uvs.push(uv)
-            var uv = new THREE.Vector2(1, 0)
+            uv = new THREE.Vector2(1, 0)
             uvs.push(uv)
-            var uv = new THREE.Vector2(0, 1)
+            uv = new THREE.Vector2(0, 1)
             uvs.push(uv)
 
             this.faces.push(face);
             this.faceVertexUvs[0].push(uvs);
 
             // Create the second triangle
-            var face = new THREE.Face3(vertexIdx + 2, vertexIdx + 1, vertexIdx + 3, normal);
-            var uvs = []
+            face = new THREE.Face3(vertexIdx + 2, vertexIdx + 1, vertexIdx + 3, normal);
+            uvs = []
 
-            var uv = new THREE.Vector2(0, 1)
+            uv = new THREE.Vector2(0, 1)
             uvs.push(uv)
-            var uv = new THREE.Vector2(1, 0)
+            uv = new THREE.Vector2(1, 0)
             uvs.push(uv)
-            var uv = new THREE.Vector2(1, 1)
+            uv = new THREE.Vector2(1, 1)
             uvs.push(uv)
 
             this.faces.push(face);
             this.faceVertexUvs[0].push(uvs);
         }
-
-        //this.computeCentroids();
-        /*
-            this.computeBoundingBox();
-
-            var centroid = new THREE.Vector3();
-            centroid.addVectors( this.boundingBox.min, this.boundingBox.max );
-            centroid.multiplyScalar( - 0.5 );
-
-            centroid.applyMatrix4( mesh.matrixWorld );*/
-
-        //
 
         this.computeFaceNormals();
 
@@ -430,15 +418,15 @@ export default (scene, objectsPlanets) => {
 
     //MOON
     // containerMoon
-    var Moon = new THREE.Group();
+    let Moon = new THREE.Group();
     Moon.position.z = 8
     Moon.position.x = 5
     Moon.position.y = 2
     Moon.name = "Moon";
 
 
-    var radMoon = 0.5;
-    var moonMesh = THREEx.createMoon(radMoon)
+    let radMoon = 0.5;
+    let moonMesh = THREEx.createMoon(radMoon)
 
     moonMesh.receiveShadow = true
     moonMesh.castShadow = true
@@ -449,14 +437,14 @@ export default (scene, objectsPlanets) => {
     objectsPlanets.push(Moon);
 
     //Neptune
-    var Neptune = new THREE.Group();
+    let Neptune = new THREE.Group();
     Neptune.position.z = -7
     Neptune.position.x = -4
     Neptune.position.y = 4
     Neptune.name = "Neptune";
 
-    var radNeptune = 0.5;
-    var neptuMesh = THREEx.createNeptune(radNeptune)
+    let radNeptune = 0.5;
+    let neptuMesh = THREEx.createNeptune(radNeptune)
     neptuMesh.receiveShadow = true
     neptuMesh.castShadow = true
     neptuMesh.geometry.radius = radNeptune
@@ -467,13 +455,13 @@ export default (scene, objectsPlanets) => {
 
 
     //Jupiter
-    var Jupiter = new THREE.Group();
+    let Jupiter = new THREE.Group();
     Jupiter.position.z = -8
     Jupiter.position.x = -15
     Jupiter.name = "Jupiter";
 
-    var radJupiter = 0.5;
-    var jupiMesh = THREEx.createJupiter(radJupiter)
+    let radJupiter = 0.5;
+    let jupiMesh = THREEx.createJupiter(radJupiter)
     jupiMesh.receiveShadow = true
     jupiMesh.castShadow = true
     jupiMesh.geometry.radius = radJupiter
@@ -484,14 +472,14 @@ export default (scene, objectsPlanets) => {
 
 
     //Mercury
-    var Mercury = new THREE.Group();
+    let Mercury = new THREE.Group();
     Mercury.position.z = 4
     Mercury.position.x = -3
     Mercury.position.y = -3
     Mercury.name = "Mercury";
 
-    var radMercury = 0.5;
-    var mercMesh = THREEx.createMercury(radMercury)
+    let radMercury = 0.5;
+    let mercMesh = THREEx.createMercury(radMercury)
     mercMesh.receiveShadow = true
     mercMesh.castShadow = true
 
@@ -502,14 +490,14 @@ export default (scene, objectsPlanets) => {
 
 
     //Venus
-    var Venus = new THREE.Group();
+    let Venus = new THREE.Group();
     Venus.position.z = -3
     Venus.position.x = -6
     Venus.position.y = 3
     Venus.name = "Venus";
 
-    var radVenus = 0.5;
-    var venusMesh = THREEx.createVenus(radVenus)
+    let radVenus = 0.5;
+    let venusMesh = THREEx.createVenus(radVenus)
     venusMesh.receiveShadow = true
     venusMesh.castShadow = true
 
@@ -519,14 +507,14 @@ export default (scene, objectsPlanets) => {
     objectsPlanets.push(Venus);
 
     //Mars
-    var Mars = new THREE.Group();
+    let Mars = new THREE.Group();
     Mars.position.z = -2
     Mars.position.x = 8
     Mars.position.y = 5
     Mars.name = "Mars";
 
-    var radMars = 0.5;
-    var marsMesh = THREEx.createMars(radMars)
+    let radMars = 0.5;
+    let marsMesh = THREEx.createMars(radMars)
     marsMesh.receiveShadow = true
     marsMesh.castShadow = true
 
@@ -538,56 +526,56 @@ export default (scene, objectsPlanets) => {
 
     //Saturn
     // containerSaturn
-    var Saturn = new THREE.Group();
+    let Saturn = new THREE.Group();
     Saturn.position.x = 10
     Saturn.position.y = -1
     Saturn.name = "Saturn";
 
-    var radSaturn = 0.5;
-    var mesh = THREEx.createSaturn(radSaturn)
+    let radSaturn = 0.5;
+    let mesh = THREEx.createSaturn(radSaturn)
     mesh.receiveShadow = true
     mesh.castShadow = true
     mesh.geometry.radius = radSaturn;
     Saturn.add(mesh)
 
-    var radRingSaturn = 0.55;
-    var ring = THREEx.createSaturnRing(radRingSaturn)
-    ring.receiveShadow = true
-    ring.castShadow = true
-    ring.geometry.radius = radRingSaturn;
-    Saturn.add(ring)
+    let radRingSaturn = 0.55;
+    let ringSaturn = THREEx.createSaturnRing(radRingSaturn)
+    ringSaturn.receiveShadow = true
+    ringSaturn.castShadow = true
+    ringSaturn.geometry.radius = radRingSaturn;
+    Saturn.add(ringSaturn)
     Saturn.scale.multiplyScalar(12 / 14)
     objectsPlanets.push(Saturn);
 
 
     //Uranus
     // containerUranus
-    var Uranus = new THREE.Group();
+    let Uranus = new THREE.Group();
     Uranus.position.z = 8
     Uranus.position.x = -2
     Uranus.name = "Uranus";
 
 
-    var radUranus = 0.50;
-    var mesh = THREEx.createUranus(radUranus)
-    mesh.receiveShadow = true
-    mesh.castShadow = true
-    mesh.geometry.radius = radUranus;
-    Uranus.add(mesh)
+    let radUranus = 0.50;
+    let meshUranus = THREEx.createUranus(radUranus)
+    meshUranus.receiveShadow = true
+    meshUranus.castShadow = true
+    meshUranus.geometry.radius = radUranus;
+    Uranus.add(meshUranus)
 
-    var radRingUranus = 0.50;
-    var ring = THREEx.createUranusRing(radRingUranus)
-    ring.receiveShadow = true
-    ring.castShadow = true
-    ring.geometry.radius = radRingUranus;
-    Uranus.add(ring)
+    let radRingUranus = 0.50;
+    let ringUranus = THREEx.createUranusRing(radRingUranus)
+    ringUranus.receiveShadow = true
+    ringUranus.castShadow = true
+    ringUranus.geometry.radius = radRingUranus;
+    Uranus.add(ringUranus)
     Uranus.scale.multiplyScalar(5.1 / 14)
     objectsPlanets.push(Uranus);
 
 
     //sky
 
-    var Sky = THREEx.createStarfield()
+    let Sky = THREEx.createStarfield()
     Sky.receiveShadow = true
     Sky.castShadow = true
 
@@ -595,16 +583,14 @@ export default (scene, objectsPlanets) => {
 
 
     //Ajout de toutes les planets a la scene
-    for (var i = 0; i < objectsPlanets.length; i++) {
+    for (let i = 0; i < objectsPlanets.length; i++) {
         scene.add(objectsPlanets[i]);
     }
 
 
     function update(time) {
-        for (var i = 0; i < objectsPlanets.length; i++) {
+        for (let i = 0; i < objectsPlanets.length; i++) {
             objectsPlanets[i].rotation.y += 0.0005;
-            //objectsPlanets[ i ].rotation.x += 0.0004;
-            //earthMesh.rotation.y += 1/32 * delta;
         }
 
     }

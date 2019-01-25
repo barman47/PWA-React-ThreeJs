@@ -49,8 +49,8 @@
 
 }
 
-
-.button {
+/* style button in popup */
+.buttonPopup {
 
     display: flex;
     flex-direction: row;
@@ -58,7 +58,6 @@
 
     border: none;
     color: white;
-    transition: 0.2s;
     justify-content: flex-end;
     min-width: 15em;
     background: #1D5EA8;
@@ -74,11 +73,11 @@
 }
 
 
-.button:hover {
+.buttonPopup:hover {
     background: #1f8cdf;
 }
 
-.button > h3 {
+.buttonPopup > h3 {
     flex-grow: 3;
     padding: 0.4em 1em;
     font-size: 14px

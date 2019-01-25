@@ -41,12 +41,10 @@ html, body {
 }
 
 #btn {
-    height: 18%;
     width: 100%;
     position: absolute;
     bottom: 0px;
     display: flex;
-
     flex-direction: column;
     justify-content: flex-end;
 
@@ -69,28 +67,59 @@ html, body {
     padding: 5px
 }
 
+
+/* style button planete photo */
+
+
 #btn-photo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 10px 0;
+
+}
+
+a {
+    text-decoration: none
+}
+
+.button {
 
     display: flex;
-    justify-content: space-around;
-    margin-bottom: 0px;
-    font-size: 20px;
-    /*opacity: 0;*/
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 
+    border: none;
+    color: white;
+
+    justify-content: flex-end;
+    background: #1D5EA8;
+    padding: 0;
 }
 
-#btn-photo button {
-    color: #D4C3B5;
-    border-color: #D4C3B5;
-    font-size: 17px;
-    border-radius: 10px 120px / 120px;
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 5px
+.button > svg {
+    background: rgba(0, 0, 0, 0.1);
+    width: 4em;
+    height: 100%;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    padding: 5px 3px;
 }
 
-button:focus {
-    outline: 0;
+
+.button:hover {
+    background: #1f8cdf;
 }
+
+.button > h3 {
+    font-size: 14px;
+    padding: 3px 10px;
+}
+
+/* style button navbar */
 
 
 #btn-navigation {

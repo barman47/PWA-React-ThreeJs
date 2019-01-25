@@ -2,28 +2,14 @@ import THREE from './../../three';
 import * as Navigation from '../sceneActions/Navigation'
 import EarthPlanet from './../sceneSubjects/Earth'
 
-
-//
-// export function onDocumentTouchStart(event, objectsPlanets, renderer, camera, modal, scene, controls) {
-//
-//     //event.preventDefault();
-//
-//     event.clientX = event.touches[0].clientX;
-//     event.clientY = event.touches[0].clientY;
-//     onDocumentMouseDown(event);
-// }
-
-
 let currentObj = null
 
 export function onDocumentMouseDown(mouseX, mouseY, updateOptsThree, optsThreeGlobal) {
 
 
-    //console.log("evenet touche : " + event.touches[0].clientX )
     let raycaster = new THREE.Raycaster();
     let mouse = new THREE.Vector2();
 
-    //console.log("--- onDocumentMouseDown : optsThreeGlobal  ", optsThreeGlobal)
 
     //event.preventDefault();
     mouse.x = (mouseX / optsThreeGlobal.renderer.domElement.clientWidth) * 2 - 1;
@@ -32,32 +18,23 @@ export function onDocumentMouseDown(mouseX, mouseY, updateOptsThree, optsThreeGl
     raycaster.setFromCamera(mouse, optsThreeGlobal.camera);
     let intersects = raycaster.intersectObjects(optsThreeGlobal.objectsPlanets, true);
 
-    //console.log("position camera : " + optsThreeGlobal.camera.position.x + " - " + optsThreeGlobal.camera.position.y)
+
     if (intersects.length > 0) {
         let namePlanet = intersects[0].object.parent.name;
-        switchValue(namePlanet, optsThreeGlobal, currentObj);
-        updateOptsThree(optsThreeGlobal);
-
+        switchValue(namePlanet, optsThreeGlobal, currentObj, updateOptsThree);
     }
-
 
 }
 
-let focusZoomVal = null;
+
 let accueil = true;
 let earthExist = false;
 
-// {camera, modal, scene, controls}
-export function switchValue(choix, optsThreeGlobal, currentObj) {
-
-    // fermer le modal quand on appui sur la navette
-    // if (modal.style.display = "block") {
-    //     modal.style.display = "none"
-    // }
-
+export function switchValue(choix, optsThreeGlobal, currentObj, updateOptsThree) {
 
     // retour sur la planete terre
-    if (choix === "Back") {
+    if (choix === "Back" && !accueil) {
+
 
         optsThreeGlobal.controls.autoRotate = false;
 
@@ -100,15 +77,14 @@ export function switchValue(choix, optsThreeGlobal, currentObj) {
                 }, 3000);
             }
 
+            console.log(" addBtnAccueilBack :" + accueil)
+            accueil = !accueil;
 
-            if (!accueil) {
-                console.log(" addBtnAccueilBack :" + accueil)
-                //addBtnAccueilBack()
-                //deleteBtnPhoto();
-                accueil = true;
-            }
+            updateOptsThree(optsThreeGlobal);
+
 
         }
+
 
     } else {
 
@@ -140,22 +116,20 @@ export function switchValue(choix, optsThreeGlobal, currentObj) {
             Navigation.focusTarget(planet, optsThreeGlobal.controls);
 
             setTimeout(function () {
-                focusZoomVal = Navigation.focusZoom(planet, optsThreeGlobal.camera)
+                Navigation.focusZoom(planet, optsThreeGlobal.camera)
                 if (!earthExist) {
                     EarthPlanet(optsThreeGlobal.scene);
                     earthExist = true
                 }
-
             }, 500);
 
-            //console.log(" controls-target : " + optsThreeGlobal.controls.target.x)
             optsThreeGlobal.controls.autoRotate = true;
             if (accueil) {
                 window.dispatchEvent(new Event('btnToParachute'));
-
-                //addBtnPhoto()
-                accueil = false;
+                accueil = !accueil;
             }
+
+            updateOptsThree(optsThreeGlobal);
 
             // si on clique sur la meme planetes
         } else {

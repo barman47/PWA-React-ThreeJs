@@ -6,11 +6,11 @@ export function focusZoom(obj, camera) {
         z: 0.05 * camera.position.z + 0.7 * obj.position.z
         //y: 0.05 * camera.position.y + 0.2 * obj.position.y
     };
-    let focusZoomVal = new TWEEN.Tween(camera.position)
+    new TWEEN.Tween(camera.position)
         .to(target, 2000)
         .easing(TWEEN.Easing.Quadratic.InOut)
         .start();
-    return focusZoomVal;
+   // return focusZoomVal;
 }
 
 export function focusTarget(obj, controls) {

@@ -2,30 +2,41 @@ import React, {Component} from 'react';
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faCamera, faImages} from '@fortawesome/free-solid-svg-icons'
-
+import {CSSTransition} from "react-transition-group";
+import "../style/Popup.css"
 
 export default class ButtonsPhoto extends Component {
 
 
-
-    componentDidMount() {
-    }
-
     render() {
         return (
 
-                <div  id="btn-photo">
+            <CSSTransition
+                in={(this.props.show === "parachute-box")}
+                timeout={300}
+                classNames="popup"
+                unmountOnExit
+            >
+                <div id="btn-photo">
                     <a href="OpenStars://">
-                        <button > Nouvelle Photo
-                            <FontAwesomeIcon icon={faCamera} size="lg" style={{paddingLeft : 5 , paddingRight : 5 }} />
+                        <button className="button">
+                            <h3> Nouvelle Photo </h3>
+                            <FontAwesomeIcon icon={faCamera} fixedWidth size="3x"/>
                         </button>
+
                     </a>
 
-                    <button > Galerie Photo
-                        <FontAwesomeIcon icon={faImages} size="lg" style={{paddingLeft : 5 , paddingRight : 5 }} />
-                    </button>
+                    <a href="OpenStars://">
+                        <button className="button">
+                            <h3>Galerie Photo</h3>
+                            <FontAwesomeIcon icon={faImages} fixedWidth size="3x"/>
+                        </button>
+
+                    </a>
 
                 </div>
+            </CSSTransition>
+
 
         );
     }

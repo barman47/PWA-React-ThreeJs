@@ -60,8 +60,8 @@ export default class ModalParam extends Component {
                                 <FontAwesomeIcon icon={faCompass} size="lg" fixedWidth/>
                                 Calibrer la boussole
                             </div>
-                            {this.props.optsThree.typeDevice != "mobile" &&
-                            <div className="right" >Disponible seulement sur mobile et tablette </div>}
+                            {this.props.optsThree.typeDevice !== "mobile" &&
+                            <div className="right">Disponible seulement sur mobile et tablette </div>}
                         </li>
 
                         <li>
@@ -69,7 +69,7 @@ export default class ModalParam extends Component {
                                 <FontAwesomeIcon icon={faVrCardboard} size="lg" fixedWidth/>
                                 Réalité augmenté
                             </div>
-                            {this.props.optsThree.typeDevice != "mobile" &&
+                            {this.props.optsThree.typeDevice !== "mobile" &&
                             <div className="right">Disponible seulement sur mobile et tablette </div>}
                         </li>
                         <li>

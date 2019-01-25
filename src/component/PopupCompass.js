@@ -3,18 +3,10 @@ import {styleGlobal} from "../style/StyleGlobal"
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faAngleRight, faTimes} from '@fortawesome/free-solid-svg-icons'
 import "../style/Popup.css"
+import {CSSTransition} from 'react-transition-group';
 import {calibrerCompass} from './../threejs/planetarium/SceneManager'
 
-import {CSSTransition} from 'react-transition-group';
-
-import {switchValue} from './../threejs/planetarium/sceneActions/Raycaster'
-import {buildOrbitControls} from './../threejs/planetarium/SceneManager'
-
 export default class PopupCompass extends Component {
-
-    constructor(props) {
-        super(props);
-    }
 
     onClick = (props) => {
         calibrerCompass(this.props.optsThree, this.props.updateOptsThree);
@@ -55,10 +47,10 @@ export default class PopupCompass extends Component {
                                     <p> veuillez poser votre mobile sur une
                                         surface plane </p>
 
-                                    <button className="button"
+                                    <button className="buttonPopup"
                                             onClick={this.onClick}>
                                         <h3> C'est fait </h3>
-                                        <FontAwesomeIcon className="arrow" icon={faAngleRight} size="lg" fixedWidth/>
+                                        <FontAwesomeIcon className="arrow" icon={faAngleRight}/>
                                     </button>
                                 </div>
                             </div>

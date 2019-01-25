@@ -7,18 +7,12 @@ import Planets from './sceneSubjects/Planets';
 
 export default (canvas, updateOptsThree, optsThreeGlobal) => {
 
-    const clock = new THREE.Clock();
-    //const origin = new THREE.Vector3(0,0,0);
+    //const clock = new THREE.Clock();
 
     const screenDimensions = {
         width: canvas.width,
         height: canvas.height
     }
-
-    // const mousePosition = {
-    //     x: 0,
-    //     y: 0
-    // }
 
     let controlsType = null;
     let objectsPlanets = [];
@@ -97,34 +91,6 @@ export default (canvas, updateOptsThree, optsThreeGlobal) => {
 
     calibrerCompass(optsThree, updateOptsThree)
 
-
-    // async function setOrientationControls(e) {
-    //
-    //     if (!e.alpha) {
-    //         return;
-    //     }
-    //
-    //     let orientation = Math.round(e.webkitCompassHeading);
-    //
-    //     console.log("orientation init :" + orientation)
-    //
-    //
-    //     if (orientation != 0) {
-    //         if (orientation > 180) {
-    //             orientation = 360 - orientation;
-    //             orientation = -orientation;
-    //             console.log("orientation de base >180 :" + orientation)
-    //         }
-    //
-    //
-    //         optsThree.scene.rotation.y = ((2 * Math.PI) / 100) * orientation;
-    //         console.log(" optsThree.scene.rotation.y :" + optsThree.scene.rotation.y)
-    //         buildOrientationControl(optsThree, updateOptsThree);
-    //         window.removeEventListener('deviceorientation', setOrientationControls, true);
-    //     }
-    // }
-
-
     function buildRender({width, height}) {
         const renderer = new THREE.WebGLRenderer({canvas: canvas, antialias: true, alpha: true});
         const DPR = window.devicePixelRatio ? window.devicePixelRatio : 1;
@@ -166,21 +132,10 @@ export default (canvas, updateOptsThree, optsThreeGlobal) => {
 
 
     function update() {
-        const elapsedTime = clock.getElapsedTime();
+        //const elapsedTime = clock.getElapsedTime();
 
-
-        // collisionCam(optsThree);
-        // TWEEN.update();
-        // controls.update();
         renderer.render(scene, camera);
-
     }
-
-// function updateCameraPositionRelativeToMouse() {
-//     camera.position.x += (  (mousePosition.x * 0.01) - camera.position.x ) * 0.01;
-//     camera.position.y += ( -(mousePosition.y * 0.01) - camera.position.y ) * 0.01;
-//     camera.lookAt(origin);
-// }
 
     function onWindowResize() {
         const {width, height} = canvas;
@@ -198,27 +153,9 @@ export default (canvas, updateOptsThree, optsThreeGlobal) => {
     }
 
 
-// function onMouseMove(x, y) {
-//     mousePosition.x = x;
-//     mousePosition.y = y;
-//    // console.log("mousePosition.x : " + mousePosition.x)
-// }
-
-
-//function init(objectsPlanets, renderer, camera, modal, scene, controls) {
-//
-//
-//     document.addEventListener('mousedown', onDocumentMouseDown(objectsPlanets, renderer, camera, modal, scene, controls), false);
-//     //document.addEventListener('touchstart', onDocumentTouchStart, false);
-//
-// }
-
-
     return {
-        // update,
         onWindowResize,
         update
-        // onMouseMove,
     }
 
 }
