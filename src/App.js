@@ -3,6 +3,8 @@ import './App.css';
 import ThreeContainer from './component/ThreeContainer'
 import NavBarBottom from './component/NavBarBottom'
 
+import Connexion from './page/Connexion'
+
 // On importe la classe `UserProvider`
 import {Context} from "./store/Context";
 
@@ -37,15 +39,24 @@ class App extends Component {
 
     render() {
         return (
-            <div>
-                <Context.Provider value={this.state}>
-                    <ThreeContainer updateOptsThree={this.updateOptsThree} optsThreeGlobal={this.state.optsThree}/>
-                    <NavBarBottom optsThreeGlobal={this.state.optsThree} updateOptsThree={this.updateOptsThree}/>
-                </Context.Provider>
-            </div>
+            <Connexion/>
+
         );
     }
 
+}
+
+{/*<div>*/
+}
+{/*<Context.Provider value={this.state}>*/
+}
+{/*<ThreeContainer updateOptsThree={this.updateOptsThree} optsThreeGlobal={this.state.optsThree}/>*/
+}
+{/*<NavBarBottom optsThreeGlobal={this.state.optsThree} updateOptsThree={this.updateOptsThree}/>*/
+}
+{/*</Context.Provider>*/
+}
+{/*</div>*/
 }
 
 
