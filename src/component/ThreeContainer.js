@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import threeEntryPoint from './../threejs/threeEntryPoint';
-import mouseDown from './../threejs/mouseDown';
+import threeEntryPoint from '../threejs/threeEntryPoint';
+import mouseDown from '../threejs/mouseDown';
 
 export default class ThreeContainer extends Component {
     constructor(props) {

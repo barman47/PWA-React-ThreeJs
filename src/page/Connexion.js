@@ -2,14 +2,14 @@ import React, {Component} from 'react';
 import '../style/Connexion.css'
 import Background from '../image/voie.jpg';
 import * as ServiceRecupDonneesBDD from '../service/ServiceRecupDonneesBDD';
-
+import {Redirect} from 'react-router';
 
 class Connexion extends Component {
     constructor(props) {
         super(props);
         this.state = {
             email: '',
-            password: 'Damien1@',
+            password: 'Nathan1@',
             saveEmail: true
         };
 
@@ -75,8 +75,10 @@ class Connexion extends Component {
 
                         ServiceRecupDonneesBDD.RecupUsers()
                             .then(response => response.json())
-                            .then(() => this.props.connect())
+                        //.then(() => this.props.connect())
+                        this.setState({redirect: true});
                         console.log("connexion reussi")
+
                     } else {
                         alert('Mauvais mot de passe ou mauvais email');
                     }
@@ -104,6 +106,10 @@ class Connexion extends Component {
     }
 
     render() {
+
+        if (this.state.redirect) {
+            return <Redirect push to="/planetarium"/>;
+        }
         return (
             <div className="connexion" style={{
                 backgroundImage: `url(${Background})`,

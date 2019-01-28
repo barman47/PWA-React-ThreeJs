@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
 import './App.css';
+import {BrowserRouter} from 'react-router-dom';
 import ThreeContainer from './component/ThreeContainer'
 import NavBarBottom from './component/NavBarBottom'
+import Main from './router/Main'
 
 import Connexion from './page/Connexion'
+
 
 // On importe la classe `UserProvider`
 import {Context} from "./store/Context";
@@ -17,7 +20,8 @@ class App extends Component {
             updatePresent: "non",
             accueil: false,
             toggleAccueil: this.toggleAccueil,
-            optsThree: ""
+            optsThree: "",
+            toUsers: false,
         };
 
 
@@ -39,25 +43,29 @@ class App extends Component {
 
     render() {
         return (
-            <Connexion/>
 
+
+            <div>
+
+                    <BrowserRouter>
+                        <Main/>
+                    </BrowserRouter>
+                    :
+                    <div>
+                        <Context.Provider value={this.state}>
+                            <ThreeContainer updateOptsThree={this.updateOptsThree}
+                                            optsThreeGlobal={this.state.optsThree}/>
+
+                            <NavBarBottom optsThreeGlobal={this.state.optsThree}
+                                          updateOptsThree={this.updateOptsThree}/>
+                        </Context.Provider>
+                    </div>
+                }
+
+            </div>
         );
     }
-
 }
-
-{/*<div>*/
-}
-{/*<Context.Provider value={this.state}>*/
-}
-{/*<ThreeContainer updateOptsThree={this.updateOptsThree} optsThreeGlobal={this.state.optsThree}/>*/
-}
-{/*<NavBarBottom optsThreeGlobal={this.state.optsThree} updateOptsThree={this.updateOptsThree}/>*/
-}
-{/*</Context.Provider>*/
-}
-{/*</div>*/
-}
-
 
 export default App;
+//< BackOffice deconnect={() => this.deconnect()}/>
