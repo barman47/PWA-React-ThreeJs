@@ -35,6 +35,7 @@ export default class ModalRecherche extends Component {
         this.setState({
             items: this.state.initialItems,
         })
+
     }
 
     render() {
@@ -85,12 +86,14 @@ class List extends React.Component {
 
 
     btnNavette(item) {
+
+
         if (this.props.optsThree.controlsType === "orientation") {
             buildOrbitControls(this.props.optsThree, this.props.updateOptsThree)
             console.log(" <<<<<>>>>>>> c'est fait : " + this.props.optsThree.controlsType)
 
         }
-        switchValue(item, this.props.optsThree, this.props.currentObj);
+        switchValue(item, this.props.optsThree, this.props.currentObj, this.props.updateOptsThree);
         this.props.onClose();
     }
 
@@ -98,7 +101,6 @@ class List extends React.Component {
 
         return (
             <TransitionGroup className="todo-list">
-
 
                 {this.props.items.map((item, index) => (
 

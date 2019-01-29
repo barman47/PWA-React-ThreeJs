@@ -141,7 +141,6 @@ export default class NavBarBottom extends Component {
                 </ModalParam>
 
 
-
             </div>
 
         );

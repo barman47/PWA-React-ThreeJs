@@ -2,7 +2,9 @@ import React, {Component} from 'react';
 import '../style/Connexion.css'
 import Background from '../image/voie.jpg';
 import * as ServiceRecupDonneesBDD from '../service/ServiceRecupDonneesBDD';
-import {Redirect} from 'react-router';
+import {Redirect, withRouter} from 'react-router';
+
+import {fakeAuth} from '../router/Main'
 
 class Connexion extends Component {
     constructor(props) {
@@ -10,8 +12,10 @@ class Connexion extends Component {
         this.state = {
             email: '',
             password: 'Nathan1@',
-            saveEmail: true
+            saveEmail: true,
+            redirectToReferrer: false
         };
+
 
         this.handleEmail = this.handleEmail.bind(this);
         this.handlePassword = this.handlePassword.bind(this);
@@ -57,7 +61,7 @@ class Connexion extends Component {
             this.setState({saveEmail: false})
     }
 
-    handleSubmit(event) {
+    handleSubmit = (event) => {
         let email = this.state.email;
         let pass = this.state.password;
         if (email === null || pass === null || pass === '' || email === '') {
@@ -76,8 +80,13 @@ class Connexion extends Component {
                         ServiceRecupDonneesBDD.RecupUsers()
                             .then(response => response.json())
                         //.then(() => this.props.connect())
-                        this.setState({redirect: true});
-                        console.log("connexion reussi")
+
+                        console.log(" this.props.location.state.from:", this.props.location.state.from)
+
+                        fakeAuth.authenticate(() => {
+                            this.setState({redirectToReferrer: true});
+                        })
+                        //this.props.history.push('/planetarium')
 
                     } else {
                         alert('Mauvais mot de passe ou mauvais email');
@@ -107,15 +116,23 @@ class Connexion extends Component {
 
     render() {
 
-        if (this.state.redirect) {
-            return <Redirect push to="/planetarium"/>;
-        }
+        let {from} = this.props.location.state || {from: {pathname: "/"}};
+        let {redirectToReferrer} = this.state;
+
+        if (redirectToReferrer) return <Redirect to={from}/>;
+        // {
+        //     pathname: from,
+        //     state: {id: '123'}
+        // }
+
         return (
+
             <div className="connexion" style={{
                 backgroundImage: `url(${Background})`,
                 backgroundSize: 'cover'
             }}>
                 <div className="titre">
+                    <p>You must log in to view the page at {from.pathname}</p>
                     <h1>Open Stars</h1>
                     <h3>Back Office</h3>
                 </div>

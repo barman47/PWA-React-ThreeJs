@@ -12,10 +12,9 @@ import React from "react"; // on importe createContext qui servira à la créati
 
 
 
+
 export const Context = React.createContext({
-    accueil: true,
-    toggleAccueil: () => {
-    },
+    logged: false,
 });
 
 
