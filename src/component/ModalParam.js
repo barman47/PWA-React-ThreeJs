@@ -3,7 +3,6 @@ import PopupCompass from "./PopupCompass"
 import "../style/Popup.css"
 import {CSSTransition} from 'react-transition-group';
 import {Redirect, withRouter} from 'react-router';
-import {fakeAuth} from '../router/Main'
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import {
@@ -16,7 +15,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons"
 
 
-export default class ModalParam extends Component {
+class ModalParam extends Component {
 
     constructor(props) {
         super(props)
@@ -35,6 +34,11 @@ export default class ModalParam extends Component {
 
     logOut = () => {
         console.log(" je me casse ")
+        console.log(localStorage.getItem('auth-token'))
+        localStorage.removeItem('auth-token')
+        this.props.history.push('/')
+        console.log(localStorage.getItem('auth-token'))
+
     }
 
 
@@ -90,9 +94,7 @@ export default class ModalParam extends Component {
                             </div>
                         </li>
                         <li>
-                            <div onClick={() => {
-                                fakeAuth.signout(() => this.props.history.push('/'))
-                            }}>
+                            <div onClick={this.logOut}>
                                 <FontAwesomeIcon icon={faSignOutAlt} size="lg" fixedWidth/>
                                 Déconnexion
                             </div>
@@ -112,3 +114,5 @@ export default class ModalParam extends Component {
         );
     }
 }
+
+export default withRouter(ModalParam)

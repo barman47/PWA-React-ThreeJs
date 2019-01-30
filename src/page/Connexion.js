@@ -13,7 +13,6 @@ class Connexion extends Component {
             email: '',
             password: 'Nathan1@',
             saveEmail: true,
-            redirectToReferrer: false
         };
 
 
@@ -79,14 +78,10 @@ class Connexion extends Component {
 
                         ServiceRecupDonneesBDD.RecupUsers()
                             .then(response => response.json())
-                        //.then(() => this.props.connect())
+                        if (localStorage.getItem('auth-token') != null) {
+                            this.props.history.push('/planetarium')
+                        }
 
-                        console.log(" this.props.location.state.from:", this.props.location.state.from)
-
-                        fakeAuth.authenticate(() => {
-                            this.setState({redirectToReferrer: true});
-                        })
-                        //this.props.history.push('/planetarium')
 
                     } else {
                         alert('Mauvais mot de passe ou mauvais email');
@@ -115,16 +110,6 @@ class Connexion extends Component {
     }
 
     render() {
-
-        let {from} = this.props.location.state || {from: {pathname: "/"}};
-        let {redirectToReferrer} = this.state;
-
-        if (redirectToReferrer) return <Redirect to={from}/>;
-        // {
-        //     pathname: from,
-        //     state: {id: '123'}
-        // }
-
         return (
 
             <div className="connexion" style={{
@@ -132,9 +117,8 @@ class Connexion extends Component {
                 backgroundSize: 'cover'
             }}>
                 <div className="titre">
-                    <p>You must log in to view the page at {from.pathname}</p>
                     <h1>Open Stars</h1>
-                    <h3>Back Office</h3>
+                    <h3>Planétarium</h3>
                 </div>
                 <form onSubmit={this.handleSubmit}>
                     <input type="email" className="infoUser" placeholder="Email" value={this.state.email}

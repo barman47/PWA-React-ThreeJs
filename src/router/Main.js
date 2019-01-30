@@ -32,11 +32,11 @@ class Main extends Component {
                                 timeout={300}
                             >
                                 <Switch location={location}>
+
                                     <Route exact path='/' component={Connexion}/>
                                     <PrivateRoute path='/planetarium' component={Planetarium}/>
-
-                                    // eurreur 404 a gerer a la place re afficher la page connexion
                                     <Route component={NoMatch}/>
+
                                 </Switch>
                             </CSSTransition>
                         </TransitionGroup>
@@ -62,11 +62,12 @@ function NoMatch({location}) {
 
 
 function PrivateRoute({component: Component, ...rest}) {
+
     return (
         <Route
             {...rest}
             render={props =>
-                fakeAuth.isAuthenticated ? (
+                localStorage.getItem('auth-token') != null ? (
                     <Component {...props} />
                 ) : (
                     <Redirect
@@ -78,7 +79,8 @@ function PrivateRoute({component: Component, ...rest}) {
                 )
             }
         />
-    );
+    )
+        ;
 }
 
 
