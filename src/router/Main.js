@@ -33,7 +33,7 @@ class Main extends Component {
                             >
                                 <Switch location={location}>
 
-                                    <Route exact path='/' component={Connexion}/>
+                                    <PrivateConnexion exact path='/' component={Connexion}/>
                                     <PrivateRoute path='/planetarium' component={Planetarium}/>
                                     <Route component={NoMatch}/>
 
@@ -63,16 +63,40 @@ function NoMatch({location}) {
 
 function PrivateRoute({component: Component, ...rest}) {
 
+    console.log("local : ", localStorage)
     return (
         <Route
             {...rest}
             render={props =>
-                localStorage.getItem('auth-token') != null ? (
+                localStorage.getItem('auth-token') != null || localStorage.getItem('discover') ? (
                     <Component {...props} />
                 ) : (
                     <Redirect
                         to={{
                             pathname: "/",
+                            state: {from: props.location}
+                        }}
+                    />
+                )
+            }
+        />
+    )
+        ;
+}
+
+
+function PrivateConnexion({component: Component, ...rest}) {
+
+    return (
+        <Route
+            {...rest}
+            render={props =>
+                localStorage.getItem('auth-token') === null ? (
+                    <Component {...props} />
+                ) : (
+                    <Redirect
+                        to={{
+                            pathname: "/planetarium",
                             state: {from: props.location}
                         }}
                     />

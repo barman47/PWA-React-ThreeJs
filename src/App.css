@@ -148,7 +148,7 @@ a {
 
 }
 
-#listPlanete h3 {
+#listPlanete > h3 {
 
     background: black;
     text-align: left;
@@ -200,4 +200,23 @@ a {
     opacity: 1;
     transition: opacity 250ms ease-in;
     transitionDelay: 300;
+}
+
+
+.lock {
+    color: #1D5EA8;
+    position: absolute;
+    left: -5px;
+    top: -5px;
+    padding: 0px !important;
+}
+
+.right {
+    display: flex;
+    flex-direction: row;
+}
+
+.containerIcon {
+    position: relative;
+    padding: 0 5px
 }

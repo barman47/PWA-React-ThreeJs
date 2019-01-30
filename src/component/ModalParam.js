@@ -11,7 +11,7 @@ import {
     faCompass,
     faSignOutAlt,
     faTimes,
-    faInfoCircle
+    faInfoCircle, faSpaceShuttle, faLock
 } from "@fortawesome/free-solid-svg-icons"
 
 
@@ -33,11 +33,9 @@ class ModalParam extends Component {
     }
 
     logOut = () => {
-        console.log(" je me casse ")
-        console.log(localStorage.getItem('auth-token'))
         localStorage.removeItem('auth-token')
+        localStorage.removeItem('discover')
         this.props.history.push('/')
-        console.log(localStorage.getItem('auth-token'))
 
     }
 
@@ -74,9 +72,14 @@ class ModalParam extends Component {
                         </li>
 
                         <li>
-                            <div>
-                                <FontAwesomeIcon icon={faVrCardboard} size="lg" fixedWidth/>
-                                Réalité augmenté
+                            <div className="containerIcon">
+                                <div>
+                                    <FontAwesomeIcon icon={faVrCardboard} size="lg" fixedWidth/>
+                                    Réalité augmenté
+                                </div>
+                                {localStorage.getItem('discover') && <FontAwesomeIcon icon={faLock}
+                                                                                      className="lock"
+                                                                                      size="xs"/>}
                             </div>
                             {this.props.optsThree.typeDevice !== "mobile" &&
                             <div className="right">Disponible seulement sur mobile et tablette </div>}

@@ -1,15 +1,18 @@
 import React, {Component} from "react";
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-import {faGlobe, faInfo, faSpaceShuttle, faSearch, faTimes} from "@fortawesome/free-solid-svg-icons"
+import {faGlobe, faInfo, faSpaceShuttle, faSearch, faTimes, faLock} from "@fortawesome/free-solid-svg-icons"
 import {switchValue} from "./../threejs/planetarium/sceneActions/Raycaster"
 import {buildOrbitControls} from "./../threejs/planetarium/SceneManager"
 import "../style/Modal.css";
+import PopupLock from "./PopupLock"
+import "../style/Popup.css"
 
 import {
     CSSTransition,
     TransitionGroup,
 } from 'react-transition-group';
+import PopupCompass from "./ModalParam";
 
 export default class ModalRecherche extends Component {
 
@@ -82,25 +85,56 @@ export default class ModalRecherche extends Component {
     }
 }
 
+
 class List extends React.Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            show: false,
+            item: null
+        }
+
+    }
 
 
     btnNavette(item) {
 
+        if (localStorage.getItem('discover')) {
+            this.setState({
+                    item: item,
+                    show: true,
+                }
+            )
+        } else {
+            if (this.props.optsThree.controlsType === "orientation") {
+                buildOrbitControls(this.props.optsThree, this.props.updateOptsThree)
+                console.log(" <<<<<>>>>>>> c'est fait : " + this.props.optsThree.controlsType)
 
-        if (this.props.optsThree.controlsType === "orientation") {
-            buildOrbitControls(this.props.optsThree, this.props.updateOptsThree)
-            console.log(" <<<<<>>>>>>> c'est fait : " + this.props.optsThree.controlsType)
-
+            }
+            switchValue(item, this.props.optsThree, this.props.currentObj, this.props.updateOptsThree);
+            this.props.onClose();
         }
-        switchValue(item, this.props.optsThree, this.props.currentObj, this.props.updateOptsThree);
-        this.props.onClose();
+
     }
+
+    togglePopup = () => {
+        this.setState({
+            show: !this.state.show,
+        });
+    }
+
 
     render() {
 
         return (
+
+
             <TransitionGroup className="todo-list">
+
+                <PopupLock show={this.state.show}
+                           onClose={this.togglePopup}
+                           planet={this.state.item}/>
 
                 {this.props.items.map((item, index) => (
 
@@ -110,14 +144,43 @@ class List extends React.Component {
                         classNames="fade"
                     >
                         <li key={index}>
+
+
                             <div>
                                 <FontAwesomeIcon icon={faGlobe} size="lg"/>
-                                {item}</div>
+                                {item}
+                            </div>
                             <div className="right">
-                                <FontAwesomeIcon icon={faInfo} size="lg"
-                                                 onClick={() => console.log("info planet : " + item)}/>
-                                <FontAwesomeIcon icon={faSpaceShuttle} transform={{rotate: 300}} size="lg"
-                                                 onClick={() => this.btnNavette(item)}/>
+
+
+                                <div className="containerIcon">
+                                    <FontAwesomeIcon icon={faInfo} size="lg"
+                                                     onClick={() => console.log("info planet : " + item)}/>
+                                    {localStorage.getItem('discover') &&
+
+                                    <FontAwesomeIcon icon={faLock}
+                                                     className="lock"
+                                                     size="xs"/>
+                                    }
+
+
+                                </div>
+
+
+                                <div className="containerIcon">
+                                    <FontAwesomeIcon icon={faSpaceShuttle} transform={{rotate: 300}} size="lg"
+                                                     onClick={() => this.btnNavette(item)}>
+
+                                    </FontAwesomeIcon>
+                                    {localStorage.getItem('discover') &&
+
+                                    <FontAwesomeIcon icon={faLock}
+                                                     className="lock"
+                                                     size="xs"/>
+                                    }
+
+                                </div>
+
                             </div>
                         </li>
                     </CSSTransition>

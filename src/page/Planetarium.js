@@ -36,6 +36,10 @@ class Planetarium extends Component {
         });
     }
 
+    componentWillMount() {
+        //console.log("localstoragee: ", localStorage)
+    }
+
 
     render() {
         return (

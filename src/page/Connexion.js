@@ -5,6 +5,8 @@ import * as ServiceRecupDonneesBDD from '../service/ServiceRecupDonneesBDD';
 import {Redirect, withRouter} from 'react-router';
 
 import {fakeAuth} from '../router/Main'
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faAngleRight} from "@fortawesome/free-solid-svg-icons";
 
 class Connexion extends Component {
     constructor(props) {
@@ -76,10 +78,13 @@ class Connexion extends Component {
                         let recupToken = response.headers.get("token");
                         localStorage.setItem('auth-token', JSON.stringify(recupToken));
 
+
                         ServiceRecupDonneesBDD.RecupUsers()
                             .then(response => response.json())
                         if (localStorage.getItem('auth-token') != null) {
+                            localStorage.removeItem('discover');
                             this.props.history.push('/planetarium')
+
                         }
 
 
@@ -109,6 +114,16 @@ class Connexion extends Component {
         }
     }
 
+    discover = () => {
+
+        localStorage.removeItem('auth-token')
+
+        if (localStorage.getItem('auth-token') === null) {
+            localStorage.setItem('discover', true);
+            this.props.history.push('/planetarium')
+        }
+    }
+
     render() {
         return (
 
@@ -127,6 +142,11 @@ class Connexion extends Component {
                            value={this.state.password} onChange={this.handlePassword}/>
                     <input type="submit" value="Connexion" className="buttonConnexion"/>
                 </form>
+                <button className="buttonPopup"
+                        onClick={this.discover}>
+                    <h3> Découvrir </h3>
+                    <FontAwesomeIcon className="arrow" icon={faAngleRight}/>
+                </button>
             </div>
 
         );

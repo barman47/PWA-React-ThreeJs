@@ -1,16 +1,16 @@
 import React, {Component} from 'react';
 import {styleGlobal} from "../style/StyleGlobal"
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faAngleRight, faLockOpen, faTimes} from '@fortawesome/free-solid-svg-icons'
+import {faAngleRight, faTimes, faLockOpen, faLock} from '@fortawesome/free-solid-svg-icons'
 import "../style/Popup.css"
 import {CSSTransition} from 'react-transition-group';
 import {calibrerCompass} from './../threejs/planetarium/SceneManager'
 
-export default class PopupCompass extends Component {
+export default class PopupLock extends Component {
 
-    onClick = (props) => {
-        calibrerCompass(this.props.optsThree, this.props.updateOptsThree);
-        this.props.onClose();
+    onClick = () => {
+        localStorage.removeItem('discover')
+        this.props.history.push('/')
     }
 
 
@@ -39,21 +39,22 @@ export default class PopupCompass extends Component {
                                 <div style={styleGlobal.couleurFondBleu}>
                                     <FontAwesomeIcon className="close" icon={faTimes} size="lg"
                                                      onClick={this.props.onClose}/>
+
                                     <h2>
-                                        Afin de calibrer correctement la boussole du planétarium
+                                        Vous souhaitez faire un tour sur {this.props.planet} ?
                                     </h2>
+
                                 </div>
                                 <div>
-                                    <p> veuillez poser votre mobile sur une
-                                        surface plane </p>
+                                    <p> Pour cela, munissez-vous de vos identifiant afin de monter à bord de votre
+                                        navette spatiale ! </p>
 
                                     <button className="buttonPopup"
                                             onClick={this.onClick}>
-                                        <p> C'est fait </p>
+                                        <p> Se connecter </p>
                                         <div className="cube">
-                                            <FontAwesomeIcon className="arrow" icon={faAngleRight} size="2x"/>
+                                            <FontAwesomeIcon className="arrow" icon={faLockOpen} size="2x"/>
                                         </div>
-
                                     </button>
                                 </div>
                             </div>
