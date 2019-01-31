@@ -32,6 +32,7 @@ let earthExist = false;
 
 export function switchValue(choix, optsThreeGlobal, currentObj, updateOptsThree) {
 
+
     // retour sur la planete terre
     if (choix === "Back" && !accueil) {
 
@@ -87,6 +88,18 @@ export function switchValue(choix, optsThreeGlobal, currentObj, updateOptsThree)
 
 
     } else {
+
+        switch (choix) {
+            case "Saturne":
+                choix = "Saturn"
+                break;
+            case "Mercure":
+                choix = "Mercury"
+                break;
+            case "Vénus":
+                choix = "Venus"
+                break;
+        }
 
         // direction la planet selectionné
 

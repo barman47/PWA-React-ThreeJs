@@ -1,11 +1,22 @@
 import React, {Component} from "react";
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-import {faGlobe, faInfo, faSpaceShuttle, faSearch, faTimes, faLock} from "@fortawesome/free-solid-svg-icons"
+import {
+    faGlobe,
+    faInfo,
+    faSpaceShuttle,
+    faSearch,
+    faTimes,
+    faLock,
+    faDotCircle,
+    faStar,
+    faLockOpen
+} from "@fortawesome/free-solid-svg-icons"
+
 import {switchValue} from "./../threejs/planetarium/sceneActions/Raycaster"
 import {buildOrbitControls} from "./../threejs/planetarium/SceneManager"
 import "../style/Modal.css";
-import PopupLock from "./PopupLock"
+import Popup from "./Popup"
 import "../style/Popup.css"
 
 import {
@@ -19,24 +30,42 @@ export default class ModalRecherche extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            initialItems: ["Moon", "Saturn", "Uranus", "Jupiter", "Mars", "Mercury", "Venus", "Neptune"],
-            items: []
+            initialItemsPlanets: ["Saturne", "Uranus", "Jupiter", "Mars", "Mercure", "Vénus", "Neptune"],
+            itemsPlanets: [],
+
+            initialItemsSatellite: ["Moon", "Calisto", "Titan"],
+            itemsSatellite: []
         }
     }
 
     filterList = (event) => {
-        var updatedList = this.state.initialItems;
+        var updatedListPlanet = this.state.initialItemsPlanets;
 
-        updatedList = updatedList.filter((item) => {
+        updatedListPlanet = updatedListPlanet.filter((item) => {
             let itemCase = item.toString().toLowerCase()
             return itemCase.search(event.target.value.toLowerCase()) !== -1
         });
-        this.setState({items: updatedList});
+
+        var updatedListSatellite = this.state.initialItemsSatellite;
+
+        updatedListSatellite = updatedListSatellite.filter((item) => {
+            let itemCase = item.toString().toLowerCase()
+            return itemCase.search(event.target.value.toLowerCase()) !== -1
+        });
+
+
+        this.setState({
+            itemsPlanets: updatedListPlanet,
+            itemsSatellite: updatedListSatellite
+        });
+
     }
+
 
     componentWillMount() {
         this.setState({
-            items: this.state.initialItems,
+            itemsPlanets: this.state.initialItemsPlanets,
+            itemsSatellite: this.state.initialItemsSatellite,
         })
 
     }
@@ -62,19 +91,55 @@ export default class ModalRecherche extends Component {
                         </h3>
                     </div>
 
-                    <div id="listPlanete">
+                    <div className="scroller">
 
-                        <h3> Planètes </h3>
+                        <div id="listPlanete">
+
+                            <h3> Planètes </h3>
+
+                            <List items={this.state.itemsPlanets}
+                                  onClose={this.props.onClose}
+                                  currentObj={this.props.currentObj}
+                                  optsThree={this.props.optsThree}
+                                  updateOptsThree={this.props.updateOptsThree}
+                                  icon={faGlobe}
+                            />
 
 
-                        <List items={this.state.items}
-                              onClose={this.props.onClose}
-                              currentObj={this.props.currentObj}
-                              optsThree={this.props.optsThree}
-                              updateOptsThree={this.props.updateOptsThree}
-                        />
+                        </div>
 
 
+                        <div id="listPlanete">
+
+                            <h3> Satellites </h3>
+
+
+                            <List items={this.state.itemsSatellite}
+                                  onClose={this.props.onClose}
+                                  currentObj={this.props.currentObj}
+                                  optsThree={this.props.optsThree}
+                                  updateOptsThree={this.props.updateOptsThree}
+                                  icon={faDotCircle}
+                            />
+
+
+                        </div>
+
+                        <div id="listPlanete">
+
+                            <h3> Etoiles </h3>
+
+
+                            <List items={this.state.itemsSatellite}
+                                  onClose={this.props.onClose}
+                                  currentObj={this.props.currentObj}
+                                  optsThree={this.props.optsThree}
+                                  updateOptsThree={this.props.updateOptsThree}
+                                  icon={faStar}
+                            />
+
+
+                        </div>
                     </div>
 
                 </div>
@@ -92,7 +157,8 @@ class List extends React.Component {
         super(props)
         this.state = {
             show: false,
-            item: null
+            item: null,
+            itemsDiscover: ["Saturne", "Uranus", "Moon"]
         }
 
     }
@@ -100,7 +166,7 @@ class List extends React.Component {
 
     btnNavette(item) {
 
-        if (localStorage.getItem('discover')) {
+        if (localStorage.getItem('discover') && !this.checkUnlock(item)) {
             this.setState({
                     item: item,
                     show: true,
@@ -124,17 +190,38 @@ class List extends React.Component {
         });
     }
 
+    checkUnlock = (item) => {
+        return this.state.itemsDiscover.some(function (arrVal) {
+            return item === arrVal;
+        });
+    }
+
+    onClick = () => {
+        localStorage.removeItem('discover')
+        this.props.history.push('/')
+    }
+
 
     render() {
 
-        return (
+        const textHaut = " Vous souhaitez faire un tour sur " + this.state.item + " ?"
+        const textBas = "Pour cela, munissez-vous de vos identifiant afin de monter à bord de votre navette spatiale !"
+        const textButton = "Se connecter"
+        const iconButton = faLockOpen
 
+
+        return (
 
             <TransitionGroup className="todo-list">
 
-                <PopupLock show={this.state.show}
-                           onClose={this.togglePopup}
-                           planet={this.state.item}/>
+                <Popup show={this.state.show}
+                       onClose={this.togglePopup}
+                       planet={this.state.item}
+                       onClick={this.onClick}
+                       textHaut={textHaut}
+                       textBas={textBas}
+                       textButton={textButton}
+                       iconButton={iconButton}/>
 
                 {this.props.items.map((item, index) => (
 
@@ -146,8 +233,8 @@ class List extends React.Component {
                         <li key={index}>
 
 
-                            <div>
-                                <FontAwesomeIcon icon={faGlobe} size="lg"/>
+                            <div className="left">
+                                <FontAwesomeIcon icon={this.props.icon} size="lg"/>
                                 {item}
                             </div>
                             <div className="right">
@@ -156,7 +243,7 @@ class List extends React.Component {
                                 <div className="containerIcon">
                                     <FontAwesomeIcon icon={faInfo} size="lg"
                                                      onClick={() => console.log("info planet : " + item)}/>
-                                    {localStorage.getItem('discover') &&
+                                    {localStorage.getItem('discover') && !this.checkUnlock(item) &&
 
                                     <FontAwesomeIcon icon={faLock}
                                                      className="lock"
@@ -172,7 +259,7 @@ class List extends React.Component {
                                                      onClick={() => this.btnNavette(item)}>
 
                                     </FontAwesomeIcon>
-                                    {localStorage.getItem('discover') &&
+                                    {localStorage.getItem('discover') && !this.checkUnlock(item) &&
 
                                     <FontAwesomeIcon icon={faLock}
                                                      className="lock"

@@ -2,11 +2,10 @@ import React, {Component} from 'react';
 import '../style/Connexion.css'
 import Background from '../image/voie.jpg';
 import * as ServiceRecupDonneesBDD from '../service/ServiceRecupDonneesBDD';
-import {Redirect, withRouter} from 'react-router';
 
-import {fakeAuth} from '../router/Main'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faAngleRight} from "@fortawesome/free-solid-svg-icons";
+import Button from "../component/Button";
 
 class Connexion extends Component {
     constructor(props) {
@@ -142,11 +141,12 @@ class Connexion extends Component {
                            value={this.state.password} onChange={this.handlePassword}/>
                     <input type="submit" value="Connexion" className="buttonConnexion"/>
                 </form>
-                <button className="buttonPopup"
-                        onClick={this.discover}>
-                    <h3> Découvrir </h3>
-                    <FontAwesomeIcon className="arrow" icon={faAngleRight}/>
-                </button>
+
+                <Button textButton="Découvrir"
+                        iconButton={faAngleRight}
+                        onClick={this.discover}/>
+
+
             </div>
 
         );

@@ -1,24 +1,15 @@
 import React, {Component} from 'react';
 import {styleGlobal} from "../style/StyleGlobal"
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faTimes, faLockOpen} from '@fortawesome/free-solid-svg-icons'
+import {faTimes, faLockOpen, faCamera} from '@fortawesome/free-solid-svg-icons'
 import "../style/Popup.css"
 import {CSSTransition} from 'react-transition-group';
-import {withRouter} from 'react-router';
+import Button from "./Button";
 
-class PopupLock extends Component {
-
-    onClick = () => {
-        localStorage.removeItem('discover')
-        this.props.history.push('/')
-    }
-
-
+class Popup extends Component {
 
 
     render() {
-
-
         return (
 
             <CSSTransition
@@ -45,21 +36,17 @@ class PopupLock extends Component {
                                                      onClick={this.props.onClose}/>
 
                                     <h2>
-                                        Vous souhaitez faire un tour sur {this.props.planet} ?
+                                        {this.props.textHaut}
                                     </h2>
 
                                 </div>
                                 <div>
-                                    <p> Pour cela, munissez-vous de vos identifiant afin de monter à bord de votre
-                                        navette spatiale ! </p>
+                                    <p> {this.props.textBas} </p>
 
-                                    <button className="buttonPopup"
-                                            onClick={this.onClick}>
-                                        <p> Se connecter </p>
-                                        <div className="cube">
-                                            <FontAwesomeIcon className="arrow" icon={faLockOpen} size="2x"/>
-                                        </div>
-                                    </button>
+                                    <Button textButton={this.props.textButton}
+                                            iconButton={this.props.iconButton}
+                                            onClick={this.props.onClick}/>
+
                                 </div>
                             </div>
                         </CSSTransition>
@@ -76,4 +63,4 @@ class PopupLock extends Component {
     }
 }
 
-export default withRouter(PopupLock)
+export default Popup

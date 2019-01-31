@@ -141,7 +141,6 @@ a {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 100%;
     background: #262e39;
     color: #D4C3B5;
     font-size: 20px;
@@ -157,10 +156,19 @@ a {
 
 }
 
+.scroller {
+    overflow: auto;
+    position: relative;
+    height: 100%;
+    background: #262e39;
+
+}
+
 #listPlanete {
     list-style-type: none;
     margin: 0;
     padding: 0;
+
 
 }
 
@@ -173,18 +181,35 @@ a {
 }
 
 
-#listPlanete li div svg:first-child {
+#listPlanete li .left svg:first-child {
     padding: 0 10px 0 0;
     flex: 2;
 }
 
 #listPlanete li .right svg:last-child {
-    padding: 0 0 0 10px;
     flex: 2;
 }
 
 #listPlanete li > * {
     padding: 5px;
+}
+
+.lock {
+    color: #1D5EA8;
+    position: absolute;
+    left: -1px;
+    top: -5px;
+    padding: 0px !important;
+}
+
+.right {
+    display: flex;
+    flex-direction: row;
+}
+
+.containerIcon {
+    position: relative;
+    padding: 0 10px
 }
 
 /* animation fade de base */
@@ -203,20 +228,4 @@ a {
 }
 
 
-.lock {
-    color: #1D5EA8;
-    position: absolute;
-    left: -5px;
-    top: -5px;
-    padding: 0px !important;
-}
 
-.right {
-    display: flex;
-    flex-direction: row;
-}
-
-.containerIcon {
-    position: relative;
-    padding: 0 5px
-}

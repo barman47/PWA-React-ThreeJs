@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faCamera, faImages} from '@fortawesome/free-solid-svg-icons'
+import {faCamera, faImages, faLockOpen} from '@fortawesome/free-solid-svg-icons'
 import {CSSTransition} from "react-transition-group";
 import "../style/Popup.css"
+import Button from "./Button"
 
 export default class ButtonsPhoto extends Component {
 
@@ -19,21 +20,16 @@ export default class ButtonsPhoto extends Component {
             >
                 <div id="btn-photo">
                     <a href="OpenStars://">
-                        <button className="button">
-                            <h3> Nouvelle Photo </h3>
-                            <FontAwesomeIcon icon={faCamera} fixedWidth size="3x"/>
-                        </button>
+                        <Button textButton="Nouvelle Photo"
+                                iconButton={faCamera}/>
 
                     </a>
 
                     <a href="OpenStars://">
-                        <button className="button">
-                            <h3>Galerie Photo</h3>
-                            <FontAwesomeIcon icon={faImages} fixedWidth size="3x"/>
-                        </button>
 
+                        <Button textButton="Galerie Photo"
+                                iconButton={faImages}/>
                     </a>
-
                 </div>
             </CSSTransition>
 
