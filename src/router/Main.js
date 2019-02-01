@@ -4,6 +4,7 @@ import Connexion from '../page/Connexion'
 import Planetarium from '../page/Planetarium'
 import {TransitionGroup, CSSTransition} from "react-transition-group";
 import Background from "../image/voie.jpg";
+import Utilisateur from "../page/Utilisateur";
 
 
 // The Main component renders one of the three provided
@@ -35,6 +36,7 @@ class Main extends Component {
 
                                     <PrivateConnexion exact path='/' component={Connexion}/>
                                     <PrivateRoute path='/planetarium' component={Planetarium}/>
+                                    <PrivateRoute path='/compte' component={Utilisateur}/>
                                     <Route component={NoMatch}/>
 
                                 </Switch>

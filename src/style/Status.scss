@@ -1,0 +1,105 @@
+.gallery  {
+
+  select {
+    position: absolute;
+    margin-top: -50px;
+    right: 45px;
+  }
+
+  .col-md-4 {
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+
+    .statu {
+      height: 92%;
+      margin-right: 20px;
+      margin-bottom: 50px;
+      background-color: #fff;
+      border-bottom: 8px solid #D2C19F;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.10), 0 3px 6px rgba(0,0,0,0.10);
+
+
+      .photopublie {
+        max-height: 190px;
+        min-height: 190px;
+        background-size: cover;
+        background-position: center;
+      }
+
+      .infoStatus {
+        padding: 20px 10px 10px 10px;
+
+        .texteStatu {
+          width: 100%;
+          text-align: left;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        label {
+          font-size: 17px;
+          color: #1D5EA8;
+        }
+
+        p {
+          float: right;
+          margin: 0 0 10px 0;
+          font-size: 17px;
+
+          a {
+           text-decoration: none;
+            color: #000;
+          }
+
+          i {
+            color: #D2C19F;
+          }
+        }
+      }
+    }
+
+    .hauteurMax {
+      max-height: 123px;
+    }
+  }
+
+  #page-numbers {
+    list-style: none;
+    display: flex;
+    margin: 0 20px 0 0;
+    float: right;
+
+    li {
+      padding: 8px 16px;
+      color: black;
+      text-decoration: none;
+      font-size: 20px;
+      cursor: pointer;
+      border: 1px solid #C3C3C3;
+
+      &:hover:not(&.active) {
+        background-color: #C3C3C3;
+        transition: background-color 0.3s;
+
+      }
+      &.active {
+        background-color: #D2C19F;
+        color: #fff;
+      }
+
+      &:first-child {
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+      }
+      &:last-child {
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+      }
+    }
+  }
+}
+
+.display {
+  display: none;
+}

@@ -20,7 +20,8 @@ class Popup extends Component {
             >
 
                 {state => (
-                    <div className="shade">
+                    <div className="shade"
+                         onClick={this.props.onClose}>
 
 
                         <CSSTransition

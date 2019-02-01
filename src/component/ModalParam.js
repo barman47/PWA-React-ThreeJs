@@ -1,8 +1,7 @@
 import React, {Component} from "react";
-import PopupCompass from "./PopupCompass"
 import "../style/Popup.css"
-import {CSSTransition, TransitionGroup} from 'react-transition-group';
-import {Redirect, withRouter} from 'react-router';
+import {CSSTransition} from 'react-transition-group';
+import {withRouter} from 'react-router';
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import {
@@ -43,6 +42,14 @@ class ModalParam extends Component {
     onClick = (props) => {
         calibrerCompass(this.props.optsThree, this.props.updateOptsThree);
         this.props.onClose();
+    }
+
+    clickCompte = () => {
+
+        this.props.history.push({
+            pathname: '/compte'
+        })
+
     }
 
 
@@ -100,7 +107,7 @@ class ModalParam extends Component {
                                 <div className="right">Disponible seulement sur mobile et tablette </div>}
                             </li>
                             <li>
-                                <div>
+                                <div onClick={this.clickCompte}>
                                     <FontAwesomeIcon icon={faUserAstronaut} size="lg" fixedWidth/>
                                     Compte
                                 </div>
