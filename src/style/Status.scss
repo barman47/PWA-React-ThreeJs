@@ -1,39 +1,64 @@
-.gallery  {
+.gallery {
 
-  select {
-    position: absolute;
-    margin-top: -50px;
-    right: 45px;
-  }
+  background-color: #e2ded6;
+  padding: 10px 0px;
+  width: 100vw;
+  border-bottom: 8px solid #FCFFF5;
 
-  .col-md-4 {
-    flex: 0 0 33.333333%;
-    max-width: 33.333333%;
+
+  .scrollHoriz {
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    min-width: 100%;
+    min-height: 200px;
+    overflow-x: auto;
+
+    .more {
+
+      min-height: 100%;
+      min-width: 100px;
+      border: 2px solid #D2C19F;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 300px;
+
+      color: #D2C19F;
+      margin: 10px 10px;
+
+      &:hover {
+        color: #FCFFF5;
+        border: 2px solid #FCFFF5;
+      }
+    }
+
 
     .statu {
-      height: 92%;
-      margin-right: 20px;
-      margin-bottom: 50px;
       background-color: #fff;
       border-bottom: 8px solid #D2C19F;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.10), 0 3px 6px rgba(0,0,0,0.10);
+      box-shadow: 3px 4px 2px rgba(0, 0, 0, 0.2);
+      min-width: 300px;
+      margin: 10px 10px;
+      height: 300px;
 
 
       .photopublie {
-        max-height: 190px;
-        min-height: 190px;
+        height: 200px;
         background-size: cover;
         background-position: center;
       }
 
       .infoStatus {
-        padding: 20px 10px 10px 10px;
+        padding: 10px;
 
         .texteStatu {
           width: 100%;
           text-align: left;
           white-space: nowrap;
           overflow: hidden;
+          margin: 10px 0;
           text-overflow: ellipsis;
         }
 
@@ -42,18 +67,22 @@
           color: #1D5EA8;
         }
 
-        p {
-          float: right;
-          margin: 0 0 10px 0;
+        .containerIconStatus {
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-end;
+          color: #D2C19F;
           font-size: 17px;
+          align-items: center;
 
           a {
-           text-decoration: none;
+            text-decoration: none;
             color: #000;
           }
 
-          i {
-            color: #D2C19F;
+          div {
+            padding: 0 5px;
           }
         }
       }
@@ -83,6 +112,7 @@
         transition: background-color 0.3s;
 
       }
+
       &.active {
         background-color: #D2C19F;
         color: #fff;
@@ -92,6 +122,7 @@
         border-top-left-radius: 5px;
         border-bottom-left-radius: 5px;
       }
+
       &:last-child {
         border-top-right-radius: 5px;
         border-bottom-right-radius: 5px;

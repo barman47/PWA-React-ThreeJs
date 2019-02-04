@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import '../style/Utilisateurs.css';
 //import Status from '../component/Status';
 import * as ServiceRecupDonneesBDD from "../service/ServiceRecupDonneesBDD";
-import {styleGlobal, colorBeige, colorBlue} from '../style/StyleGlobal';
 import Background from "../image/timeLapseStars.jpg";
 import Status from '../component/Status'
+import PublicationTelescope from '../component/PublicationTelescope'
 
 class Utilisateur extends Component {
     constructor(props, context) {
@@ -34,7 +34,7 @@ class Utilisateur extends Component {
        récupération des paramètres du serveur */
     gestionState = responseJson => {
         this.setState({
-            dataBla: responseJson,
+            userAllInfo: responseJson,
             dataId: responseJson.idMembre,
             dataNom: responseJson.familyName,
             dataPrenom: responseJson.name,
@@ -48,7 +48,7 @@ class Utilisateur extends Component {
             icone: false,
             dataUrlPicture: responseJson.urlPicture,
             dataUrlPicturePublier: [
-                ...responseJson.picturePublications.map(picture => {
+                ...responseJson.picturePublications.sort((a, b) => b.idPublication - a.idPublication).map(picture => {
                     return picture.pathPicture;
                 }),
             ],
@@ -241,8 +241,11 @@ class Utilisateur extends Component {
     render() {
         return (
             <div>
+
                 {this.enTete()}
-                {this.state.dataBla != null && <Status user={this.state.dataBla}/>}
+
+                {this.state.userAllInfo != null &&
+                <PublicationTelescope photos={this.state.dataUrlPicturePublier} user={this.state.userAllInfo}/>}
 
             </div>
         )
@@ -253,3 +256,4 @@ class Utilisateur extends Component {
 export default Utilisateur;
 
 
+// {this.state.dataBla != null && <Status user={this.state.dataBla}/>}

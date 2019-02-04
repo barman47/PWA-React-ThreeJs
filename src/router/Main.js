@@ -23,27 +23,25 @@ class Main extends Component {
     render() {
 
         return (
-            <div>
-                <Route
-                    render={({location}) => (
-                        <TransitionGroup>
-                            <CSSTransition
-                                key={location.key}
-                                classNames="fade"
-                                timeout={300}
-                            >
-                                <Switch location={location}>
+            <Route
+                render={({location}) => (
+                    <TransitionGroup>
+                        <CSSTransition
+                            key={location.key}
+                            classNames="fade"
+                            timeout={300}
+                        >
+                            <Switch location={location}>
 
-                                    <PrivateConnexion exact path='/' component={Connexion}/>
-                                    <PrivateRoute path='/planetarium' component={Planetarium}/>
-                                    <PrivateRoute path='/compte' component={Utilisateur}/>
-                                    <Route component={NoMatch}/>
+                                <PrivateConnexion exact path='/' component={Connexion}/>
+                                <PrivateRoute path='/planetarium' component={Planetarium}/>
+                                <PrivateRoute path='/compte' component={Utilisateur}/>
+                                <Route component={NoMatch}/>
 
-                                </Switch>
-                            </CSSTransition>
-                        </TransitionGroup>
-                    )}/>
-            </div>
+                            </Switch>
+                        </CSSTransition>
+                    </TransitionGroup>
+                )}/>
 
         );
     }
@@ -65,7 +63,6 @@ function NoMatch({location}) {
 
 function PrivateRoute({component: Component, ...rest}) {
 
-    console.log("local : ", localStorage)
     return (
         <Route
             {...rest}
