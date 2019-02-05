@@ -2,7 +2,7 @@
 
   background-color: #e2ded6;
   padding: 10px 0px;
-  width: 100vw;
+  width: 100%;
   border-bottom: 8px solid #FCFFF5;
 
 
@@ -11,19 +11,18 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    min-width: 100%;
+    //width: 100%;
     min-height: 200px;
     overflow-x: auto;
+    padding: 10px 10px;
 
     .more {
-
-      min-height: 100%;
       min-width: 100px;
       border: 2px solid #D2C19F;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 300px;
+      height: 100px;
 
       color: #D2C19F;
       margin: 10px 10px;
@@ -35,13 +34,22 @@
     }
 
 
-    .statu {
+    .photoCarte {
+      min-width: 300px;
+      height: 300px;
+    }
+
+    .statue {
+      min-width: 300px;
+      width: 400px;
+    }
+
+
+    .carte {
       background-color: #fff;
       border-bottom: 8px solid #D2C19F;
       box-shadow: 3px 4px 2px rgba(0, 0, 0, 0.2);
-      min-width: 300px;
       margin: 10px 10px;
-      height: 300px;
 
 
       .photopublie {
@@ -55,11 +63,8 @@
 
         .texteStatu {
           width: 100%;
-          text-align: left;
-          white-space: nowrap;
-          overflow: hidden;
+          text-align: justify;
           margin: 10px 0;
-          text-overflow: ellipsis;
         }
 
         label {

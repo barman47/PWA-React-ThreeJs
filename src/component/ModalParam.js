@@ -21,14 +21,16 @@ class ModalParam extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            compass: false,
+            showCompass: false,
+            showCompte: false,
         }
     }
 
     // ouvre le modalParam lors du clique sur le bouton param
-    toggleModalCompass = () => {
+    togglePopup(state, value) {
+        console.log("je me casse : ", [state])
         this.setState({
-            compass: !this.state.compass,
+            [state]: !value,
         });
     }
 
@@ -36,20 +38,25 @@ class ModalParam extends Component {
         localStorage.removeItem('auth-token')
         localStorage.removeItem('discover')
         this.props.history.push('/')
-
     }
 
-    onClick = (props) => {
+    onClickCalibrer = (props) => {
         calibrerCompass(this.props.optsThree, this.props.updateOptsThree);
         this.props.onClose();
     }
 
     clickCompte = () => {
 
-        this.props.history.push({
-            pathname: '/compte'
-        })
-
+        if (localStorage.getItem('discover')) {
+            this.setState({
+                    showCompte: true,
+                }
+            )
+        } else {
+            this.props.history.push({
+                pathname: '/compte'
+            })
+        }
     }
 
 
@@ -60,6 +67,10 @@ class ModalParam extends Component {
         const textButton = "C'est fait"
         const iconButton = faAngleRight
 
+        const textHautCompte = "Vous souhaitez integrer la comunauté d'astronaute ?  "
+        const textBasCompte = "N'attendez plus une année-lumière  ! "
+        const textButtonCompte = "Je me connecte"
+        const iconButtonCompte = faAngleRight
 
         return (
 
@@ -107,10 +118,17 @@ class ModalParam extends Component {
                                 <div className="right">Disponible seulement sur mobile et tablette </div>}
                             </li>
                             <li>
-                                <div onClick={this.clickCompte}>
-                                    <FontAwesomeIcon icon={faUserAstronaut} size="lg" fixedWidth/>
-                                    Compte
+                                <div className="containerIcon">
+                                    <div onClick={this.clickCompte}>
+                                        <FontAwesomeIcon icon={faUserAstronaut} size="lg" fixedWidth/>
+                                        Compte
+                                    </div>
+                                    {localStorage.getItem('discover') && <FontAwesomeIcon icon={faLock}
+                                                                                          className="lock"
+                                                                                          size="xs"/>}
                                 </div>
+
+
                             </li>
                             <li>
                                 <div>
@@ -128,13 +146,21 @@ class ModalParam extends Component {
 
                         </div>
 
-                        <Popup show={this.state.compass}
-                               onClose={this.toggleModalCompass}
-                               onClick={this.onClick}
+                        <Popup show={this.state.showCompass}
+                               onClose={() => this.togglePopup("showCompass", this.state.showCompass)}
+                               onClick={this.onClickCalibrer}
                                textHaut={textHaut}
                                textBas={textBas}
                                textButton={textButton}
                                iconButton={iconButton}/>
+
+                        <Popup show={this.state.showCompte}
+                               onClose={() => this.togglePopup("showCompte", this.state.showCompte)}
+                               onClick={this.logOut}
+                               textHaut={textHautCompte}
+                               textBas={textBasCompte}
+                               textButton={textButtonCompte}
+                               iconButton={iconButtonCompte}/>
 
                     </div>
                 </div>

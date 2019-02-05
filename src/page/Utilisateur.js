@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import '../style/Utilisateurs.css';
-//import Status from '../component/Status';
 import * as ServiceRecupDonneesBDD from "../service/ServiceRecupDonneesBDD";
 import Background from "../image/timeLapseStars.jpg";
-import Status from '../component/Status'
+// import Status from '../component/Status'
 import PublicationTelescope from '../component/PublicationTelescope'
+import Status from "../component/Status";
 
 class Utilisateur extends Component {
     constructor(props, context) {
@@ -245,7 +245,14 @@ class Utilisateur extends Component {
                 {this.enTete()}
 
                 {this.state.userAllInfo != null &&
-                <PublicationTelescope photos={this.state.dataUrlPicturePublier} user={this.state.userAllInfo}/>}
+
+                <div>
+                    <PublicationTelescope photos={this.state.dataUrlPicturePublier} user={this.state.userAllInfo}/>
+                    <Status user={this.state.userAllInfo}/>
+                </div>
+
+                }
+
 
             </div>
         )
