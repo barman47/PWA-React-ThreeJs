@@ -16,7 +16,7 @@ class Status extends Component {
         this.state = {
             status: this.props.user.statusActuel.concat(this.props.user.statusArchive).sort((a, b) => b.idFilActualite - a.idFilActualite),
             currentPage: 1,
-            photoParPage: 1,
+            photoParPage: 3,
             currentStatus: [],
             showMore: true
         }
@@ -28,7 +28,6 @@ class Status extends Component {
 
         const {currentPage, photoParPage} = this.state;
 
-        console.log("currentPage : ", this.state.currentPage)
 
         await this.setState({
 
@@ -40,9 +39,6 @@ class Status extends Component {
             indexOfFirstPhoto: this.state.indexOfLastPhoto - photoParPage,
         });
 
-
-        console.log("indexOfLastPhoto : ", this.state.indexOfLastPhoto)
-        console.log("indexOfFirstPhoto : ", this.state.indexOfFirstPhoto)
 
         this.setState({
 
@@ -53,15 +49,12 @@ class Status extends Component {
             currentPage: currentPage + 1,
         });
 
-        console.log("stop ", this.state.nbrStatus, this.state.indexOfFirstPhoto, " + ", this.state.photoParPage)
         if (this.state.nbrStatus <= (this.state.indexOfFirstPhoto + this.state.photoParPage)) {
-            console.log("stop ", this.state.nbrStatus, this.state.indexOfFirstPhoto, " + ", this.state.photoParPage)
-            console.log("showMore:", this.state.showMore)
+
 
             await this.setState({
                 showMore: false
             });
-            console.log("showMore:", this.state.showMore)
         }
 
 

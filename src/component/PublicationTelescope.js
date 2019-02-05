@@ -38,6 +38,7 @@ class PublicationTelescope extends Component {
 
         const {currentPage, photoParPage} = this.state;
 
+
         await this.setState({
 
             indexOfLastPhoto: currentPage * photoParPage,
@@ -58,15 +59,16 @@ class PublicationTelescope extends Component {
             currentPage: currentPage + 1,
         });
 
-        if (this.state.nbrPhotos <= (this.state.indexOfFirstPhoto + 3)) {
-            this.setState({
+        if (this.state.nbrPhotos <= (this.state.indexOfFirstPhoto + this.state.photoParPage)) {
+
+            await this.setState({
                 showMore: false
             });
-
         }
 
 
     }
+
 
     componentWillMount() {
         this.setState({
@@ -137,7 +139,7 @@ class PublicationTelescope extends Component {
                         )
                     }
 
-                    {this.state.showMore && <div className="more" onClick={() => this.handleClick}>
+                    {this.state.showMore && <div className="more" onClick={this.handleClick}>
 
                         <FontAwesomeIcon
                             icon={faPlus} size="lg"/>
