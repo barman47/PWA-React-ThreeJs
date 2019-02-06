@@ -1,10 +1,10 @@
 self.__precacheManifest = [
   {
-    "revision": "56f226a559fd3807a5aab2e2efab8e24",
-    "url": "/PWA-React-ThreeJs/static/media/marsmap1k.56f226a5.jpg"
+    "revision": "32995c7e3f2b7d55f30fa0cff4a830c1",
+    "url": "/PWA-React-ThreeJs/static/media/mercurybump.32995c7e.jpg"
   },
   {
-    "revision": "21fe9f2f1a2a9ccc7f98",
+    "revision": "7e9895cbce8338550782",
     "url": "/PWA-React-ThreeJs/static/css/main.057437b3.chunk.css"
   },
   {
@@ -60,12 +60,12 @@ self.__precacheManifest = [
     "url": "/PWA-React-ThreeJs/static/media/marsbump1k.f68f2bda.jpg"
   },
   {
-    "revision": "21fe9f2f1a2a9ccc7f98",
-    "url": "/PWA-React-ThreeJs/static/js/main.21fe9f2f.chunk.js"
+    "revision": "56f226a559fd3807a5aab2e2efab8e24",
+    "url": "/PWA-React-ThreeJs/static/media/marsmap1k.56f226a5.jpg"
   },
   {
-    "revision": "32995c7e3f2b7d55f30fa0cff4a830c1",
-    "url": "/PWA-React-ThreeJs/static/media/mercurybump.32995c7e.jpg"
+    "revision": "7e9895cbce8338550782",
+    "url": "/PWA-React-ThreeJs/static/js/main.7e9895cb.chunk.js"
   },
   {
     "revision": "3a95b9218d50192d7be83add30e7f489",
@@ -116,7 +116,14 @@ self.__precacheManifest = [
     "url": "/PWA-React-ThreeJs/static/media/venusmap.a54a8906.jpg"
   },
   {
-    "revision": "fb417b2f23af663a6fe2698bb9713033",
+    "revision": "bf1becd70100ce8954575df3ab22035c",
+    "url": "/PWA-React-ThreeJs/service-worker.js"
+  },
+  {
+    "url": "/PWA-React-ThreeJs/precache-manifest.175b291489d1a5b644ec13c47e3452d2.js"
+  },
+  {
+    "revision": "9578b429f9544a7e24762cec0d03105e",
     "url": "/PWA-React-ThreeJs/index.html"
   }
 ];
