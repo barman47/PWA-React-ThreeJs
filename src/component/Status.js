@@ -69,7 +69,7 @@ class Status extends Component {
                         this.state.currentStatus.map((status, index) => (
 
 
-                                <div key={index} className="statue carte" onClick={() => this.onOpenModal(index)}>
+                                <div key={index} className="statue carte">
                                     <div className="infoStatus">
                                         <div>
 

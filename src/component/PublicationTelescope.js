@@ -92,7 +92,7 @@ class PublicationTelescope extends Component {
 
                                 <div key={index}
                                      className="photoCarte carte"
-                                     onClick={() => this.onOpenModal(index)}>
+                                >
                                     {publi.pathPicture &&
                                     <div className="photopublie"
                                          style={{backgroundImage: `url(data:image/jpeg;base64,${publi.pathPicture})`}}>

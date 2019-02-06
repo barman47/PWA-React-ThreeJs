@@ -5,6 +5,10 @@ import Background from "../image/timeLapseStars.jpg";
 // import Status from '../component/Status'
 import PublicationTelescope from '../component/PublicationTelescope'
 import Status from "../component/Status";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faAngleDoubleLeft} from "@fortawesome/free-solid-svg-icons";
+import {withRouter} from 'react-router';
+
 
 class Utilisateur extends Component {
     constructor(props, context) {
@@ -183,6 +187,11 @@ class Utilisateur extends Component {
         }
     };
 
+    onRetour = () => {
+        this.props.history.push('/')
+    }
+
+
     enTete = () => {
         return (
             <div className="headerUser"
@@ -191,6 +200,16 @@ class Utilisateur extends Component {
                      backgroundSize: 'cover'
                  }}
             >
+                <div className="headerUserRetour" onClick={this.onRetour}>
+
+                    <FontAwesomeIcon className="iconRetour" icon={faAngleDoubleLeft} size="lg"
+
+                                     style={{color: "#1d5ea8"}}/>
+                    <div> Retour
+                    </div>
+                </div>
+
+
                 <div className="headerUserTop">
 
                     <div className="containerPhoto">
@@ -260,7 +279,6 @@ class Utilisateur extends Component {
 }
 
 
-export default Utilisateur;
-
+export default withRouter(Utilisateur);
 
 // {this.state.dataBla != null && <Status user={this.state.dataBla}/>}
