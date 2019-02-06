@@ -175,7 +175,6 @@ class List extends React.Component {
         } else {
             if (this.props.optsThree.controlsType === "orientation") {
                 buildOrbitControls(this.props.optsThree, this.props.updateOptsThree)
-                console.log(" <<<<<>>>>>>> c'est fait : " + this.props.optsThree.controlsType)
 
             }
             switchValue(item, this.props.optsThree, this.props.currentObj, this.props.updateOptsThree);

@@ -35,7 +35,8 @@ export default (canvas, updateOptsThree, optsThreeGlobal) => {
         camera: camera,
         controls: controls,
         controlsType: controlsType,
-        typeDevice: typeDevice
+        typeDevice: typeDevice,
+        accueil: true
     }
 
 

@@ -27,14 +27,13 @@ export function onDocumentMouseDown(mouseX, mouseY, updateOptsThree, optsThreeGl
 }
 
 
-let accueil = true;
 let earthExist = false;
 
 export function switchValue(choix, optsThreeGlobal, currentObj, updateOptsThree) {
 
 
     // retour sur la planete terre
-    if (choix === "Back" && !accueil) {
+    if (choix === "Back" && !optsThreeGlobal.accueil) {
 
 
         optsThreeGlobal.controls.autoRotate = false;
@@ -69,17 +68,15 @@ export function switchValue(choix, optsThreeGlobal, currentObj, updateOptsThree)
             if (optsThreeGlobal.camera.position.x < 0.15 || optsThreeGlobal.camera.position.z < 0.15) {
                 setTimeout(function () {
 
-                    if (earthExist) {
-                        let earth = optsThreeGlobal.scene.getObjectByName("Earth");
-                        optsThreeGlobal.scene.remove(earth)
-                        // console.log("- Suppr : " + earth.name)
-                        earthExist = false
-                    }
+                    let earth = optsThreeGlobal.scene.getObjectByName("Earth");
+                    optsThreeGlobal.scene.remove(earth)
+                    // console.log("- Suppr : " + earth.name)
+
                 }, 3000);
             }
 
-            console.log(" addBtnAccueilBack :" + accueil)
-            accueil = !accueil;
+            console.log(" addBtnAccueilBack :" + optsThreeGlobal.accueil)
+            optsThreeGlobal.accueil = !optsThreeGlobal.accueil;
 
             updateOptsThree(optsThreeGlobal);
 
@@ -130,16 +127,15 @@ export function switchValue(choix, optsThreeGlobal, currentObj, updateOptsThree)
 
             setTimeout(function () {
                 Navigation.focusZoom(planet, optsThreeGlobal.camera)
-                if (!earthExist) {
-                    EarthPlanet(optsThreeGlobal.scene);
-                    earthExist = true
-                }
+
+                EarthPlanet(optsThreeGlobal.scene);
             }, 500);
 
             optsThreeGlobal.controls.autoRotate = true;
-            if (accueil) {
+            console.log("--------- optsThreeGlobal.accueil = " + optsThreeGlobal.accueil)
+            if (optsThreeGlobal.accueil) {
                 window.dispatchEvent(new Event('btnToParachute'));
-                accueil = !accueil;
+                optsThreeGlobal.accueil = !optsThreeGlobal.accueil;
             }
 
             updateOptsThree(optsThreeGlobal);

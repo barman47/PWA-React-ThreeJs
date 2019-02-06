@@ -27,19 +27,14 @@ class Status extends Component {
     async handleClick() {
 
         const {currentPage, photoParPage} = this.state;
-
-
         await this.setState({
 
             indexOfLastPhoto: currentPage * photoParPage,
         });
-
         await this.setState({
 
             indexOfFirstPhoto: this.state.indexOfLastPhoto - photoParPage,
         });
-
-
         this.setState({
 
             indexOfLastPhoto: currentPage * photoParPage,
@@ -48,7 +43,6 @@ class Status extends Component {
             currentStatus: this.state.currentStatus.concat(this.state.status.slice(this.state.indexOfFirstPhoto, this.state.indexOfLastPhoto)),
             currentPage: currentPage + 1,
         });
-
         if (this.state.nbrStatus <= (this.state.indexOfFirstPhoto + this.state.photoParPage)) {
 
 
@@ -56,8 +50,6 @@ class Status extends Component {
                 showMore: false
             });
         }
-
-
     }
 
     componentWillMount() {

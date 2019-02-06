@@ -96,7 +96,7 @@ class ModalParam extends Component {
 
 
                             <li>
-                                <div onClick={this.toggleModalCompass}>
+                                <div onClick={() => this.togglePopup("showCompass", this.state.showCompass)}>
                                     <FontAwesomeIcon icon={faCompass} size="lg" fixedWidth/>
                                     Calibrer la boussole
                                 </div>
