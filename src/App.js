@@ -10,7 +10,7 @@ import {Context} from "./store/Context";
 class App extends Component {
     render() {
         return (
-            <BrowserRouter>
+            <BrowserRouter basename="/PWA-React-ThreeJs">
                 <Main/>
             </BrowserRouter>
         );
@@ -18,4 +18,3 @@ class App extends Component {
 }
 
 export default App;
-//< BackOffice deconnect={() => this.deconnect()}/>
