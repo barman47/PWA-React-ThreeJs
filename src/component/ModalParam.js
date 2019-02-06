@@ -100,8 +100,6 @@ class ModalParam extends Component {
                                     <FontAwesomeIcon icon={faCompass} size="lg" fixedWidth/>
                                     Calibrer la boussole
                                 </div>
-                                {this.props.optsThree.typeDevice !== "mobile" &&
-                                <div className="right">Disponible seulement sur mobile et tablette </div>}
                             </li>
 
                             <li>
@@ -114,8 +112,6 @@ class ModalParam extends Component {
                                                                                           className="lock"
                                                                                           size="xs"/>}
                                 </div>
-                                {this.props.optsThree.typeDevice !== "mobile" &&
-                                <div className="right">Disponible seulement sur mobile et tablette </div>}
                             </li>
                             <li>
                                 <div className="containerIcon">
