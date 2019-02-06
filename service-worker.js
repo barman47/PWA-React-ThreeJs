@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/nathanfrad/PWA-React-ThreeJs/precache-manifest.0d6b39fdf55c0a4c78e7c7768054d87c.js"
+  "/PWA-React-ThreeJs/precache-manifest.4155728bfec141150b1a488b55aa458d.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("/nathanfrad/PWA-React-ThreeJs/index.html", {
+workbox.routing.registerNavigationRoute("/PWA-React-ThreeJs/index.html", {
   
   blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
 });

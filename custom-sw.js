@@ -1,5 +1,5 @@
-importScripts("/nathanfrad/PWA-React-ThreeJs/precache-manifest.a873a734a21419e541b5451b6d78f90b.js", "/nathanfrad/PWA-React-ThreeJs/workbox-v3.6.3/workbox-sw.js");
-workbox.setConfig({modulePathPrefix: "/nathanfrad/PWA-React-ThreeJs/workbox-v3.6.3"});
+importScripts("/PWA-React-ThreeJs/precache-manifest.1abf6f32754e9bd580f85f34258a583a.js", "/PWA-React-ThreeJs/workbox-v3.6.3/workbox-sw.js");
+workbox.setConfig({modulePathPrefix: "/PWA-React-ThreeJs/workbox-v3.6.3"});
 function displayNotification() {
     document
         .querySelector("#notification")
