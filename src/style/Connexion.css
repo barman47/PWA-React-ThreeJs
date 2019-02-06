@@ -34,6 +34,11 @@ form input {
     color: #D2C19F;
 }
 
+.formConnexion {
+    width: 60vw;
+    max-width: 400px;
+}
+
 .buttonConnexion {
     color: #FCFFF5;
     border: none;

@@ -134,7 +134,7 @@ class Connexion extends Component {
                     <h1>Open Stars</h1>
                     <h3>Planétarium</h3>
                 </div>
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={this.handleSubmit} className="formConnexion">
                     <input type="email" className="infoUser" placeholder="Email" value={this.state.email}
                            onChange={this.handleEmail}/>
                     <input type="password" className="infoUser" placeholder="Mot de passe"
