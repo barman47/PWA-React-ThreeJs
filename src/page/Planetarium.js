@@ -32,7 +32,7 @@ class Planetarium extends Component {
 
     updateOptsThree = (opts) => {
         this.setState({optsThree: opts}, () => {
-            console.log("this.state.optsThree: ", this.state.optsThree);
+            //console.log("this.state.optsThree: ", this.state.optsThree);
         });
     }
 
