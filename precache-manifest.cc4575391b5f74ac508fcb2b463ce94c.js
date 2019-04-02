@@ -4,12 +4,12 @@ self.__precacheManifest = [
     "url": "/PWA-React-ThreeJs/static/media/marsmap1k.56f226a5.jpg"
   },
   {
-    "revision": "8b589260e02bfea87f24",
+    "revision": "952a72375c9357a0fa29",
     "url": "/PWA-React-ThreeJs/static/css/main.9256e2f6.chunk.css"
   },
   {
-    "revision": "f2fffcaf3df085dda155",
-    "url": "/PWA-React-ThreeJs/static/js/1.f2fffcaf.chunk.js"
+    "revision": "32d4cd9be3317553b0b7",
+    "url": "/PWA-React-ThreeJs/static/js/1.32d4cd9b.chunk.js"
   },
   {
     "revision": "088d3ac5e9f8fa061f1a",
@@ -60,8 +60,8 @@ self.__precacheManifest = [
     "url": "/PWA-React-ThreeJs/static/media/marsbump1k.f68f2bda.jpg"
   },
   {
-    "revision": "8b589260e02bfea87f24",
-    "url": "/PWA-React-ThreeJs/static/js/main.8b589260.chunk.js"
+    "revision": "952a72375c9357a0fa29",
+    "url": "/PWA-React-ThreeJs/static/js/main.952a7237.chunk.js"
   },
   {
     "revision": "32995c7e3f2b7d55f30fa0cff4a830c1",
@@ -116,7 +116,7 @@ self.__precacheManifest = [
     "url": "/PWA-React-ThreeJs/static/media/venusmap.a54a8906.jpg"
   },
   {
-    "revision": "b698eeea069bb171f4ea91a660363c30",
+    "revision": "0ac3c52c6da23d0808269b7e79e74dbc",
     "url": "/PWA-React-ThreeJs/index.html"
   }
 ];
