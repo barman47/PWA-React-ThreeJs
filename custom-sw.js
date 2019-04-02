@@ -1,4 +1,4 @@
-importScripts("/PWA-React-ThreeJs/precache-manifest.bd5c34c572bb13deadc1ddd52b6726fe.js", "/PWA-React-ThreeJs/workbox-v3.6.3/workbox-sw.js");
+importScripts("/PWA-React-ThreeJs/precache-manifest.c357141ffb43946df77a1d81937a87a6.js", "/PWA-React-ThreeJs/workbox-v3.6.3/workbox-sw.js");
 workbox.setConfig({modulePathPrefix: "/PWA-React-ThreeJs/workbox-v3.6.3"});
 function displayNotification() {
     document
