@@ -1,15 +1,15 @@
 self.__precacheManifest = [
   {
-    "revision": "56f226a559fd3807a5aab2e2efab8e24",
-    "url": "/PWA-React-ThreeJs/static/media/marsmap1k.56f226a5.jpg"
+    "revision": "32995c7e3f2b7d55f30fa0cff4a830c1",
+    "url": "/PWA-React-ThreeJs/static/media/mercurybump.32995c7e.jpg"
   },
   {
-    "revision": "9e5145ff6477d65bf689",
+    "revision": "8b589260e02bfea87f24",
     "url": "/PWA-React-ThreeJs/static/css/main.9256e2f6.chunk.css"
   },
   {
-    "revision": "32d4cd9be3317553b0b7",
-    "url": "/PWA-React-ThreeJs/static/js/1.32d4cd9b.chunk.js"
+    "revision": "f2fffcaf3df085dda155",
+    "url": "/PWA-React-ThreeJs/static/js/1.f2fffcaf.chunk.js"
   },
   {
     "revision": "088d3ac5e9f8fa061f1a",
@@ -60,12 +60,12 @@ self.__precacheManifest = [
     "url": "/PWA-React-ThreeJs/static/media/marsbump1k.f68f2bda.jpg"
   },
   {
-    "revision": "9e5145ff6477d65bf689",
-    "url": "/PWA-React-ThreeJs/static/js/main.9e5145ff.chunk.js"
+    "revision": "56f226a559fd3807a5aab2e2efab8e24",
+    "url": "/PWA-React-ThreeJs/static/media/marsmap1k.56f226a5.jpg"
   },
   {
-    "revision": "32995c7e3f2b7d55f30fa0cff4a830c1",
-    "url": "/PWA-React-ThreeJs/static/media/mercurybump.32995c7e.jpg"
+    "revision": "8b589260e02bfea87f24",
+    "url": "/PWA-React-ThreeJs/static/js/main.8b589260.chunk.js"
   },
   {
     "revision": "3a95b9218d50192d7be83add30e7f489",
@@ -116,7 +116,14 @@ self.__precacheManifest = [
     "url": "/PWA-React-ThreeJs/static/media/venusmap.a54a8906.jpg"
   },
   {
-    "revision": "9f61b96ef9aaa331f48e74366e240fc8",
+    "revision": "3afd8ac440d57841c6134b264647b8e5",
+    "url": "/PWA-React-ThreeJs/service-worker.js"
+  },
+  {
+    "url": "/PWA-React-ThreeJs/precache-manifest.db242b70f64f4329a45f131d06981313.js"
+  },
+  {
+    "revision": "b698eeea069bb171f4ea91a660363c30",
     "url": "/PWA-React-ThreeJs/index.html"
   }
 ];
